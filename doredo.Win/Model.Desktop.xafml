@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <ActionDesign>
+    <ActionToContainerMapping>
+      <ActionContainer Id="Map" IsNewNode="True" />
+    </ActionToContainerMapping>
+  </ActionDesign>
+  <SchemaModules>
+    <SchemaModule Name="CloneObjectModule" Version="19.2.5.0" IsNewNode="True" />
+    <SchemaModule Name="SystemAspNetModule" Version="19.2.5.0" IsNewNode="True" />
+    <SchemaModule Name="SystemModule" Version="19.2.5.0" IsNewNode="True" />
+  </SchemaModules>
+</Application>

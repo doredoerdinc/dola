@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>xafoc</Title>
+      <Author>Erdinc Simsek</Author>
+      <Description>Code snippet for an automatically implemented XAF class</Description>
+      <HelpUrl></HelpUrl>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Keywords />
+      <Shortcut>xafoc</Shortcut>
+    </Header>
+    <Snippet>
+      <References />
+      <Imports />
+      <Declarations>
+        <Literal Editable="true">
+          <ID>class</ID>
+          <Type></Type>
+          <ToolTip>Class Name</ToolTip>
+          <Default>ClassName</Default>
+          <Function></Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>NewLiteral</ID>
+          <Type></Type>
+          <ToolTip></ToolTip>
+          <Default>NewLiteral</Default>
+          <Function></Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>namespace</ID>
+          <Type></Type>
+          <ToolTip></ToolTip>
+          <Default>namespace</Default>
+          <Function></Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>NewLiteral1</ID>
+          <Type />
+          <ToolTip />
+          <Default>NewLiteral1</Default>
+          <Function />
+        </Literal>
+        <Literal Editable="true">
+          <ID>persistent</ID>
+          <Type />
+          <ToolTip />
+          <Default>NewLiteral2</Default>
+          <Function />
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Kind="" Delimiter="$"><![CDATA[
+    [DefaultClassOptions]
+	[NonPersistent]
+    public class $class$DB : BranchNP	
+	{
+		public $class$DB (Session session) : base(session) { }
+	}
+
+	[DefaultClassOptions]
+	[Custom("Caption", "$class$")]
+	[NavigationItem("Default")]
+	[Persistent("$class$")]				
+	public class $class$ : $class$DB	
+	{
+		public $class$ (Session session) : base(session) { }
+	}
+}			
+$end$			]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

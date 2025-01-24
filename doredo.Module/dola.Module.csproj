@@ -1,0 +1,692 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5F15837D-D1E5-44DC-92F0-4F2EBE9C3F8D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>dola.Module</RootNamespace>
+    <AssemblyName>dola.Module</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'EasyTest|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\EasyTest\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;EASYTEST</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CsvHelper, Version=27.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.27.2.1\lib\net47\CsvHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="DelegateDecompiler, Version=1.0.0.0, Culture=neutral, PublicKeyToken=93b26a10a04705bd, processorArchitecture=MSIL">
+      <HintPath>..\packages\DelegateDecompiler.0.30.0\lib\net45\DelegateDecompiler.dll</HintPath>
+    </Reference>
+    <Reference Include="DelegateDecompiler.EntityFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=93b26a10a04705bd, processorArchitecture=MSIL">
+      <HintPath>..\packages\DelegateDecompiler.EntityFramework.0.30.0\lib\net45\DelegateDecompiler.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v20.1">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.ExpressApp.ConditionalAppearance.v20.1, Version=20.1.17.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.ExpressApp.Dashboards.v20.1, Version=20.1.17.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.ExpressApp.EF.v20.1, Version=20.1.17.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.ExpressApp.Objects.v20.1">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.ExpressApp.ReportsV2.v20.1, Version=20.1.17.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.ExpressApp.Security.v20.1">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.ExpressApp.v20.1">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.ExpressApp.Validation.v20.1">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Persistent.Base.v20.1">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Persistent.BaseImpl.v20.1, Version=20.1.17.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v20.1.Core">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Xpo.v20.1, Version=20.1.17.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v20.1, Version=20.1.17.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.OrTools, Version=9.11.4210.0, Culture=neutral, PublicKeyToken=53dbb1ea090cbef7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.OrTools.9.11.4210\lib\net462\Google.OrTools.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.26.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.26.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.HashCode.1.0.0\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.6.0.0\lib\net461\Microsoft.Extensions.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.6.0.0\lib\net461\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.FileExtensions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.FileExtensions.6.0.0\lib\net461\Microsoft.Extensions.Configuration.FileExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.8.0.0\lib\net462\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Abstractions.6.0.0\lib\net461\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Physical, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Physical.6.0.0\lib\net461\Microsoft.Extensions.FileProviders.Physical.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileSystemGlobbing, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileSystemGlobbing.6.0.0\lib\net461\Microsoft.Extensions.FileSystemGlobbing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.6.0.0\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Reflection, Version=1.1.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Reflection.Core.1.1.1\lib\net45\Mono.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SqlClient, Version=4.6.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.8.3\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <Name>System.Configuration</Name>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.6.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Services">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddressRouteMatrix.cs" />
+    <Compile Include="BusinessObjects\Address.cs" />
+    <Compile Include="BusinessObjects\Device.cs" />
+    <Compile Include="BusinessObjects\GoogleRouteMap.cs" />
+    <Compile Include="BusinessObjects\OrderItem.cs" />
+    <Compile Include="BusinessObjects\StockCheck.cs" />
+    <Compile Include="BusinessObjects\StockItemLocationTransfer.cs" />
+    <Compile Include="BusinessObjects\Const.cs" />
+    <Compile Include="BusinessObjects\DeviceManagemant.cs" />
+    <Compile Include="BusinessObjects\LabelStatic.cs" />
+    <Compile Include="BusinessObjects\Geo.cs" />
+    <Compile Include="BusinessObjects\Entry.cs" />
+    <Compile Include="BusinessObjects\RoutePlan.cs" />
+    <Compile Include="BusinessObjects\RouteBck.cs" />
+    <Content Include="BusinessObjects\map.html" />
+    <Content Include="BusinessObjects\SQL\ProcedureStockUpdate.txt" />
+    <Compile Include="BusinessObjects\Stock.cs" />
+    <Compile Include="BusinessObjects\DataAnalysis.cs" />
+    <Content Include="orLogo.png" />
+    <None Include="algorithms\set_cover.proto" />
+    <None Include="bop\bop_parameters.proto" />
+    <None Include="constraint_solver\assignment.proto" />
+    <None Include="constraint_solver\demon_profiler.proto" />
+    <None Include="constraint_solver\routing_enums.proto" />
+    <None Include="constraint_solver\routing_ils.proto" />
+    <None Include="constraint_solver\routing_parameters.proto" />
+    <None Include="constraint_solver\search_limit.proto" />
+    <None Include="constraint_solver\search_stats.proto" />
+    <None Include="constraint_solver\solver_parameters.proto" />
+    <None Include="glop\parameters.proto" />
+    <None Include="graph\flow_problem.proto" />
+    <None Include="linear_solver\linear_solver.proto" />
+    <None Include="pdlp\solvers.proto" />
+    <None Include="pdlp\solve_log.proto" />
+    <None Include="README.md" />
+    <None Include="sat\boolean_problem.proto" />
+    <None Include="sat\cp_model.proto" />
+    <None Include="sat\cp_model_service.proto" />
+    <None Include="sat\sat_parameters.proto" />
+    <None Include="UnusableNodes.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App.config" />
+    <None Include="BusinessObjects\WarehouseOrder.cs" />
+    <Compile Include="BusinessObjects\DocumentTracking.cs" />
+    <Compile Include="BusinessObjects\OperationSmart.cs" />
+    <Compile Include="BusinessObjects\LabelDefination.cs" />
+    <Compile Include="BusinessObjects\Location.cs" />
+    <Compile Include="BusinessObjects\Task.cs" />
+    <Compile Include="BusinessObjects\TempShippingContainer.cs" />
+    <Compile Include="BusinessObjects\Trip.cs" />
+    <Compile Include="BusinessObjects\DeliveryPlan.cs" />
+    <Compile Include="BusinessObjects\user\UserDola.cs" />
+    <Compile Include="BusinessObjects\VehicleFuel.cs" />
+    <Compile Include="BusinessObjects\CurrentData.cs" />
+    <Compile Include="BusinessObjects\DocumentOcr.cs" />
+    <Compile Include="BusinessObjects\DriverWorkingday.cs" />
+    <Compile Include="BusinessObjects\Fuel.cs" />
+    <Compile Include="BusinessObjects\Person.cs" />
+    <Compile Include="BusinessObjects\Item.cs" />
+    <Compile Include="BusinessObjects\ObjectNP.cs" />
+    <Compile Include="BusinessObjects\Order.cs" />
+    <Compile Include="BusinessObjects\Position.cs" />
+    <Compile Include="BusinessObjects\Region.cs" />
+    <Compile Include="BusinessObjects\Vehicle.cs" />
+    <Compile Include="BusinessObjects\VehicleShift.cs" />
+    <Compile Include="BusinessObjects\WorkingArea.cs" />
+    <Compile Include="Controllers\MainController.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controllers\MainController.Designer.cs">
+      <DependentUpon>MainController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\MainDashBoardController.cs" />
+    <Compile Include="Controllers\MainDashBoardController.Designer.cs">
+      <DependentUpon>MainDashBoardController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\RefreshFieldPickerController.cs" />
+    <Compile Include="Controllers\RefreshFieldPickerController.Designer.cs">
+      <DependentUpon>RefreshFieldPickerController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseUpdate\Updater.cs" />
+    <Compile Include="GlobalWindowsController.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GlobalWindowsController.Designer.cs">
+      <DependentUpon>GlobalWindowsController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202501221442324_a.cs" />
+    <Compile Include="Migrations\202501221442324_a.designer.cs">
+      <DependentUpon>202501221442324_a.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202501221559430_b.cs" />
+    <Compile Include="Migrations\202501221559430_b.designer.cs">
+      <DependentUpon>202501221559430_b.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202501221612064_c.cs" />
+    <Compile Include="Migrations\202501221612064_c.designer.cs">
+      <DependentUpon>202501221612064_c.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202501221948327_a1.cs" />
+    <Compile Include="Migrations\202501221948327_a1.designer.cs">
+      <DependentUpon>202501221948327_a1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202501222001263_a2.cs" />
+    <Compile Include="Migrations\202501222001263_a2.designer.cs">
+      <DependentUpon>202501222001263_a2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Module.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Module.Designer.cs">
+      <DependentUpon>Module.cs</DependentUpon>
+    </Compile>
+    <None Include="Order_Daily_Planed.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="qrproblem.cs" />
+    <Compile Include="Web References\tr.gov.turkiye.servisLive\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\tr.gov.turkiye.servis\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controllers\MainController.resx">
+      <DependentUpon>MainController.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controllers\MainDashBoardController.resx">
+      <DependentUpon>MainDashBoardController.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501221442324_a.resx">
+      <DependentUpon>202501221442324_a.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501221559430_b.resx">
+      <DependentUpon>202501221559430_b.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501221612064_c.resx">
+      <DependentUpon>202501221612064_c.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501221948327_a1.resx">
+      <DependentUpon>202501221948327_a1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501222001263_a2.resx">
+      <DependentUpon>202501222001263_a2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model.DesignedDiffs.xafml" />
+    <EmbeddedResource Include="Module.resx">
+      <DependentUpon>Module.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BusinessObjects\ReadMe.txt" />
+    <None Include="Controllers\ReadMe.txt" />
+    <None Include="DatabaseUpdate\ReadMe.txt" />
+    <None Include="Images\ReadMe.txt" />
+    <EmbeddedResource Include="Model.xafml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FunctionalTests\config.xml" />
+    <None Include="FunctionalTests\sample.ets" />
+    <None Include="FunctionalTests\ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.configuration" />
+    <Compile Include="BusinessObjects\DoredoDbContext.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="util\int128.proto" />
+    <None Include="util\optional_boolean.proto" />
+    <None Include="Web References\tr.gov.turkiye.servisLive\esyaservisi.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servisLive\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servisLive\UdhbUetdsEsyaWsService.wsdl" />
+    <None Include="Web References\tr.gov.turkiye.servisLive\uetdsEsyaIPListeleSonuc1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servisLive\uetdsEsyaParamEsyaTurSonuc1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servisLive\uetdsEsyaParamIptalTuruSonuc1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servisLive\uetdsEsyaParamMuafiyetTuruSonuc1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servisLive\uetdsEsyaParamTasimaTuruSonuc1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servisLive\uetdsEsyaParamTehlikeliMaddeTasimaSekliSonuc1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servisLive\uetdsEsyaParamYukBirimiSonuc1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servisLive\uetdsEsyaSeferDetayiSonucV31.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servisLive\uetdsEsyaSeferEkleSonucV31.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servisLive\uetdsEsyaSeferListesiSonucV31.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servisLive\uetdsEsyaYeniYukEkleSonucV31.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servisLive\uetdsEsyaYukDetayiSonucV31.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servisLive\uetdsFirmaSonuc1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servisLive\uetdsGenelIslemSonuc1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servisLive\uetdsGenelPdfSonuc1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servisLive\uetdsMesSorguSonuc1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servisLive\uetdsMuayeneSorguSonuc1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servisLive\uetdsSurucuVizeBasvuruSonuc1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servisLive\uetdsVizeBasvuruDetaySonuc1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servisLive\uetdsVizeBasvuruListeSonuc1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servisLive\uetdsVizeSurucuEkleSonuc1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servis\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servis\testesyaservisi.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servis\UdhbUetdsEsyaWsService.wsdl" />
+    <None Include="Web References\tr.gov.turkiye.servis\uetdsEsyaIPListeleSonuc2.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servis\uetdsEsyaParamEsyaTurSonuc2.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servis\uetdsEsyaParamIptalTuruSonuc2.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servis\uetdsEsyaParamMuafiyetTuruSonuc2.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servis\uetdsEsyaParamTasimaTuruSonuc2.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servis\uetdsEsyaParamTehlikeliMaddeTasimaSekliSonuc2.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servis\uetdsEsyaParamYukBirimiSonuc2.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servis\uetdsEsyaSeferDetayiSonucV32.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servis\uetdsEsyaSeferEkleSonucV32.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servis\uetdsEsyaSeferListesiSonucV32.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servis\uetdsEsyaYeniYukEkleSonucV32.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servis\uetdsEsyaYukDetayiSonucV32.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servis\uetdsFirmaSonuc2.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servis\uetdsGenelIslemSonuc2.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servis\uetdsGenelPdfSonuc2.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servis\uetdsMesSorguSonuc2.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servis\uetdsMuayeneSorguSonuc2.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servis\uetdsSurucuVizeBasvuruSonuc2.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servis\uetdsVizeBasvuruDetaySonuc2.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servis\uetdsVizeBasvuruListeSonuc2.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\tr.gov.turkiye.servis\uetdsVizeSurucuEkleSonuc2.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Welcome.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\containerOperation48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\containerOperation32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\port.png" />
+    <EmbeddedResource Include="Images\port32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\zincirpalet.png" />
+    <EmbeddedResource Include="Images\Trendyol_logo.png" />
+    <EmbeddedResource Include="Images\warehouse16.png" />
+    <EmbeddedResource Include="Images\warehouse32.png" />
+    <EmbeddedResource Include="Images\ulastirmaBakanligi.png" />
+    <EmbeddedResource Include="Images\turkiye_ulastirma16x16.png" />
+    <EmbeddedResource Include="Images\spot16x16.png" />
+    <EmbeddedResource Include="Images\spot32x32.png" />
+    <EmbeddedResource Include="Images\containerOperation16X16.png" />
+    <EmbeddedResource Include="Images\Truck16X16.png" />
+    <EmbeddedResource Include="Images\Vessel16X16.png" />
+    <EmbeddedResource Include="Images\Vessel48x48.png" />
+    <EmbeddedResource Include="Images\capa16x16.png" />
+    <EmbeddedResource Include="Images\capa24x24.png" />
+    <EmbeddedResource Include="Images\capa36x36.png" />
+    <EmbeddedResource Include="Images\container16x16.png" />
+    <EmbeddedResource Include="Images\container32x32.png" />
+    <EmbeddedResource Include="Images\containerLeft16x16.png" />
+    <EmbeddedResource Include="Images\containerLeft32x32.png" />
+    <EmbeddedResource Include="Images\fuel16x16.png" />
+    <EmbeddedResource Include="Images\fuel32x32.png" />
+    <EmbeddedResource Include="Images\colakLogo.png" />
+    <EmbeddedResource Include="Images\kastomonuentegre.png" />
+    <EmbeddedResource Include="Images\ulsastirma32.png" />
+    <EmbeddedResource Include="Images\logilogo.png" />
+    <EmbeddedResource Include="Images\sitelogo.png" />
+    <EmbeddedResource Include="Images\petrolofisi.png" />
+    <EmbeddedResource Include="Images\doredo.png" />
+    <EmbeddedResource Include="Images\doredo_do.png" />
+    <EmbeddedResource Include="Images\ramp32x32.png" />
+    <EmbeddedResource Include="Images\doredo_do_32x32.png" />
+    <EmbeddedResource Include="Images\kfc_logo_32x32.png" />
+    <EmbeddedResource Include="Images\ph_logo_32x_32.png" />
+    <Content Include="Images\singleContainer32x32.png" />
+    <Content Include="Images\containerWithTruck32x32.png" />
+    <EmbeddedResource Include="Images\Vessel32x32.png" />
+    <EmbeddedResource Include="Images\Truck32x32.png" />
+    <EmbeddedResource Include="Images\Truck48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="https://servis.turkiye.gov.tr/services/g2g/kdgm/test/uetdsesya%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\tr.gov.turkiye.servis\</RelPath>
+      <UpdateFromURL>https://servis.turkiye.gov.tr/services/g2g/kdgm/test/uetdsesya%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>KYS_Module_tr_gov_turkiye_servis_UdhbUetdsEsyaWsService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://servis.turkiye.gov.tr/services/g2g/kdgm/uetdsesya%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\tr.gov.turkiye.servisLive\</RelPath>
+      <UpdateFromURL>https://servis.turkiye.gov.tr/services/g2g/kdgm/uetdsesya%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>gologdo_Module_tr_gov_turkiye_servisLive_UdhbUetdsEsyaWsService</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LgsLib.Base.StateMachine\LgsLib.StateMachine.csproj">
+      <Project>{88a2fdab-b210-4bc0-87e4-6c1a75c38037}</Project>
+      <Name>LgsLib.StateMachine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lgslib.Base.Web\Lgslib.Base.Web.csproj">
+      <Project>{57437aa8-722c-4f10-8223-712d2c24152d}</Project>
+      <Name>Lgslib.Base.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lgslib.Base\LgsLib.Base.csproj">
+      <Project>{ba2e0a47-f2b8-4ff7-a834-9656bdf8fce5}</Project>
+      <Name>LgsLib.Base</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

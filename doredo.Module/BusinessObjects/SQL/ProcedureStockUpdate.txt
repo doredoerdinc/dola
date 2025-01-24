@@ -1,0 +1,217 @@
+﻿USE[doreddeveloper]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_insert_stock]    Script Date: 5/2/2022 8:54:49 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[pr_insert_stock]
+@TaskCode varchar(100)
+as
+DECLARE
+@CreateTime DateTime2
+, @Warehouse_SysCode varchar(100)
+,@Quantity float
+,@PaletteCode varchar(100)
+,@Batch varchar(100)
+,@ExpireDate varchar(100)
+,@Location_SysCode varchar(100)
+,@ItemBarcode varchar(100)
+,@TaskTemplate_SysCode varchar(100)
+,@TransactionCode varchar(100)
+,@TaskStep_SysCode varchar(100)
+,@TaskStepIntegrationCode varchar(100)
+,@TaskStepObjectCode varchar(100)
+,@Task_SysCode varchar(100)
+,@TaskIntegrationCode varchar(100)
+,@TaskIntegrationObject varchar(100)
+,@Heat varchar(100)
+,@Client varchar(100)
+declare
+@currentLocation varchar(100)
+,@stockID int
+,@stockProcedureMessage varchar(4000)
+,@curentItem varchar(100)
+,@realQuantity float
+,@stockTransactionType int
+,@Stock_Id int
+
+
+if (@TaskCode is null or @TaskCode = '')
+    begin
+ RAISERROR(N'TaskCode Is Not Empty.', --Message text.
+                         10, --Severity,
+                         1, --State,
+                         N'number', --First argument.
+                         5
+                     ); --Second argume
+                     ROLLBACK TRANSACTION
+            return
+end
+DECLARE cursor_transaction CURSOR
+FOR SELECT 
+ CreateTime 
+, Warehouse_SysCode
+, Quantity
+, PaletteCode
+, Batch
+, ExpireDate
+, Location_SysCode
+, ItemBarcode
+, TaskTemplate_SysCode
+, TransactionCode
+, TaskStep_SysCode
+, TaskStepIntegrationCode
+, TaskStepObjectCode
+, Task_SysCode
+, TaskIntegrationCode
+, TaskIntegrationObject
+, Heat
+, Client
+    FROM 
+        vw_TaskStepTransaction where Task_SysCode=@TaskCode
+OPEN cursor_transaction;
+
+FETCH NEXT FROM cursor_transaction INTO 
+@CreateTime 
+, @Warehouse_SysCode
+, @Quantity
+, @PaletteCode
+, @Batch
+, @ExpireDate
+, @Location_SysCode
+, @ItemBarcode
+, @TaskTemplate_SysCode
+, @TransactionCode
+, @TaskStep_SysCode
+, @TaskStepIntegrationCode
+, @TaskStepObjectCode
+, @Task_SysCode
+, @TaskIntegrationCode
+, @TaskIntegrationObject
+, @Heat
+, @Client
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+set @curentItem=(select Syscode from Item where Barcode=@ItemBarcode);
+set @currentLocation = @Location_SysCode;
+set @stockTransactionType =
+    (
+        select StockTransactionType
+        from TaskTemplate
+        where SysCode = @TaskTemplate_SysCode
+) 
+if (@currentLocation is null or @currentLocation = '')
+    begin
+        SET @currentLocation = 'R1'
+end
+
+set @realQuantity = @Quantity * @stockTransactionType
+ 
+					 
+BEGIN TRY
+begin transaction
+
+ exec @Stock_Id=dbo.pr_stockTransaction @PaletteCode,
+                                                        @currentLocation,
+                                                        @Warehouse_Syscode,
+                                                        @Batch,
+                                                        @curentItem,
+                                                        @ExpireDate,
+                                                        @realQuantity
+
+print @Stock_Id
+--
+Insert into  dbo.stocktransaction(
+CreateTime 
+, Warehouse_SysCode
+, Quantity
+, TransporterBarcode
+, Batch
+, ExpireDate
+, Location_SysCode
+, Item_SysCode
+, OrderLine_SysCode
+, TaskTemplate_SysCode
+, TaskStepTransaction
+, TaskStep_SysCode
+, TaskStepIntegrationCode
+, TaskStepIntegrationObject
+, Task_SysCode
+, TaskIntegrationCode
+, TaskIntegrationObject
+, Heat
+, Client
+, Stock_ID
+) values(
+@CreateTime
+, @Warehouse_SysCode
+, @Quantity
+, @PaletteCode
+, @Batch
+, @ExpireDate
+, @currentLocation
+, @curentItem
+, @TaskStepIntegrationCode
+, @TaskTemplate_SysCode
+, @TransactionCode
+, @TaskStep_SysCode
+, @TaskStepIntegrationCode
+, @TaskStepObjectCode
+, @Task_SysCode
+, @TaskIntegrationCode
+, @TaskIntegrationObject
+, @Heat
+, @Client
+, @Stock_Id
+)
+COMMIT TRANSACTION
+print @Stock_Id
+end try
+ BEGIN CATCH
+ /*
+ SUSER_SNAME(),
+   ERROR_NUMBER(),
+   ERROR_STATE(),
+   ERROR_SEVERITY(),
+   ERROR_LINE(),
+   ERROR_PROCEDURE(),
+   ERROR_MESSAGE(),
+   GETDATE()*/
+  -- set @returnMessage=ERROR_MESSAGE()
+ 
+--Transaction uncommittable
+   IF(XACT_STATE()) = -1
+      ROLLBACK TRANSACTION
+ 
+-- Transaction committable
+    IF (XACT_STATE()) = 1
+      COMMIT TRANSACTION
+END CATCH
+ FETCH  NEXT FROM cursor_transaction INTO 
+@CreateTime 
+, @Warehouse_SysCode
+, @Quantity
+, @PaletteCode
+, @Batch
+, @ExpireDate
+, @Location_SysCode
+, @ItemBarcode
+, @TaskTemplate_SysCode
+, @TransactionCode
+, @TaskStep_SysCode
+, @TaskStepIntegrationCode
+, @TaskStepObjectCode
+, @Task_SysCode
+, @TaskIntegrationCode
+, @TaskIntegrationObject
+, @Heat
+, @Client
+
+    END;
+
+CLOSE cursor_transaction;
+
+DEALLOCATE cursor_transaction;

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>css</Title>
+      <Author>Dincer-ERDINC SIMSEK</Author>
+      <Description>Code snippet for an automatically implemented XAF property</Description>
+      <HelpUrl></HelpUrl>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Keywords />
+      <Shortcut>css</Shortcut>
+    </Header>
+    <Snippet>
+      <References />
+      <Imports />
+      <Declarations>
+        <Literal Editable="true">
+          <ID>type</ID>
+          <Type></Type>
+          <ToolTip>Class type</ToolTip>
+          <Default>int</Default>
+          <Function></Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>property</ID>
+          <Type></Type>
+          <ToolTip>Property name</ToolTip>
+          <Default>MyProperty</Default>
+          <Function></Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Kind="" Delimiter="$">
+	  <![CDATA[ 
+
+    [Table("$type$")]
+    public class $type$:BaseObjectI
+    {
+        public $type$() { }
+    }	    
+ 
+		$end$			
+			]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

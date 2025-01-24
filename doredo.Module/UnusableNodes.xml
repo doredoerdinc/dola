@@ -1,0 +1,847 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <ActionDesign Id="ActionDesign">
+    <Node Id="DisableActions@1e4ecb32-805c-4603-8e9d-3d72883489cd" UnusableNodeName="DisableActions">
+      <Node Id="@35c1e46b-d50b-45f6-a3b3-d034e538d01e" UnusableNodeName="DisableAction" Action="OrderGoodsInOut" IsNewNode="True" />
+      <Node Id="@38ff3843-c3ee-468c-b2eb-18a0099ca8be" UnusableNodeName="DisableAction" Action="TaskAssigned" IsNewNode="True" />
+      <Node Id="@67d78804-0f93-4fbf-9d44-c21c7cbc1531" UnusableNodeName="DisableAction" Action="ResetViewSettings" IsNewNode="True" />
+      <Node Id="@6fb170ad-afa6-46c5-80cb-3d2c485e7dad" UnusableNodeName="DisableAction" Action="LabelCreateFromOrder" IsNewNode="True" />
+      <Node Id="@7456f588-67fe-4182-aa64-ebdbb80249e2" UnusableNodeName="DisableAction" Action="GoodsIn" Removed="True" />
+      <Node Id="@76a9fbf8-1f4f-4f65-948a-7dd391a586a5" UnusableNodeName="DisableAction" Action="TemplateLabelCreate" IsNewNode="True" />
+      <Node Id="@7f31c2b3-fa5e-4885-8a66-37f8f4ec394b" UnusableNodeName="DisableAction" Action="GenerateTaskForItemPickProcess" IsNewNode="True" />
+      <Node Id="@82322c25-e1e4-430f-9294-538cabe0f5ab" UnusableNodeName="DisableAction" Action="Export" IsNewNode="True" />
+      <Node Id="@837483a5-6c8f-4bda-8cf2-439a8b24365b" UnusableNodeName="DisableAction" Action="TaskAssignedFromOrder" IsNewNode="True" />
+      <Node Id="@8569cc6b-ce23-4fc9-b084-f1c5a4a30af7" UnusableNodeName="DisableAction" Action="OrderGoodsInOut" IsNewNode="True" />
+      <Node Id="@8814f735-816a-4214-b054-fcb466692696" UnusableNodeName="DisableAction" Action="GenerateTaskForItemAcceptProcess" IsNewNode="True" />
+      <Node Id="@9771152d-1891-4ae8-bdef-4ac17e7f1403" UnusableNodeName="DisableAction" Action="Print" IsNewNode="True" />
+      <Node Id="@b04b33c9-540d-4bee-b180-33f18e034502" UnusableNodeName="DisableAction" Action="OrderPickingReservation" IsNewNode="True" />
+      <Node Id="@c3ab8df1-53b6-4fa8-ba09-333a325088a9" UnusableNodeName="DisableAction" Action="GenerateTaskForVehicleLoadProcess" IsNewNode="True" />
+      <Node Id="@c59f55a4-51b8-4238-a70c-b14f7b77cac3" UnusableNodeName="DisableAction" Action="ResetModelDifferences" IsNewNode="True" />
+    </Node>
+    <Actions Id="Actions">
+      <Action Id="HelpWindow" ImageName="HandTool_32x32" />
+      <Action Id="ShowInReportV2" ImageName="DefaultPrinter_32x32" />
+      <Action Id="ShowMapView" ImageName="GeoPointMap_32x32" />
+      <Action Id="showOnMap" ImageName="GeoPoint_16x16">
+        <DisableReasons Id="DisableReasons">
+          <Reason Id="ShowOnMap" Caption="ShowOnMap" />
+        </DisableReasons>
+      </Action>
+    </Actions>
+  </ActionDesign>
+  <Views Id="Views">
+    <ListView Id="EntryLocation_ListViewDHV">
+      <Node Id="MenuSettings@a4420321-91ee-4f80-9dd4-ae749a3d05a4" UnusableNodeName="MenuSettings" IsNewNode="True">
+        <Node Id="MenuItem@795cf14f-835a-4db8-9eaa-c2cd77816d75" UnusableNodeName="MenuItem" Name="ramp" CallAction="GoodsInOutFromEntry" Caption="Araç Yükle &amp; Boşalt" Image="ramp32x32" IsNewNode="True" />
+      </Node>
+      <Columns Id="Columns">
+        <ColumnInfo Id="GlobalLocation" PropertyName="GlobalLocation" Width="94" Index="4" Caption="Rampa" />
+      </Columns>
+    </ListView>
+    <ListView Id="GlobalLocation_ListViewDashBoardView" PageSize="10" EnableEndlessPaging="False" ClassName="dola.Module.GlobalLocation">
+      <Columns Id="Columns">
+        <ColumnInfo Id="CreatedBy" PropertyName="CreatedBy" Width="70" Index="-1" />
+        <ColumnInfo Id="CreateTime" PropertyName="CreateTime" Width="70" Index="-1" />
+        <ColumnInfo Id="IsNewObject" PropertyName="IsNewObject" Width="50" Index="-1" />
+        <ColumnInfo Id="ObjectSpace" PropertyName="ObjectSpace" Width="70" Index="-1" />
+        <ColumnInfo Id="State" PropertyName="State" Width="70" Index="-1" />
+        <ColumnInfo Id="SysCode" PropertyName="SysCode" Width="400" Index="-1" />
+        <ColumnInfo Id="UpdateBy" PropertyName="UpdateBy" Width="70" Index="-1" />
+        <ColumnInfo Id="UpdateTime" PropertyName="UpdateTime" Width="70" Index="-1" />
+        <ColumnInfo Id="Barcode" PropertyName="Barcode" Width="112" SortIndex="0" SortOrder="Ascending" Index="0" />
+        <ColumnInfo Id="Zone" PropertyName="Zone" Width="70" Index="1" />
+        <ColumnInfo Id="OperationRow" PropertyName="OperationRow" Width="70" Index="2" />
+        <ColumnInfo Id="FunctionType" PropertyName="FunctionType" Width="70" Index="3" />
+        <ColumnInfo Id="Width" PropertyName="Width" Width="70" Index="4" />
+        <ColumnInfo Id="Height" PropertyName="Height" Width="70" Index="5" />
+        <ColumnInfo Id="Length" PropertyName="Length" Width="70" Index="6" />
+        <ColumnInfo Id="MaxLoadQuantityKg" PropertyName="MaxLoadQuantityKg" Width="70" Index="7" />
+        <ColumnInfo Id="MinTemperature" PropertyName="MinTemperature" Width="70" Index="8" />
+        <ColumnInfo Id="MaxTemperature" PropertyName="MaxTemperature" Width="70" Index="9" />
+        <ColumnInfo Id="PalleteCapacity" PropertyName="PalleteCapacity" Width="70" Index="10" />
+      </Columns>
+    </ListView>
+    <ListView Id="Item_ListViewDashBoardView" PageSize="10">
+      <Columns Id="Columns">
+        <ColumnInfo Id="OrderMinimumQuantity" PropertyName="OrderMinimumQuantity" Width="70" Index="14" />
+        <ColumnInfo Id="PalletePackageCapacity" PropertyName="PalletePackageCapacity" Width="70" Index="13" />
+        <ColumnInfo Id="PackageUnitCapacity" PropertyName="PackageUnitCapacity" Width="70" Index="12" />
+        <ColumnInfo Id="Packageheight" PropertyName="Packageheight" Width="70" Index="11" />
+        <ColumnInfo Id="PackageLenght" PropertyName="PackageLenght" Width="70" Index="10" />
+        <ColumnInfo Id="PackageWidth" PropertyName="PackageWidth" Width="70" Index="9" />
+        <ColumnInfo Id="PackageWeight" PropertyName="PackageWeight" Width="70" Index="7" />
+        <ColumnInfo Id="Height" PropertyName="Height" Width="70" Index="6" />
+        <ColumnInfo Id="UnitWeight" PropertyName="UnitWeight" Width="70" Index="5" />
+        <ColumnInfo Id="Width" PropertyName="Width" Width="70" Index="4" />
+        <ColumnInfo Id="Length" PropertyName="Length" Width="70" Index="3" />
+      </Columns>
+    </ListView>
+    <ListView Id="Order_Create_ListView" DetailRowView="Order_Create_DetailView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="QuantityCheck" PropertyName="QuantityCheck" Width="50" Index="-1" />
+        <ColumnInfo Id="PlanedTransporterQuantity" PropertyName="PlanedTransporterQuantity" Width="70" Index="-1" />
+        <ColumnInfo Id="OperationRow" PropertyName="OperationRow" Width="50" Index="-1" />
+        <ColumnInfo Id="IntegrationDocumentCode" PropertyName="IntegrationDocumentCode" Width="70" Index="-1" />
+        <ColumnInfo Id="GroupCode" PropertyName="GroupCode" Width="70" Index="-1" />
+        <ColumnInfo Id="GlobalLocation" PropertyName="GlobalLocation" Width="70" Index="-1" />
+        <ColumnInfo Id="DocumentCode" PropertyName="DocumentCode" Width="70" Index="-1" />
+      </Columns>
+    </ListView>
+    <ListView Id="Order_Item_ListViewDHV" PageSize="10" IsAdaptive="True" InlineEditMode="Batch" />
+    <ListView Id="Order_Items_Create_ListView" IsAdaptive="True" InlineEditMode="Inline" />
+    <ListView Id="Order_Items_ListView" InlineEditMode="Inline" IsAdaptive="True" />
+    <ListView Id="Order_OutIn_ListViewDHV" IsAdaptive="True">
+      <Node Id="MenuSettings@53f1f0ac-90c3-4fb2-a50a-035f3ee37f2c" UnusableNodeName="MenuSettings" IsNewNode="True">
+        <Node Id="MenuItem@ea80186d-c725-4060-9603-0059be96c3ee" UnusableNodeName="MenuItem" Name="CreateTask_OrderGoodsInOut" CallAction="OrderGoodsInOut" Caption="Görev Oluştur" Image="ramp32x32" ParentMenu="Menu" PassiveCriteria="Not [State.SysCode] In ('ItemPickStarted', 'ItemPickProcess''ItemPickProblem', 'ItemPickFinished', 'ItemAcceptStarted', 'Approved') And Contains([OrderType.SysCode], 'GoodsOut')" IsNewNode="True" />
+        <Node Id="MenuItem@75719365-d0e5-418e-b1e3-5bd2e89f532c" UnusableNodeName="MenuItem" Name="TaskAssignedFromOrder" CallAction="TaskAssignedFromOrder" Image="dola_do_32x32" Caption="Assign Task" ParentMenu="Menu" IsNewNode="True" />
+      </Node>
+      <Columns Id="Columns">
+        <ColumnInfo Id="QuantityCheck" PropertyName="QuantityCheck" Width="50" Index="-1" />
+        <ColumnInfo Id="PlanedTransporterQuantity" PropertyName="PlanedTransporterQuantity" Width="70" Index="-1" />
+        <ColumnInfo Id="OperationRow" PropertyName="OperationRow" Width="50" Index="-1" />
+        <ColumnInfo Id="IntegrationDocumentCode" PropertyName="IntegrationDocumentCode" Width="120" Index="-1" />
+        <ColumnInfo Id="GroupCode" PropertyName="GroupCode" Width="70" Index="-1" />
+        <ColumnInfo Id="GlobalLocation" PropertyName="GlobalLocation" Width="70" Index="-1" />
+        <ColumnInfo Id="DocumentCode" PropertyName="DocumentCode" Width="128" Index="-1" />
+      </Columns>
+    </ListView>
+    <ListView Id="Order_Pick_ListViewDHV" IsAdaptive="True">
+      <Node Id="MenuSettings@9c2ce114-a27e-49d4-b7d5-20cdf4c7a9af" UnusableNodeName="MenuSettings" IsNewNode="True">
+        <Node Id="MenuItem@0a9b5ee2-34e4-4b88-8962-cec9dcc50b4e" UnusableNodeName="MenuItem" Name="CreateTaskForItemPickProcess" CallAction="GenerateTaskForItemPickProcess" Caption="Görev Oluştur" Image="BODepartment_32x32" IsNewNode="True" />
+        <Node Id="MenuItem@c890fdc3-9ccf-47a7-8d5e-c81673cbc843" UnusableNodeName="MenuItem" Name="OrderPickingReservation" CallAction="OrderPickingReservation" Caption="Order Reservation" Image="DeleteDataSource2_32x32" IsNewNode="True" />
+        <Node Id="MenuItem@cec99aa5-c7be-4cab-9f48-0f8dfb7acce9" UnusableNodeName="MenuItem" Name="TaskAssignedFromOrder" CallAction="TaskAssignedFromOrder" Image="dola_do_32x32" Caption="Assign Task" ParentMenu="Menu" IsNewNode="True" />
+      </Node>
+      <Columns Id="Columns">
+        <ColumnInfo Id="QuantityCheck" PropertyName="QuantityCheck" Width="50" Index="-1" />
+        <ColumnInfo Id="PlanedTransporterQuantity" PropertyName="PlanedTransporterQuantity" Width="70" Index="-1" />
+        <ColumnInfo Id="OperationRow" PropertyName="OperationRow" Width="50" Index="-1" />
+        <ColumnInfo Id="IntegrationDocumentCode" PropertyName="IntegrationDocumentCode" Width="120" Index="-1" />
+        <ColumnInfo Id="GroupCode" PropertyName="GroupCode" Width="70" Index="-1" />
+        <ColumnInfo Id="GlobalLocation" PropertyName="GlobalLocation" Width="70" Index="-1" />
+        <ColumnInfo Id="DocumentCode" PropertyName="DocumentCode" Width="128" Index="-1" />
+      </Columns>
+    </ListView>
+    <ListView Id="State_ListView" InlineEditMode="Batch" />
+    <ListView Id="StockControlStep_ListView">
+      <Node Id="MenuSettings@6a5cfcff-4f86-4299-9b9c-ee2924b6ffb3" UnusableNodeName="MenuSettings">
+        <Node Id="MenuItem@60d3f081-c219-4f26-81e8-639a3c547cba" UnusableNodeName="MenuItem" Name="TaskAssigned" CallAction="TaskAssigned" Caption="TaskAssigned" Image="dola_do_32x32" IsNewNode="True" />
+      </Node>
+    </ListView>
+    <DashboardView Id="Transport_DashBoardView">
+      <Items Id="Items">
+        <Node Id="Label_DashBoardView" UnusableNodeName="DashboardViewItemRelation" ViewId="Label_ListView" IsNewNode="True" />
+        <Node Id="Order_Ready_DashBoardView" UnusableNodeName="DashboardViewItemRelation" ViewId="Order_OutIn_ListViewDHV" ActionsToolbarVisibility="Hide" Criteria="Contains([OrderType.SysCode], 'GoodsIn') And Not [State.SysCode] In ('Created', 'ItemAccepFinished')" IsFirtLoad="True" IsNewNode="True">
+          <Node Id="RelationListViews@bcda299b-8123-445c-95f3-0d80cf168b4b" UnusableNodeName="RelationListViews" IsNewNode="True">
+            <Node Id="DashBoardRelationView@f43caf51-ea9c-4c49-8c51-c659474fcd66" UnusableNodeName="DashBoardRelationView" Name="Order_Item" WherePropertyName="Order.SysCode" WherePropertyNameValue="SysCode" DashboardViewItem="Order_Item_DashBoardView" IsNewNode="True" />
+          </Node>
+        </Node>
+        <Node Id="Trip_DashBoardView" UnusableNodeName="DashboardViewItemRelation" Caption="Trip Tracking" ViewId="Trip_ListViewDashBoardView" IsNewNode="True">
+          <Node Id="RelationListViews@578ef202-1f73-44ba-9f00-6b529a017027" UnusableNodeName="RelationListViews" IsNewNode="True">
+            <Node Id="DashBoardRelationView@ef7d8214-731e-4c13-9145-11abec15542f" UnusableNodeName="DashBoardRelationView" Name="Trip_Label" WherePropertyName="Trip.SysCode" WherePropertyNameValue="SysCode" DashboardViewItem="Label_DashBoardView" IsNewNode="True" />
+          </Node>
+        </Node>
+        <Node Id="Trip_Order_DashBoardView" UnusableNodeName="DashboardViewItemRelation" ViewId="Order_OutIn_ListViewDHV" ActionsToolbarVisibility="Show" Caption="Trip_Order_DashBoardView" IsNewNode="True" />
+      </Items>
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Autoadd88513-32d8-4e52-8a42-90dad033b966">
+            <LayoutItem Id="Order_Item_DashBoardView" ViewItem="Order_Item_DashBoardView" />
+            <LayoutItem Id="Order_Ready_DashBoardView" ViewItem="Order_Ready_DashBoardView" />
+          </LayoutGroup>
+          <LayoutGroup Id="Auto1312a2ce-a17a-4d84-819c-af844b15f1f7">
+            <LayoutItem Id="Order_Entry_DashBoardView" ViewItem="Order_Entry_DashBoardView" />
+            <LayoutItem Id="Entry_Vehicle_DashBoardView" ViewItem="Entry_Vehicle_DashBoardView" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DashboardView>
+    <ListView Id="Trip_Order_ListViewDHV" IsAdaptive="True">
+      <Node Id="MenuSettings@43873908-3175-4dfd-bd30-cda3949c4917" UnusableNodeName="MenuSettings" IsNewNode="True">
+        <Node Id="MenuItem@9396c8c9-e4eb-4e4a-b345-e476bf79544b" UnusableNodeName="MenuItem" Name="CreateTask_OrderGoodsInOut" CallAction="OrderGoodsInOut" Caption="Görev Oluştur" Image="ramp32x32" ParentMenu="Menu" PassiveCriteria="Not [State.SysCode] In ('ItemPickStarted', 'ItemPickProcess''ItemPickProblem', 'ItemPickFinished', 'ItemAcceptStarted', 'Approved') And Contains([OrderType.SysCode], 'GoodsOut')" IsNewNode="True" />
+        <Node Id="MenuItem@3df3cc0b-05a9-4040-a903-fbd31f825293" UnusableNodeName="MenuItem" Name="TaskAssignedFromOrder" CallAction="TaskAssignedFromOrder" Image="dola_do_32x32" Caption="Assign Task" ParentMenu="Menu" IsNewNode="True" />
+      </Node>
+      <Columns Id="Columns">
+        <ColumnInfo Id="QuantityCheck" PropertyName="QuantityCheck" Width="50" Index="-1" />
+        <ColumnInfo Id="PlanedTransporterQuantity" PropertyName="PlanedTransporterQuantity" Width="70" Index="-1" />
+        <ColumnInfo Id="OperationRow" PropertyName="OperationRow" Width="50" Index="-1" />
+        <ColumnInfo Id="IntegrationDocumentCode" PropertyName="IntegrationDocumentCode" Width="120" Index="-1" />
+        <ColumnInfo Id="GroupCode" PropertyName="GroupCode" Width="70" Index="-1" />
+        <ColumnInfo Id="GlobalLocation" PropertyName="GlobalLocation" Width="70" Index="-1" />
+        <ColumnInfo Id="DocumentCode" PropertyName="DocumentCode" Width="128" Index="-1" />
+      </Columns>
+    </ListView>
+    <DashboardView Id="Warehouse_Picking_DashBoardView">
+      <Items Id="Items">
+        <Node Id="Order_Item_DashBoardView" UnusableNodeName="DashboardViewItemRelation" Caption="OrderLineDashBoard" IsFirtLoad="False" ActionsToolbarVisibility="Hide" ViewId="Order_Item_ListViewDHV" IsNewNode="True" />
+        <Node Id="Order_Ready_DashBoardView" UnusableNodeName="DashboardViewItemRelation" ActionsToolbarVisibility="Show" Criteria="Not [State.SysCode] In ('Created') And Contains([OrderType.SysCode], 'GoodsOut')" IsFirtLoad="True" ViewId="Order_Pick_ListViewDHV" IsNewNode="True">
+          <Node Id="RelationListViews@12c763e4-d590-44cf-90d7-cf7be654d0ed" UnusableNodeName="RelationListViews" IsNewNode="True">
+            <Node Id="DashBoardRelationView@c0326fa5-d99a-45bc-a66d-74c9840412bc" UnusableNodeName="DashBoardRelationView" Name="Order_Item" WherePropertyName="Order.SysCode" WherePropertyNameValue="SysCode" DashboardViewItem="Order_Item_DashBoardView" IsNewNode="True" />
+            <Node Id="DashBoardRelationView@80c567d4-114b-4b19-b5d1-3a1e67f270b9" UnusableNodeName="DashBoardRelationView" Name="OrderStockItemReservation" WherePropertyName="Order.SysCode" WherePropertyNameValue="SysCode" DashboardViewItem="OrderStockItemReservation_DashBoardView" IsNewNode="True" />
+          </Node>
+        </Node>
+        <Node Id="OrderStockItemReservation_DashBoardView" UnusableNodeName="DashboardViewItemRelation" ViewId="OrderStockItemReservation_ListViewDHV" IsNewNode="True" />
+      </Items>
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Autoadd88513-32d8-4e52-8a42-90dad033b966">
+            <LayoutItem Id="OrderStockItemReservation_DashBoardView" ViewItem="OrderStockItemReservation_DashBoardView" />
+            <LayoutItem Id="Order_Item_DashBoardView" ViewItem="Order_Item_DashBoardView" />
+          </LayoutGroup>
+          <LayoutGroup Id="Auto1312a2ce-a17a-4d84-819c-af844b15f1f7">
+            <LayoutItem Id="Order_Ready_DashBoardView" ViewItem="Order_Ready_DashBoardView" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DashboardView>
+    <DashboardView Id="WarehouseIn_DashBoardView">
+      <Items Id="Items">
+        <Node Id="Entry_Vehicle_DashBoardView" UnusableNodeName="DashboardViewItemRelation" ViewId="EntryLocation_ListViewDHV" Caption="EntryVehicle" ActionsToolbarVisibility="Hide" IsFirtLoad="True" IsNewNode="True">
+          <Node Id="RelationListViews@05e0ff82-6301-4299-a0d8-ea68589dee75" UnusableNodeName="RelationListViews" IsNewNode="True">
+            <Node Id="DashBoardRelationView@2c2bb6a4-a5c4-4efb-a321-34ed4cfd096b" UnusableNodeName="DashBoardRelationView" Name="Entry_Order" WherePropertyName="LastEntryLocation.ID" WherePropertyNameValue="ID" DashboardViewItem="Order_Entry_DashBoardView" IsNewNode="True" />
+          </Node>
+        </Node>
+        <Node Id="Order_Entry_DashBoardView" UnusableNodeName="DashboardViewItemRelation" ActionsToolbarVisibility="Show" Caption="Trip in Order" ViewId="Trip_Order_ListViewDHV" Criteria="Contains([OrderType.SysCode], 'GoodsIn')" IsNewNode="True">
+          <Node Id="RelationListViews@1e5cfe48-8d3a-4452-891d-36c7e57d4dbc" UnusableNodeName="RelationListViews" IsNewNode="True">
+            <Node Id="DashBoardRelationView@a7d8c918-ac9a-465b-afaa-8d41bb1ce9ad" UnusableNodeName="DashBoardRelationView" Name="Order_Item" WherePropertyName="Order.SysCode" WherePropertyNameValue="SysCode" DashboardViewItem="Order_Item_DashBoardView" IsNewNode="True" />
+            <Node Id="DashBoardRelationView@392d3890-1d63-4491-bc0e-9ba5e1926922" UnusableNodeName="DashBoardRelationView" Name="OrderToTransaction" DashboardViewItem="TaskStepTransaction" WherePropertyName="TaskIntegrationCode" WherePropertyNameValue="SysCode" IsNewNode="True" />
+          </Node>
+        </Node>
+        <Node Id="Order_Item_DashBoardView" UnusableNodeName="DashboardViewItemRelation" Caption="OrderLineDashBoard" IsFirtLoad="False" ActionsToolbarVisibility="Hide" ViewId="Order_Item_ListViewDHV" IsNewNode="True" />
+        <Node Id="Order_Ready_DashBoardView" UnusableNodeName="DashboardViewItemRelation" ViewId="Order_OutIn_ListViewDHV" ActionsToolbarVisibility="Hide" Criteria="Contains([OrderType.SysCode], 'GoodsIn') And Not [State.SysCode] In ('Created', 'ItemAccepFinished') And [LastEntryLocation] Is Null" IsFirtLoad="True" IsNewNode="True">
+          <Node Id="RelationListViews@7acb1a82-4e9b-4061-a37a-f9bf7336c67e" UnusableNodeName="RelationListViews" IsNewNode="True">
+            <Node Id="DashBoardRelationView@27585349-c9b9-4d0b-a140-19e4b108e990" UnusableNodeName="DashBoardRelationView" Name="Order_Item" WherePropertyName="Order.SysCode" WherePropertyNameValue="SysCode" DashboardViewItem="Order_Item_DashBoardView" IsNewNode="True" />
+          </Node>
+        </Node>
+        <Node Id="TaskStepTransaction" UnusableNodeName="DashboardViewItemRelation" ViewId="TaskStepTransactionVW_ListView" ActionsToolbarVisibility="Hide" IsNewNode="True" />
+      </Items>
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Autoadd88513-32d8-4e52-8a42-90dad033b966">
+            <LayoutItem Id="Order_Item_DashBoardView" ViewItem="Order_Item_DashBoardView" />
+            <LayoutItem Id="Order_Ready_DashBoardView" ViewItem="Order_Ready_DashBoardView" />
+          </LayoutGroup>
+          <LayoutGroup Id="Auto1312a2ce-a17a-4d84-819c-af844b15f1f7">
+            <LayoutItem Id="TaskStepTransaction" ViewItem="TaskStepTransaction" />
+            <LayoutItem Id="Order_Entry_DashBoardView" ViewItem="Order_Entry_DashBoardView" />
+            <LayoutItem Id="Entry_Vehicle_DashBoardView" ViewItem="Entry_Vehicle_DashBoardView" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DashboardView>
+    <DashboardView Id="WarehouseOrderTracking_DashBoardView">
+      <Items Id="Items">
+        <Node Id="Order_Item_DashBoardView" UnusableNodeName="DashboardViewItemRelation" Caption="OrderLineDashBoard" IsFirtLoad="False" ActionsToolbarVisibility="Hide" ViewId="Order_Item_ListViewDHV" IsNewNode="True">
+          <Node Id="RelationListViews@5261661c-4221-4c25-b4fe-5bcec079d715" UnusableNodeName="RelationListViews" IsNewNode="True">
+            <Node Id="DashBoardRelationView@276174c2-2ffd-455e-8781-a76097fc840f" UnusableNodeName="DashBoardRelationView" Name="OrderToTransaction" WherePropertyName="TaskStepIntegrationCode" WherePropertyNameValue="SysCode" DashboardViewItem="TransactionHistory_ListViewDashBoardView" IsNewNode="True" />
+          </Node>
+        </Node>
+        <Node Id="Order_Ready_DashBoardView" UnusableNodeName="DashboardViewItemRelation" ActionsToolbarVisibility="Hide" Criteria="Not [State.SysCode] In ('Created', 'Approved')" IsFirtLoad="True" ViewId="Order_OutIn_ListViewDHV" IsNewNode="True">
+          <Node Id="RelationListViews@6fe0e85e-611e-4bb3-a21b-e0169e472c17" UnusableNodeName="RelationListViews" IsNewNode="True">
+            <Node Id="DashBoardRelationView@375b4864-233d-4738-b5ad-53c68ce58da7" UnusableNodeName="DashBoardRelationView" Name="Order_Item" WherePropertyName="Order.SysCode" WherePropertyNameValue="SysCode" DashboardViewItem="Order_Item_DashBoardView" IsNewNode="True" />
+            <Node Id="DashBoardRelationView@5fce0e44-ff14-446b-8526-ceb79eda31b6" UnusableNodeName="DashBoardRelationView" Name="OrderToStock" DashboardViewItem="StockItem_ListViewDashBoardView" WherePropertyName="Order.SysCode" WherePropertyNameValue="SysCode" IsNewNode="True" />
+            <Node Id="DashBoardRelationView@16e9b2fe-f893-4b7e-9c3e-399761705562" UnusableNodeName="DashBoardRelationView" Name="OrderToTempTransaction" DashboardViewItem="TemporyStockItem" WherePropertyName="TaskIntegrationCode" WherePropertyNameValue="SysCode" IsNewNode="True" />
+          </Node>
+        </Node>
+        <Node Id="StockItem_ListViewDashBoardView" UnusableNodeName="DashboardViewItemRelation" ActionsToolbarVisibility="Hide" ViewId="StockItem_ListViewDashBoardView" Caption="Stock" IsNewNode="True" />
+        <Node Id="TemporyStockItem" UnusableNodeName="DashboardViewItemRelation" ViewId="TaskStepTransactionVW_ListView" Caption="Geçici Malzeme Stok" ActionsToolbarVisibility="Hide" IsNewNode="True" />
+        <Node Id="TransactionHistory_ListViewDashBoardView" UnusableNodeName="DashboardViewItemRelation" ViewId="TaskStepTransactionHistory_ListView" ActionsToolbarVisibility="Hide" Caption="Stok Hareketleri" IsNewNode="True" />
+      </Items>
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Autoa3cd5f10-0af4-4bbc-a9e0-15a1ab113982">
+            <LayoutGroup Id="Auto0b5b6b1f-63ac-4ac7-881a-1f482438f580">
+              <LayoutItem Id="TransactionHistory_ListViewDashBoardView" ViewItem="TransactionHistory_ListViewDashBoardView" />
+              <LayoutItem Id="StockItem_ListViewDashBoardView" ViewItem="StockItem_ListViewDashBoardView" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto7202d955-87ce-4c00-b4fc-dc6690b606dd">
+              <LayoutItem Id="TemporyStockItem" ViewItem="TemporyStockItem" />
+              <LayoutItem Id="Order_Item_DashBoardView" ViewItem="Order_Item_DashBoardView" />
+              <LayoutItem Id="Order_Ready_DashBoardView" ViewItem="Order_Ready_DashBoardView" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DashboardView>
+    <DashboardView Id="WarehouseOut_DashBoardView">
+      <Items Id="Items">
+        <Node Id="Entry_Vehicle_DashBoardView" UnusableNodeName="DashboardViewItemRelation" ViewId="EntryLocation_ListViewDHV" Caption="Entry_Vehicle_DashBoardView" ActionsToolbarVisibility="Show" IsFirtLoad="True" IsNewNode="True">
+          <Node Id="RelationListViews@4dbcb845-a1b2-4599-a800-3181e0c376a6" UnusableNodeName="RelationListViews" IsNewNode="True">
+            <Node Id="DashBoardRelationView@3930fae5-fac6-4c23-9713-297c4a1b51a7" UnusableNodeName="DashBoardRelationView" Name="Entry_Order" WherePropertyName="LastEntryLocation.ID" WherePropertyNameValue="ID" DashboardViewItem="Order_Entry_DashBoardView" IsNewNode="True" />
+          </Node>
+        </Node>
+        <Node Id="Order_Entry_DashBoardView" UnusableNodeName="DashboardViewItemRelation" ViewId="Order_OutIn_ListViewDHV" ActionsToolbarVisibility="Show" Caption="Order_Entry_DashBoardView" Criteria="Contains([OrderType.SysCode], 'GoodsOut')" IsNewNode="True" />
+        <Node Id="Order_Item_DashBoardView" UnusableNodeName="DashboardViewItemRelation" Caption="Order_Item_DashBoardView" IsFirtLoad="False" ActionsToolbarVisibility="Hide" ViewId="Order_Item_ListViewDHV" IsNewNode="True" />
+        <Node Id="Order_Ready_DashBoardView" UnusableNodeName="DashboardViewItemRelation" ViewId="Order_OutIn_ListViewDHV" ActionsToolbarVisibility="Hide" Criteria="Not [State.SysCode] In ('Created') And Contains([OrderType.SysCode], 'GoodsOut') And [LastEntryLocation] Is Null" IsFirtLoad="True" Caption="Order_Ready_DashBoardView" IsNewNode="True">
+          <Node Id="RelationListViews@6d38cf89-085c-494b-9afc-b8f1efe438ba" UnusableNodeName="RelationListViews" IsNewNode="True">
+            <Node Id="DashBoardRelationView@149d982d-7741-409f-b0ea-18fdd28d500b" UnusableNodeName="DashBoardRelationView" Name="Order_Item" WherePropertyName="Order.SysCode" WherePropertyNameValue="SysCode" DashboardViewItem="Order_Item_DashBoardView" IsNewNode="True" />
+          </Node>
+        </Node>
+      </Items>
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Autoadd88513-32d8-4e52-8a42-90dad033b966">
+            <LayoutItem Id="Order_Item_DashBoardView" ViewItem="Order_Item_DashBoardView" />
+            <LayoutItem Id="Order_Ready_DashBoardView" ViewItem="Order_Ready_DashBoardView" />
+          </LayoutGroup>
+          <LayoutGroup Id="Auto1312a2ce-a17a-4d84-819c-af844b15f1f7">
+            <LayoutItem Id="Order_Entry_DashBoardView" ViewItem="Order_Entry_DashBoardView" />
+            <LayoutItem Id="Entry_Vehicle_DashBoardView" ViewItem="Entry_Vehicle_DashBoardView" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DashboardView>
+    <DashboardView Id="WarehouseStock_DashBoardView">
+      <Items Id="Items">
+        <Node Id="Item" UnusableNodeName="DashboardViewItemRelation" ViewId="Item_ListViewDashBoardView" Caption="Items" IsFirtLoad="True" ActionsToolbarVisibility="Hide" IsNewNode="True">
+          <Node Id="RelationListViews@ff7046dc-7832-465f-9b4c-b442a31b5e27" UnusableNodeName="RelationListViews" IsNewNode="True">
+            <Node Id="DashBoardRelationView@16dd042b-9d0a-427d-85d5-58d77a514f61" UnusableNodeName="DashBoardRelationView" Name="ItemToStock" DashboardViewItem="StockItem_ListViewDashBoardView" WherePropertyName="Item.SysCode" WherePropertyNameValue="SysCode" IsNewNode="True" />
+            <Node Id="DashBoardRelationView@83a12a34-779f-4bc8-ad2f-fbaff3b756db" UnusableNodeName="DashBoardRelationView" Name="ItemToTransaction" WherePropertyName="Item.SysCode" WherePropertyNameValue="SysCode" DashboardViewItem="TaskStepTransactionHistory_ListViewDashBoardView" IsNewNode="True" />
+          </Node>
+        </Node>
+        <Node Id="StockItem_ListViewDashBoardView" UnusableNodeName="DashboardViewItemRelation" ActionsToolbarVisibility="Hide" ViewId="StockItem_ListViewDashBoardView" Caption="Stock" IsNewNode="True">
+          <Node Id="RelationListViews@133eaf41-fec2-4a38-ad25-d20f7b5a7d73" UnusableNodeName="RelationListViews" IsNewNode="True">
+            <Node Id="DashBoardRelationView@b71a7983-8128-45e6-ba4b-77929e9bbd01" UnusableNodeName="DashBoardRelationView" Name="StockItemToLocation" DashboardViewItem="GlobalLocation_ListViewDashBoardView" WherePropertyName="SysCode" WherePropertyNameValue="GlobalLocation.SysCode" IsNewNode="True" />
+          </Node>
+        </Node>
+        <Node Id="TaskStepTransactionHistory_ListViewDashBoardView" UnusableNodeName="DashboardViewItemRelation" ViewId="TaskStepTransactionHistory_ListView" ActionsToolbarVisibility="Hide" Caption="Stok Hareketleri" IsNewNode="True" />
+      </Items>
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Auto3b2888a8-762f-4951-bb77-1e94bb90614b">
+            <LayoutItem Id="TaskStepTransactionHistory_ListViewDashBoardView" ViewItem="TaskStepTransactionHistory_ListViewDashBoardView" />
+            <LayoutItem Id="StockItem_ListViewDashBoardView" ViewItem="StockItem_ListViewDashBoardView" />
+          </LayoutGroup>
+          <LayoutGroup Id="Autob4187955-b286-4d75-b250-84c73ac71be2">
+            <LayoutItem Id="Item" ViewItem="Item" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DashboardView>
+    <DashboardView Id="WarehouseStockControl_DashBoardView">
+      <Items Id="Items">
+        <Node Id="GlobalLocation" UnusableNodeName="DashboardViewItemRelation" IsFirtLoad="True" ViewId="GlobalLocation_ListViewDashBoardView" ActionsToolbarVisibility="Show" IsNewNode="True">
+          <Node Id="RelationListViews@532b0869-9346-4b8f-b710-21cd1e1e72ee" UnusableNodeName="RelationListViews" IsNewNode="True">
+            <Node Id="DashBoardRelationView@720c91da-2fe8-4864-9815-92c7e8d8a897" UnusableNodeName="DashBoardRelationView" Name="LocationToControl" DashboardViewItem="StockControl" WherePropertyName="GlobalLocation.SysCode" WherePropertyNameValue="SysCode" IsNewNode="True" />
+            <Node Id="DashBoardRelationView@f93385d3-7579-4cab-bd3b-90321bf96ef9" UnusableNodeName="DashBoardRelationView" Name="LocationToStockItem" DashboardViewItem="StockItem" WherePropertyName="GlobalLocation.SysCode" WherePropertyNameValue="SysCode" IsNewNode="True" />
+          </Node>
+        </Node>
+        <Node Id="StockControl" UnusableNodeName="DashboardViewItemRelation" ViewId="StockControlStep_ListView" IsNewNode="True" />
+        <Node Id="StockItem" UnusableNodeName="DashboardViewItemRelation" ViewId="StockItem_ListViewDashBoardView" ActionsToolbarVisibility="Hide" IsNewNode="True" />
+      </Items>
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Autoa588ca58-5037-4470-9bdb-3946423a62a1">
+            <LayoutItem Id="StockItem" ViewItem="StockItem" />
+            <LayoutItem Id="GlobalLocation" ViewItem="GlobalLocation" />
+          </LayoutGroup>
+          <LayoutGroup Id="Auto311c51a5-68d0-4142-992f-428b2147d51f">
+            <LayoutItem Id="StockControl" ViewItem="StockControl" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DashboardView>
+    <DetailView Id="ClientMessage_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="ClientMessage" RelativeSize="100">
+              <LayoutItem Id="Message" RelativeSize="100" ShowCaption="False" />
+            </LayoutGroup>
+            <LayoutGroup Id="NonePercentObject" Caption="Oid" RelativeSize="94.933333333333337" Removed="True">
+              <LayoutItem Id="Oid" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="Map_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main" RelativeSize="100" Caption="Main">
+          <LayoutItem Id="Points" ViewItem="Points" Index="0" RelativeSize="100" />
+          <LayoutGroup Id="Points_Group" Direction="Horizontal" RelativeSize="50.0542888165038" Caption="Points" Removed="True">
+            <LayoutItem Id="Points" RelativeSize="100" Removed="True" />
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" RelativeSize="50" Removed="True">
+            <LayoutGroup Id="NonePercentObject" RelativeSize="100" Index="0" Caption="Oid" Removed="True">
+              <LayoutItem Id="Oid" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Map" RelativeSize="90.4" Caption="Map" Removed="True">
+              <LayoutItem Id="Key" Index="0" RelativeSize="38.554216867469883" Removed="True" />
+              <LayoutItem Id="Latitude" Index="0" RelativeSize="100" Removed="True" />
+              <LayoutItem Id="Longitude" Index="0" RelativeSize="54.237288135593218" Removed="True" />
+              <LayoutItem Id="Title" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Order_Labels_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Description" Index="-1" />
+        <ColumnInfo Id="LabelTemplate" Index="-1" Width="95" />
+        <ColumnInfo Id="LinkLabel" Index="-1" />
+        <ColumnInfo Id="Order" Index="-1" Width="51" />
+        <ColumnInfo Id="Value" Index="-1" />
+        <ColumnInfo Id="SysCode" Width="87" Index="0" />
+        <ColumnInfo Id="GlobalLocation" Index="1" Width="87" />
+      </Columns>
+    </ListView>
+    <ListView Id="Order_StockItemReservation_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Index" Index="-1" />
+        <ColumnInfo Id="SysCode" Width="87" />
+        <ColumnInfo Id="ReservationQuantity" Width="120" />
+        <ColumnInfo Id="OperationQuantity" Width="116" />
+      </Columns>
+    </ListView>
+    <ListView Id="Order_StockItems_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="ID" Width="53" Index="-1" />
+        <ColumnInfo Id="Owner" Index="-1" />
+        <ColumnInfo Id="Order" Index="0" />
+        <ColumnInfo Id="Item" Index="1" />
+        <ColumnInfo Id="OrderLine" Index="2" />
+        <ColumnInfo Id="TransporterBarcode" Index="3" />
+        <ColumnInfo Id="GlobalLocation" Index="4" />
+        <ColumnInfo Id="Label" Index="5" />
+        <ColumnInfo Id="LinkStockItem" Index="6" />
+        <ColumnInfo Id="Batch" Index="7" />
+        <ColumnInfo Id="ExpireDate" Index="8" />
+        <ColumnInfo Id="Temperature" Index="9" />
+        <ColumnInfo Id="ReservationQuantity" Index="10" />
+        <ColumnInfo Id="StockQuantity" Index="11" />
+        <ColumnInfo Id="AvailableQuantity" Index="12" />
+      </Columns>
+    </ListView>
+    <ListView Id="Order_Tasks_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Assigned" Index="-1" Width="61" />
+        <ColumnInfo Id="CompletedStepCount" Index="-1" />
+        <ColumnInfo Id="Description" Index="-1" />
+        <ColumnInfo Id="DocumentCode" Index="-1" />
+        <ColumnInfo Id="FromLocation" Index="-1" />
+        <ColumnInfo Id="Index" Index="-1" />
+        <ColumnInfo Id="JsonData" Index="-1" />
+        <ColumnInfo Id="SubTitle" Index="-1" />
+        <ColumnInfo Id="SubTitleImage" Index="-1" />
+        <ColumnInfo Id="SysCode" Width="87" Index="-1" />
+        <ColumnInfo Id="TaskIntegrationCode" Index="-1" />
+        <ColumnInfo Id="TaskIntegrationObject" Index="-1" />
+        <ColumnInfo Id="Title" Index="-1" />
+        <ColumnInfo Id="TitleImage" Index="-1" />
+        <ColumnInfo Id="TodoStepCount" Index="-1" />
+        <ColumnInfo Id="ToLocation" Index="-1" />
+        <ColumnInfo Id="Trip" Index="-1" />
+        <ColumnInfo Id="WaitingStepCount" Index="-1" />
+        <ColumnInfo Id="Order" Index="0" Width="54" />
+        <ColumnInfo Id="Template" Index="1" Width="67" />
+        <ColumnInfo Id="State" Index="2" Width="55" />
+        <ColumnInfo Id="IntegrationCode" Index="3" Width="97" />
+      </Columns>
+    </ListView>
+    <ListView Id="OrderLine_Labels_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="LinkLabel" Width="69" Index="-1" />
+        <ColumnInfo Id="Value" Width="52" Index="-1" />
+        <ColumnInfo Id="SysCode" Width="87" />
+        <ColumnInfo Id="LabelTemplate" Width="95" />
+        <ColumnInfo Id="Order" Width="54" />
+        <ColumnInfo Id="GlobalLocation" Width="87" />
+        <ColumnInfo Id="Description" Width="76" />
+      </Columns>
+    </ListView>
+    <ListView Id="OrderLine_StocktemReservations_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Index" Index="-1" />
+        <ColumnInfo Id="SysCode" Width="87" />
+        <ColumnInfo Id="Order" Width="54" />
+        <ColumnInfo Id="OrderLine" Width="105" />
+        <ColumnInfo Id="ReservationQuantity" Width="120" />
+        <ColumnInfo Id="OperationQuantity" Width="110" />
+      </Columns>
+    </ListView>
+    <DetailView Id="StateHistory_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="StateHistory" RelativeSize="9.0119435396308365">
+              <LayoutItem Id="State" RelativeSize="38.554216867469883" />
+              <LayoutItem Id="Description" RelativeSize="28.91566265060241" />
+              <LayoutItem Id="StateTime" RelativeSize="32.53012048192771" />
+            </LayoutGroup>
+            <LayoutGroup Id="BaseObjectI" RelativeSize="3.5830618892508141">
+              <LayoutItem Id="ID" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="ObjectBase" RelativeSize="87.404994571118351" Direction="Horizontal">
+              <LayoutGroup Id="ObjectBase_col2" RelativeSize="100" Index="0" Removed="True">
+                <LayoutItem Id="ObjectSpace" RelativeSize="100" Index="0" Removed="True" />
+                <LayoutItem Id="UpdateBy" RelativeSize="4.0404040404040407" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="ObjectBase_col1" RelativeSize="49.9586435070306" Removed="True">
+                <LayoutItem Id="CreatedBy" Index="0" RelativeSize="100" Removed="True" />
+                <LayoutItem Id="CreateTime" RelativeSize="4.0404040404040407" Removed="True" />
+                <LayoutItem Id="UpdateTime" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="StockItem_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="ID" Width="49" />
+        <ColumnInfo Id="Item" Index="1" />
+        <ColumnInfo Id="TransporterBarcode" Index="2" />
+        <ColumnInfo Id="Label" Index="3" />
+        <ColumnInfo Id="GlobalLocation" Index="4" />
+        <ColumnInfo Id="Batch" Index="7" Width="45" />
+        <ColumnInfo Id="ExpireDate" Index="8" Width="71" />
+      </Columns>
+    </ListView>
+    <DetailView Id="TaskLGS_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="11.943539630836048" Direction="Horizontal">
+            <LayoutGroup Id="Auto07c810fd-7e00-40f6-a352-5d035b88007f" ShowCaption="False" Caption="" Index="0" RelativeSize="33.294930875576036">
+              <LayoutItem Id="Type" ViewItem="Type" Index="0" RelativeSize="29.09090909090909" />
+              <LayoutItem Id="TaskLGSType" ViewItem="TaskLGSType" Index="1" RelativeSize="21.818181818181817" />
+              <LayoutItem Id="RequestedUser" ViewItem="RequestedUser" Index="2" RelativeSize="21.818181818181817" />
+              <LayoutItem Id="State" ViewItem="State" Index="3" RelativeSize="27.272727272727273" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto56961433-6fed-425f-933a-badc0de8fe1c" ShowCaption="False" Caption="" Direction="Horizontal" Index="1" RelativeSize="66.705069124423957">
+              <LayoutGroup Id="Auto0f3cfe96-57d2-4cd7-a5f7-a57ee69a81ca" ShowCaption="False" Caption="" Index="0" RelativeSize="49.913644214162346">
+                <LayoutItem Id="Description" ViewItem="Description" Index="0" RelativeSize="29.09090909090909" />
+                <LayoutItem Id="PlanedStartTime" ViewItem="PlanedStartTime" Index="1" RelativeSize="21.818181818181817" />
+                <LayoutItem Id="StartTime" ViewItem="StartTime" Index="2" RelativeSize="21.818181818181817" />
+                <LayoutItem Id="SysCode" ViewItem="SysCode" Index="3" RelativeSize="27.272727272727273" />
+              </LayoutGroup>
+              <LayoutGroup Id="Auto56bc09cf-0030-4d15-b05c-3f5e3a4ebc0c" ShowCaption="False" Caption="" Index="1" RelativeSize="50.086355785837654">
+                <LayoutItem Id="Subject" ViewItem="Subject" Index="0" RelativeSize="29.09090909090909" />
+                <LayoutItem Id="PlanedFinishTime" ViewItem="PlanedFinishTime" Index="1" RelativeSize="21.818181818181817" />
+                <LayoutItem Id="FinishTime" ViewItem="FinishTime" Index="2" RelativeSize="21.818181818181817" />
+                <LayoutItem Id="AssignedUser" ViewItem="AssignedUser" Index="3" RelativeSize="27.272727272727273" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="BaseObjectC" Index="1" RelativeSize="24.535315985130111" Caption="Sys Code" Removed="True">
+              <LayoutItem Id="SysCode" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="BaseObjectState" Index="1" RelativeSize="11.152416356877323" Caption="State" Removed="True">
+              <LayoutItem Id="State" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="ObjectBase" Index="1" RelativeSize="48.768472906403943" Removed="True">
+              <LayoutGroup Id="ObjectBase_col1" RelativeSize="50">
+                <LayoutItem Id="CreatedBy" RelativeSize="36.363636363636367" />
+                <LayoutItem Id="CreateTime" RelativeSize="36.363636363636367" />
+                <LayoutItem Id="UpdateTime" RelativeSize="27.272727272727273" />
+              </LayoutGroup>
+              <LayoutGroup Id="ObjectBase_col2" RelativeSize="50">
+                <LayoutItem Id="ObjectSpace" RelativeSize="63.636363636363633" />
+                <LayoutItem Id="UpdateBy" RelativeSize="36.363636363636367" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="TaskLGS" Index="1" RelativeSize="66.91266912669127" Direction="Vertical" Removed="True">
+              <LayoutGroup Id="TaskLGS_col2" RelativeSize="100" Caption="TaskLGS_col2" Index="0">
+                <LayoutItem Id="AssignedUser" RelativeSize="100" Index="0" Removed="True" />
+                <LayoutItem Id="FinishTime" RelativeSize="50" Index="0" Removed="True" />
+                <LayoutItem Id="RequestedUser" RelativeSize="28.571428571428573" Index="0" Removed="True" />
+                <LayoutItem Id="StartTime" RelativeSize="36.363636363636367" Index="0" Removed="True" />
+                <LayoutItem Id="PlanedFinishTime" RelativeSize="23.529411764705884" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="TaskLGS_col1" RelativeSize="50" Caption="TaskLGS_col1" Removed="True">
+                <LayoutItem Id="Description" Index="0" RelativeSize="23.529411764705884" Removed="True" />
+                <LayoutItem Id="PlanedStartTime" Index="0" RelativeSize="100" Removed="True" />
+                <LayoutItem Id="Subject" Index="0" RelativeSize="23.529411764705884" Removed="True" />
+                <LayoutItem Id="TaskLGSType" Index="0" RelativeSize="23.529411764705884" Removed="True" />
+                <LayoutItem Id="Type" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutItem Id="Coments" ViewItem="Coments" Index="1" RelativeSize="88.056460369163958" />
+          <LayoutGroup Id="Coments_Group" Direction="Horizontal" RelativeSize="79.478827361563518" Caption="Coments" Index="2" Removed="True">
+            <LayoutItem Id="Coments" RelativeSize="100" Removed="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="TaskStepTransactionHistory_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="SysCode" Width="103" />
+      </Columns>
+    </ListView>
+    <ListView Id="TaskStepTransactionQ_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Client" Index="-1" Removed="True" />
+        <ColumnInfo Id="ID" Width="47" Index="-1" Removed="True" />
+        <ColumnInfo Id="MobileError" Index="-1" Removed="True" />
+        <ColumnInfo Id="Name" Index="-1" Removed="True" />
+        <ColumnInfo Id="SqlError" Index="-1" Removed="True" />
+        <ColumnInfo Id="Task" Index="-1" Removed="True" />
+        <ColumnInfo Id="TaskIntegrationObject" Index="-1" Removed="True" />
+        <ColumnInfo Id="TaskStep" Index="-1" Removed="True" />
+        <ColumnInfo Id="TaskStepIntegrationCode" Index="-1" Removed="True" />
+        <ColumnInfo Id="TaskStepIntegrationObject" Index="-1" Removed="True" />
+        <ColumnInfo Id="TaskStepState" Index="-1" Removed="True" />
+        <ColumnInfo Id="TaskTemplate_SysCode" Index="-1" Removed="True" />
+        <ColumnInfo Id="Type" Index="-1" Removed="True" />
+        <ColumnInfo Id="TransactionCode" Index="0" />
+        <ColumnInfo Id="ClientValue" Index="1" />
+        <ColumnInfo Id="TaskIntegrationCode" PropertyName="TaskIntegrationCode" Index="2" Removed="True" />
+        <ColumnInfo Id="CreatedBy" Removed="True" />
+        <ColumnInfo Id="CreateTime" Removed="True" />
+        <ColumnInfo Id="IsNewObject" Removed="True" />
+        <ColumnInfo Id="ObjectSpace" Removed="True" />
+        <ColumnInfo Id="UpdateBy" Removed="True" />
+        <ColumnInfo Id="UpdateTime" Removed="True" />
+        <ColumnInfo Id="Warehouse" Removed="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="Trip_ListViewDashBoardView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="QuantityCheck" PropertyName="QuantityCheck" Width="50" Index="-1" />
+        <ColumnInfo Id="PlanedTransporterQuantity" PropertyName="PlanedTransporterQuantity" Width="70" Index="-1" />
+        <ColumnInfo Id="GlobalLocation" PropertyName="GlobalLocation" Width="70" Index="-1" />
+      </Columns>
+    </ListView>
+    <ListView Id="TaskStepTransactionHistory_ListViewDashBoardView" ClassName="dola.Module.TaskStepTransactionHistory">
+      <Columns Id="Columns">
+        <ColumnInfo Id="CreatedBy" PropertyName="CreatedBy" Width="70" Index="-1" />
+        <ColumnInfo Id="CreateTime" PropertyName="CreateTime" Width="70" Index="-1" />
+        <ColumnInfo Id="IsNewObject" PropertyName="IsNewObject" Width="50" Index="-1" />
+        <ColumnInfo Id="ObjectSpace" PropertyName="ObjectSpace" Width="70" Index="-1" />
+        <ColumnInfo Id="UpdateBy" PropertyName="UpdateBy" Width="70" Index="-1" />
+        <ColumnInfo Id="UpdateTime" PropertyName="UpdateTime" Width="70" Index="-1" />
+        <ColumnInfo Id="Warehouse" PropertyName="Warehouse" Width="70" Index="-1" />
+        <ColumnInfo Id="SysCode" PropertyName="SysCode" Width="400" SortIndex="0" SortOrder="Ascending" Index="0" />
+        <ColumnInfo Id="GlobalLocation" PropertyName="GlobalLocation" Width="70" Index="1" />
+        <ColumnInfo Id="LabelItem" PropertyName="LabelItem" Width="70" Index="2" />
+        <ColumnInfo Id="Task" PropertyName="Task" Width="70" Index="3" />
+        <ColumnInfo Id="TaskStep" PropertyName="TaskStep" Width="70" Index="4" />
+        <ColumnInfo Id="TaskTemplate" PropertyName="TaskTemplate" Width="70" Index="5" />
+        <ColumnInfo Id="Item" PropertyName="Item" Width="70" Index="6" />
+        <ColumnInfo Id="TransporterBarcode" PropertyName="TransporterBarcode" Width="70" Index="7" />
+        <ColumnInfo Id="ExpireDate" PropertyName="ExpireDate" Width="70" Index="8" />
+        <ColumnInfo Id="Quantity" PropertyName="Quantity" Width="70" Index="9" />
+        <ColumnInfo Id="BatchCode" PropertyName="BatchCode" Width="70" Index="10" />
+        <ColumnInfo Id="Heat" PropertyName="Heat" Width="70" Index="11" />
+        <ColumnInfo Id="TaskStepIntegrationCode" PropertyName="TaskStepIntegrationCode" Width="70" Index="12" />
+        <ColumnInfo Id="TaskIntegrationObject" PropertyName="TaskIntegrationObject" Width="70" Index="13" />
+        <ColumnInfo Id="TaskIntegrationCode" PropertyName="TaskIntegrationCode" Width="70" Index="14" />
+        <ColumnInfo Id="TaskStepIntegrationObject" PropertyName="TaskStepIntegrationObject" Width="70" Index="15" />
+        <ColumnInfo Id="TaskStepState" PropertyName="TaskStepState" Width="70" Index="16" />
+        <ColumnInfo Id="Client" PropertyName="Client" Width="70" Index="17" />
+      </Columns>
+    </ListView>
+    <ListView Id="StockItem_ListViewDashBoardView" ClassName="dola.Module.StockItem" Criteria="[LinkStockItem] Is Null">
+      <Columns Id="Columns">
+        <ColumnInfo Id="AvailableQuantity" PropertyName="AvailableQuantity" Width="70" Index="-1" />
+        <ColumnInfo Id="CreatedBy" PropertyName="CreatedBy" Width="70" Index="-1" />
+        <ColumnInfo Id="CreateTime" PropertyName="CreateTime" Width="70" Index="-1" />
+        <ColumnInfo Id="ID" PropertyName="ID" Width="49" SortIndex="0" SortOrder="Ascending" Index="-1" />
+        <ColumnInfo Id="IsNewObject" PropertyName="IsNewObject" Width="50" Index="-1" />
+        <ColumnInfo Id="LinkStockItem" PropertyName="LinkStockItem" Width="70" Index="-1" />
+        <ColumnInfo Id="ObjectSpace" PropertyName="ObjectSpace" Width="70" Index="-1" />
+        <ColumnInfo Id="Order" PropertyName="Order" Width="70" Index="-1" />
+        <ColumnInfo Id="OrderLine" PropertyName="OrderLine" Width="70" Index="-1" />
+        <ColumnInfo Id="Owner" PropertyName="Owner" Width="70" Index="-1" />
+        <ColumnInfo Id="TransporterBarcode" PropertyName="TransporterBarcode" Width="70" Index="-1" />
+        <ColumnInfo Id="UpdateBy" PropertyName="UpdateBy" Width="70" Index="-1" />
+        <ColumnInfo Id="UpdateTime" PropertyName="UpdateTime" Width="70" Index="-1" />
+        <ColumnInfo Id="Warehouse" PropertyName="Warehouse" Width="70" Index="-1" />
+        <ColumnInfo Id="Item.SysCode" PropertyName="Item.SysCode" Index="0" />
+        <ColumnInfo Id="Item" PropertyName="Item" Width="70" Index="1" />
+        <ColumnInfo Id="Item.Barcode" PropertyName="Item.Barcode" Index="2" />
+        <ColumnInfo Id="Label" PropertyName="Label" Width="70" Index="3" />
+        <ColumnInfo Id="GlobalLocation" PropertyName="GlobalLocation" Width="70" Index="4" />
+        <ColumnInfo Id="Batch" PropertyName="Batch" Width="45" Index="5" />
+        <ColumnInfo Id="ExpireDate" PropertyName="ExpireDate" Width="71" Index="6" />
+        <ColumnInfo Id="Temperature" PropertyName="Temperature" Width="70" Index="7" />
+        <ColumnInfo Id="ReservationQuantity" PropertyName="ReservationQuantity" Width="70" Index="8" />
+        <ColumnInfo Id="StockQuantity" PropertyName="StockQuantity" Width="70" Index="9" />
+      </Columns>
+    </ListView>
+    <ListView Id="OrderStockItemReservation_ListViewDHV" ClassName="dola.Module.StockItemReservation">
+      <Columns Id="Columns">
+        <ColumnInfo Id="CreatedBy" PropertyName="CreatedBy" Width="70" Index="-1" />
+        <ColumnInfo Id="CreateTime" PropertyName="CreateTime" Width="70" Index="-1" />
+        <ColumnInfo Id="IsNewObject" PropertyName="IsNewObject" Width="50" Index="-1" />
+        <ColumnInfo Id="ObjectSpace" PropertyName="ObjectSpace" Width="70" Index="-1" />
+        <ColumnInfo Id="OperationQuantity" PropertyName="OperationQuantity" Index="-1" Width="78" />
+        <ColumnInfo Id="Order" PropertyName="Order" Width="70" Index="-1" />
+        <ColumnInfo Id="OrderLine" PropertyName="OrderLine" Width="70" Index="-1" />
+        <ColumnInfo Id="SysCode" PropertyName="SysCode" Width="400" SortIndex="0" SortOrder="Ascending" Index="-1" />
+        <ColumnInfo Id="UpdateBy" PropertyName="UpdateBy" Width="70" Index="-1" />
+        <ColumnInfo Id="UpdateTime" PropertyName="UpdateTime" Width="70" Index="-1" />
+        <ColumnInfo Id="Warehouse" PropertyName="Warehouse" Width="70" Index="-1" />
+        <ColumnInfo Id="ReservationQuantity" PropertyName="ReservationQuantity" Index="3" />
+        <ColumnInfo Id="Index" PropertyName="Index" Width="50" Index="6" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Order_Simple_DetailView">
+      <Items Id="Items">
+        <PropertyEditor Id="Tasks" PropertyName="Tasks" View="Order_Tasks_ListView" />
+        <PropertyEditor Id="StockItems" PropertyName="StockItems" View="Order_StockItems_ListView" />
+        <PropertyEditor Id="StockItemReservation" PropertyName="StockItemReservation" View="Order_StockItemReservation_ListView" />
+        <PropertyEditor Id="QuantityCheck" PropertyName="QuantityCheck" />
+        <PropertyEditor Id="PlanedTransporterQuantity" PropertyName="PlanedTransporterQuantity" />
+        <PropertyEditor Id="OperationRow" PropertyName="OperationRow" />
+        <PropertyEditor Id="Labels" PropertyName="Labels" View="Order_Labels_ListView" />
+        <PropertyEditor Id="IntegrationDocumentCode" PropertyName="IntegrationDocumentCode" />
+        <PropertyEditor Id="GroupCode" PropertyName="GroupCode" />
+        <PropertyEditor Id="GlobalLocation" PropertyName="GlobalLocation" />
+        <PropertyEditor Id="DocumentCode" PropertyName="DocumentCode" />
+      </Items>
+    </DetailView>
+    <DetailView Id="Order_Create_DetailView">
+      <Items Id="Items">
+        <PropertyEditor Id="Tasks" PropertyName="Tasks" View="Order_Tasks_ListView" />
+        <PropertyEditor Id="StockItems" PropertyName="StockItems" View="Order_StockItems_ListView" />
+        <PropertyEditor Id="StockItemReservation" PropertyName="StockItemReservation" View="Order_StockItemReservation_ListView" />
+        <PropertyEditor Id="QuantityCheck" PropertyName="QuantityCheck" />
+        <PropertyEditor Id="PlanedTransporterQuantity" PropertyName="PlanedTransporterQuantity" />
+        <PropertyEditor Id="OperationRow" PropertyName="OperationRow" />
+        <PropertyEditor Id="Labels" PropertyName="Labels" View="Order_Labels_ListView" />
+        <PropertyEditor Id="IntegrationDocumentCode" PropertyName="IntegrationDocumentCode" />
+        <PropertyEditor Id="GroupCode" PropertyName="GroupCode" />
+        <PropertyEditor Id="GlobalLocation" PropertyName="GlobalLocation" />
+        <PropertyEditor Id="DocumentCode" PropertyName="DocumentCode" />
+      </Items>
+    </DetailView>
+    <ListView Id="Label_ListViewDHV" ClassName="dola.Module.Label">
+      <Columns Id="Columns">
+        <ColumnInfo Id="CreatedBy" PropertyName="CreatedBy" Width="70" Index="-1" />
+        <ColumnInfo Id="CreateTime" PropertyName="CreateTime" Width="70" Index="-1" />
+        <ColumnInfo Id="IsNewObject" PropertyName="IsNewObject" Width="50" Index="-1" />
+        <ColumnInfo Id="ObjectSpace" PropertyName="ObjectSpace" Width="70" Index="-1" />
+        <ColumnInfo Id="UpdateBy" PropertyName="UpdateBy" Width="70" Index="-1" />
+        <ColumnInfo Id="UpdateTime" PropertyName="UpdateTime" Width="70" Index="-1" />
+        <ColumnInfo Id="SysCode" PropertyName="SysCode" Width="400" SortIndex="0" SortOrder="Ascending" Index="0" />
+        <ColumnInfo Id="LabelTemplate" PropertyName="LabelTemplate" Width="70" Index="1" />
+        <ColumnInfo Id="Order" PropertyName="Order" Width="70" Index="2" />
+        <ColumnInfo Id="GlobalLocation" PropertyName="GlobalLocation" Width="70" Index="3" />
+        <ColumnInfo Id="Description" PropertyName="Description" Width="70" Index="4" />
+        <ColumnInfo Id="Value" PropertyName="Value" Width="50" Index="5" />
+      </Columns>
+    </ListView>
+    <DetailView Id="EntryLocation_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Auto51e816b4-40dd-41bd-87fd-6a021f3234c5">
+              <LayoutGroup Id="Auto61d89184-7bf6-4dd2-902e-8adc2cf82d2d">
+                <LayoutGroup Id="Auto334c0d98-53ec-4883-8d17-c0679b265ddd">
+                  <LayoutItem Id="GlobalLocation" ViewItem="GlobalLocation" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="Order_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Auto8348b982-3346-43dd-a32c-4b0842b27bc2">
+              <LayoutGroup Id="Autoc9b3ac9a-7adc-437b-9670-bbf6d6721f41">
+                <LayoutItem Id="GlobalLocation" ViewItem="GlobalLocation" />
+                <LayoutItem Id="PlanedTransporterQuantity" ViewItem="PlanedTransporterQuantity" />
+              </LayoutGroup>
+              <LayoutGroup Id="Autof2c39942-667c-48bc-9103-488fa20aebfa">
+                <LayoutItem Id="IntegrationDocumentCode" ViewItem="IntegrationDocumentCode" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="Tasks" RelativeSize="100">
+              <LayoutItem Id="Tasks" RelativeSize="100" Index="0" />
+            </LayoutGroup>
+            <LayoutGroup Id="Labels" RelativeSize="100">
+              <LayoutItem Id="Labels" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="StockItemReservation" RelativeSize="100">
+              <LayoutItem Id="StockItemReservation" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="StockItems" RelativeSize="100">
+              <LayoutItem Id="StockItems" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Order_EntryLocations_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="GlobalLocation" Index="0" SortIndex="0" SortOrder="Ascending" />
+      </Columns>
+    </ListView>
+    <ListView Id="Order_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="GroupCode" Index="-1" />
+        <ColumnInfo Id="OperationRow" Index="-1" />
+        <ColumnInfo Id="IntegrationDocumentCode" Index="2" />
+        <ColumnInfo Id="DocumentCode" Index="8" />
+      </Columns>
+    </ListView>
+    <ListView Id="Order_Trips_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="PlanedTransporterQuantity" Index="3" SortIndex="0" SortOrder="Ascending" />
+      </Columns>
+    </ListView>
+    <DetailView Id="OrderLine_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <TabbedGroup Id="Item1">
+              <LayoutGroup Id="OrderLine">
+                <LayoutGroup Id="OrderLine_col1">
+                  <LayoutGroup Id="Auto7a8ad2ef-033c-480d-b67d-565e89c8190a">
+                    <LayoutGroup Id="Auto78910cf2-418a-45e7-b286-f003395c49f7">
+                      <LayoutGroup Id="Autoe3a6d72a-f5f9-4281-a8a8-9303756e78bf">
+                        <LayoutItem Id="Reservation" ViewItem="Reservation" />
+                      </LayoutGroup>
+                    </LayoutGroup>
+                  </LayoutGroup>
+                </LayoutGroup>
+              </LayoutGroup>
+            </TabbedGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="Labels" RelativeSize="100">
+              <LayoutItem Id="Labels" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="StocktemReservations" RelativeSize="100">
+              <LayoutItem Id="StocktemReservations" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="TaskStepTransactionVW_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="GlobalLocation_SysCode" Index="-1" />
+      </Columns>
+    </ListView>
+  </Views>
+  <BOModel Id="BOModel">
+    <Class Name="dola.Module.LabelTemplate" DefaultListViewShowFindPanel="False" />
+  </BOModel>
+  <ViewItems Id="ViewItems">
+    <PropertyEditor Name="PropertyEditors">
+      <RegisteredPropertyEditor PropertyType="System.DateTime" DefaultDisplayFormat="{0:G}" />
+    </PropertyEditor>
+  </ViewItems>
+  <NavigationItems Id="NavigationItems">
+    <Items Id="Items">
+      <Item Id="Defination">
+        <Items Id="Items">
+          <Item Id="@e0fbef2d-760e-4362-b559-5aff2a640628" ViewId="ReportDataV2_ListView" />
+          <Item Id="@e470c9f2-a25f-4050-ab83-8c326c79fdc8" ViewId="GlobalLocation_ListView" />
+        </Items>
+      </Item>
+      <Item Id="Warehouse">
+        <Items Id="Items">
+          <Item Id="Stok Takip" ViewId="StockItem_ListViewDashBoardView" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+</Application>

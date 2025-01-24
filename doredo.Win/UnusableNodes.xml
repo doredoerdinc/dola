@@ -1,0 +1,830 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <ActionDesign Id="ActionDesign">
+    <Actions Id="Actions">
+      <Action Id="PrintCode" IsPostBackRequired="True" />
+      <Action Id="DeleteStockItemControlStep" ImageName="Office2013\Cancel_16x16" />
+      <Action Id="GenerateTaskForStockItemControlProcess" Caption="Create StockItem Control" ConfirmationMessage="Are you shore create task" ImageName="BO_Quote" ImageMode="UseItemImage" PaintStyle="Image" />
+      <Action Id="ItemTempToStockItem" ImageName="AddNewDataSource_32x32" />
+      <Action Id="ShowOnMap" ImageName="GeoPoint_32x32" />
+    </Actions>
+    <DisableActions Id="DisableActions">
+      <DisableAction Id="@7456f588-67fe-4182-aa64-ebdbb80249e2" Action="GoodsIn" Removed="True" />
+      <DisableAction Id="@b8ceac5a-c073-4290-8173-cc9444680cfe" Action="ShowOnMap" />
+      <DisableAction Id="@b04b33c9-540d-4bee-b180-33f18e034502" Action="OrderPickingReservation" />
+      <DisableAction Id="@8569cc6b-ce23-4fc9-b084-f1c5a4a30af7" Action="OrderGoodsInOut" />
+      <DisableAction Id="@837483a5-6c8f-4bda-8cf2-439a8b24365b" Action="TaskAssignedFromOrder" />
+      <DisableAction Id="@6fb170ad-afa6-46c5-80cb-3d2c485e7dad" Action="LabelCreateFromOrder" />
+      <DisableAction Id="@35c1e46b-d50b-45f6-a3b3-d034e538d01e" Action="OrderGoodsInOut" />
+      <DisableAction Id="@1ab2b5c5-0d64-43b2-900f-a080157ac256" Action="TaskAssignedStockItemControl" />
+    </DisableActions>
+  </ActionDesign>
+  <Views Id="Views">
+    <ListView Id="Item_ListViewDashBoardView" PageSize="10" />
+    <ListView Id="Order_Canceled_ListView" DetailRowView="Order_Simple_DetailView" DetailViewID="Order_Simple_DetailView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Location" PropertyName="Location" Width="70" Index="-1" />
+        <ColumnInfo Id="LastTrip" PropertyName="LastTrip" Width="70" Index="-1" />
+      </Columns>
+    </ListView>
+    <ListView Id="Order_Create_ListView" DetailRowView="Order_Simple_DetailView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Location" PropertyName="Location" Width="70" Index="-1" />
+        <ColumnInfo Id="LastTrip" PropertyName="LastTrip" Width="70" Index="-1" />
+      </Columns>
+    </ListView>
+    <ListView Id="Order_Item_ListViewDHV" PageSize="10" IsAdaptive="True" InlineEditMode="Batch">
+      <Columns Id="Columns">
+        <ColumnInfo Id="PalleteQuantity" PropertyName="PalleteQuantity" Width="70" Index="-1" />
+        <ColumnInfo Id="PackageQuantity" PropertyName="PackageQuantity" Width="70" Index="-1" />
+        <ColumnInfo Id="BoxQuantity" PropertyName="BoxQuantity" Width="70" Index="-1" />
+      </Columns>
+    </ListView>
+    <ListView Id="Order_Items_Create_ListView" IsAdaptive="True" InlineEditMode="Inline" />
+    <ListView Id="Order_Items_ListView" InlineEditMode="Inline" IsAdaptive="True">
+      <Columns Id="Columns">
+        <ColumnInfo Id="BoxQuantity" Index="-1" />
+        <ColumnInfo Id="PackageQuantity" Index="-1" />
+        <ColumnInfo Id="PalleteQuantity" Index="-1" />
+      </Columns>
+    </ListView>
+    <ListView Id="Order_Pick_ListViewDHV" IsAdaptive="True" MasterDetailView="Order_Simple_DetailView" DetailViewID="Order_Simple_DetailView">
+      <MenuSettings Id="MenuSettings">
+        <MenuItem Name="TaskAssignedFromOrder" CallAction="TaskAssignedFromOrder" ParentMenu="Menu" />
+        <MenuItem Name="OrderPickingReservation" CallAction="OrderPickingReservation" />
+      </MenuSettings>
+      <Columns Id="Columns">
+        <ColumnInfo Id="Location" PropertyName="Location" Width="70" Index="-1" />
+        <ColumnInfo Id="LastTrip" PropertyName="LastTrip" Width="70" Index="-1" />
+      </Columns>
+    </ListView>
+    <ListView Id="State_ListView" InlineEditMode="Batch" />
+    <ListView Id="TaskTemplate_TemplateItems_ListView" InlineEditMode="Batch" />
+    <ListView Id="Trip_Order_ListViewDHV" IsAdaptive="True" MasterDetailView="Order_Simple_DetailView" DetailViewID="Order_Simple_DetailView">
+      <MenuSettings Id="MenuSettings">
+        <MenuItem Name="TaskAssignedFromOrder" CallAction="TaskAssignedFromOrder" ParentMenu="Menu" />
+        <MenuItem Name="CreateTask_OrderGoodsInOut" CallAction="OrderGoodsInOut" ParentMenu="Menu" />
+      </MenuSettings>
+      <Columns Id="Columns">
+        <ColumnInfo Id="Location" PropertyName="Location" Width="70" Index="-1" />
+        <ColumnInfo Id="LastTrip" PropertyName="LastTrip" Width="70" Index="-1" />
+      </Columns>
+    </ListView>
+    <ListView Id="Item_Locations_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="OperationRow" SortIndex="0" SortOrder="Ascending" Width="114" />
+        <ColumnInfo Id="FunctionType" SortIndex="-1" SortOrder="None" Width="91" />
+        <ColumnInfo Id="MaxTemperature" Index="8" />
+        <ColumnInfo Id="MinTemperature" Index="9" />
+      </Columns>
+    </ListView>
+    <ListView Id="Item_SmartMobiles_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="FormVisible" Index="-1" />
+        <ColumnInfo Id="Index" Index="-1" />
+        <ColumnInfo Id="ListVisible" Index="-1" />
+        <ColumnInfo Id="ID" Width="53" />
+        <ColumnInfo Id="Name" Index="3" />
+        <ColumnInfo Id="IsLoop" Index="4" />
+        <ColumnInfo Id="DisplayName" Index="5" />
+        <ColumnInfo Id="Type" Index="6" />
+        <ColumnInfo Id="ClientValue" Index="8" />
+        <ColumnInfo Id="SysValue" Index="9" />
+        <ColumnInfo Id="ValidationMessage" Index="10" />
+        <ColumnInfo Id="CharacterLength" Index="11" />
+        <ColumnInfo Id="ObjectTypeName" Index="12" />
+        <ColumnInfo Id="ObjectType" Index="13" />
+        <ColumnInfo Id="SysValueReferanceProperty" Index="14" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Location_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="34.469696969696969" Direction="Horizontal">
+            <LayoutGroup Id="Autocfd16ab9-3c89-425f-8aae-254511570a69" ShowCaption="False" Caption="Autocfd16ab9-3c89-425f-8aae-254511570a69(3)" Index="0" RelativeSize="25">
+              <LayoutItem Id="SysCode" ViewItem="SysCode" Index="0" RelativeSize="17.582417582417584" />
+              <LayoutItem Id="Code" ViewItem="Code" Index="1" RelativeSize="13.186813186813186" />
+              <LayoutItem Id="FunctionType" ViewItem="FunctionType" Index="2" RelativeSize="13.186813186813186" />
+              <LayoutItem Id="OperationRow" ViewItem="OperationRow" Index="3" RelativeSize="56.043956043956044" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto3177a9c9-ca7e-4b52-a0ed-f1670559d696" ShowCaption="False" Caption="Auto3177a9c9-ca7e-4b52-a0ed-f1670559d696(11)" Direction="Horizontal" Index="1" RelativeSize="75">
+              <LayoutGroup Id="Auto92568d2a-ad8e-4e4d-bdde-24aeaf9f0028" ShowCaption="False" Caption="Auto92568d2a-ad8e-4e4d-bdde-24aeaf9f0028(12)" Index="0" RelativeSize="33.333333333333336">
+                <LayoutItem Id="PalleteCapacity" ViewItem="PalleteCapacity" Index="0" RelativeSize="17.582417582417584" />
+                <LayoutItem Id="Height" ViewItem="Height" Index="1" RelativeSize="13.186813186813186" />
+                <LayoutItem Id="Width" ViewItem="Width" Index="2" RelativeSize="13.186813186813186" />
+                <LayoutItem Id="Length" ViewItem="Length" Index="3" RelativeSize="13.186813186813186" />
+                <LayoutItem Id="MinTemperature" ViewItem="MinTemperature" Index="4" RelativeSize="13.186813186813186" />
+                <LayoutItem Id="MaxTemperature" ViewItem="MaxTemperature" Index="5" RelativeSize="29.670329670329672" />
+              </LayoutGroup>
+              <LayoutGroup Id="Auto79a3e93c-4129-4607-85f9-9cc1bb717298" ShowCaption="False" Caption="Auto79a3e93c-4129-4607-85f9-9cc1bb717298(20)" Index="1" RelativeSize="66.666666666666671">
+                <LayoutItem Id="Holl" ViewItem="Holl" Index="0" RelativeSize="17.582417582417584" />
+                <LayoutItem Id="Column" ViewItem="Column" Index="1" RelativeSize="13.186813186813186" />
+                <LayoutItem Id="Zone" ViewItem="Zone" Index="2" RelativeSize="13.186813186813186" />
+                <LayoutItem Id="Side" ViewItem="Side" Index="3" RelativeSize="13.186813186813186" />
+                <LayoutItem Id="Level" ViewItem="Level" Index="4" RelativeSize="13.186813186813186" />
+                <LayoutItem Id="State" ViewItem="State" Index="5" RelativeSize="13.186813186813186" />
+                <LayoutItem Id="MaxLoadQuantityKg" ViewItem="MaxLoadQuantityKg" Index="6" RelativeSize="16.483516483516482" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="BaseObjectC" RelativeSize="28.756476683937823" Index="1" Caption="Sys Code" Removed="True">
+              <LayoutItem Id="SysCode" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="BaseObjectState" Caption="State" RelativeSize="25.647668393782382" Index="1" Removed="True">
+              <LayoutItem Id="State" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Location" RelativeSize="5.4404145077720205" Index="1" Removed="True">
+              <LayoutGroup Id="Location_col1" RelativeSize="51.308139534883722" Caption="Location_col1">
+                <LayoutItem Id="Code" RelativeSize="28.571428571428573" Index="0" Removed="True" />
+                <LayoutItem Id="Column" RelativeSize="17.391304347826086" Index="0" Removed="True" />
+                <LayoutItem Id="FunctionType" RelativeSize="100" Index="0" Removed="True" />
+                <LayoutItem Id="Holl" RelativeSize="20" Index="0" Removed="True" />
+                <LayoutItem Id="Level" RelativeSize="23.529411764705884" Index="0" Removed="True" />
+                <LayoutItem Id="OperationRow" RelativeSize="28.571428571428573" Index="0" Removed="True" />
+                <LayoutItem Id="Side" RelativeSize="23.529411764705884" Index="0" Removed="True" />
+                <LayoutItem Id="Zone" ViewItem="Zone" Index="0" RelativeSize="15.384615384615385" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Location_col2" RelativeSize="48.691860465116278" Caption="Location_col2">
+                <LayoutItem Id="Height" RelativeSize="20" Index="0" Removed="True" />
+                <LayoutItem Id="Length" RelativeSize="23.529411764705884" Index="0" Removed="True" />
+                <LayoutItem Id="MaxLoadQuantityKg" RelativeSize="28.571428571428573" Index="0" Removed="True" />
+                <LayoutItem Id="MaxTemperature" RelativeSize="50" Index="0" Removed="True" />
+                <LayoutItem Id="MinTemperature" RelativeSize="36.363636363636367" Index="0" Removed="True" />
+                <LayoutItem Id="PalleteCapacity" RelativeSize="100" Index="0" Removed="True" />
+                <LayoutItem Id="Width" RelativeSize="17.391304347826086" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="ObjectBase" RelativeSize="22.466960352422909" Index="1" Direction="Horizontal" Removed="True">
+              <LayoutGroup Id="ObjectBase_col2" RelativeSize="100" Caption="ObjectBase_col2" Index="0" Removed="True">
+                <LayoutItem Id="ObjectSpace" RelativeSize="100" Index="0" Removed="True" />
+                <LayoutItem Id="UpdateBy" RelativeSize="50" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="ObjectBase_col1" RelativeSize="50" Caption="ObjectBase_col1" Removed="True">
+                <LayoutItem Id="CreatedBy" RelativeSize="100" Index="0" Removed="True" />
+                <LayoutItem Id="UpdateTime" RelativeSize="50" Index="0" Removed="True" />
+                <LayoutItem Id="CreateTime" RelativeSize="36.363636363636367" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="65.530303030303031">
+            <LayoutGroup Id="Items" RelativeSize="100">
+              <LayoutItem Id="Items" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Order_PickingItems_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Order" Index="-1" />
+        <ColumnInfo Id="Index" Index="0" />
+        <ColumnInfo Id="SysCode" Width="151" Index="1" />
+        <ColumnInfo Id="ShippingContainer" Index="2" />
+        <ColumnInfo Id="OrderLine" Index="3" Width="83" />
+        <ColumnInfo Id="StockItem" Index="4" />
+        <ColumnInfo Id="ReservationQuantity" Index="5" />
+        <ColumnInfo Id="OperationQuantity" Index="6" />
+        <ColumnInfo Id="CreateTime" Index="7" />
+      </Columns>
+    </ListView>
+    <ListView Id="Order_Trips_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="SysCode" Width="87" SortIndex="-1" SortOrder="None" />
+        <ColumnInfo Id="Vehicle" Width="51" />
+        <ColumnInfo Id="Employee" Width="64" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ShippingContainer_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="20.030581039755351">
+            <LayoutGroup Id="ShippingContainer" RelativeSize="100">
+              <LayoutGroup Id="ShippingContainer_col1" RelativeSize="50">
+                <LayoutItem Id="ShippingContainerTemplate" RelativeSize="28.571428571428573" />
+                <LayoutItem Id="Order" RelativeSize="21.428571428571427" />
+                <LayoutItem Id="SysCode" ViewItem="SysCode" Index="2" RelativeSize="21.428571428571427" />
+                <LayoutItem Id="Location" Index="3" RelativeSize="28.571428571428573" />
+              </LayoutGroup>
+              <LayoutGroup Id="ShippingContainer_col2" RelativeSize="50" />
+            </LayoutGroup>
+            <LayoutGroup Id="ObjectBase" RelativeSize="47.033898305084747" Index="1" Direction="Horizontal" Removed="True">
+              <LayoutGroup Id="ObjectBase_col2" RelativeSize="100" Index="0" Caption="ObjectBase_col2" Removed="True">
+                <LayoutItem Id="ObjectSpace" RelativeSize="100" Index="0" Removed="True" />
+                <LayoutItem Id="UpdateBy" RelativeSize="50" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="ObjectBase_col1" RelativeSize="50" Caption="ObjectBase_col1" Removed="True">
+                <LayoutItem Id="CreatedBy" RelativeSize="100" Index="0" Removed="True" />
+                <LayoutItem Id="UpdateTime" RelativeSize="50" Index="0" Removed="True" />
+                <LayoutItem Id="CreateTime" RelativeSize="36.363636363636367" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="BaseObjectC" Caption="Sys Code" RelativeSize="5.0847457627118642" Removed="True">
+              <LayoutItem Id="SysCode" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ShippingContainer_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="SysCode" Width="173" />
+        <ColumnInfo Id="Order" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxLookupPropertyEditor" />
+      </Columns>
+    </ListView>
+    <DetailView Id="StockItemCheckNP_DetailView" Caption="StockItem Kontrol Create">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="StockItemCheckNP" RelativeSize="100" Direction="Vertical">
+              <LayoutItem Id="Person" RelativeSize="4.8929663608562688" Index="0" />
+              <LayoutItem Id="StockItemControl" RelativeSize="95.107033639143737" Index="1" />
+            </LayoutGroup>
+            <LayoutGroup Id="NonePercentObject" Caption="Oid" RelativeSize="91.733333333333334" Removed="True">
+              <LayoutItem Id="Oid" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="StockItemControl_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="26.990553306342779">
+            <LayoutGroup Id="StockItemControl" RelativeSize="53.5">
+              <LayoutItem Id="Name" RelativeSize="29.906542056074766" />
+              <LayoutItem Id="DateTime" RelativeSize="22.429906542056074" />
+              <LayoutItem Id="Template" RelativeSize="22.429906542056074" />
+              <LayoutItem Id="TaskTemplate" RelativeSize="25.233644859813083" />
+            </LayoutGroup>
+            <LayoutGroup Id="BaseObjectWarehouseState" RelativeSize="15">
+              <LayoutItem Id="Warehouse" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="BaseObjectState" RelativeSize="15">
+              <LayoutItem Id="State" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="BaseObjectC" RelativeSize="16.5">
+              <LayoutItem Id="SysCode" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="ObjectBase" Removed="True" />
+          </LayoutGroup>
+          <LayoutGroup Id="Locations_Group" Direction="Vertical" RelativeSize="73.009446693657225">
+            <LayoutItem Id="Locations" RelativeSize="100" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="StockItemControlStep_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100" Direction="Horizontal">
+            <LayoutGroup Id="Auto8e3df65a-6eec-480d-a46f-8313c4e8d294" ShowCaption="False" Index="0" RelativeSize="50">
+              <LayoutItem Id="StockItemControl" ViewItem="StockItemControl" Index="0" RelativeSize="4.3184885290148447" />
+              <LayoutItem Id="Location" ViewItem="Location" Index="1" RelativeSize="3.2388663967611335" />
+              <LayoutItem Id="SysCode" ViewItem="SysCode" Index="2" RelativeSize="92.442645074224018" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto026d9de8-d53a-48ca-9e2a-4b0dda802992" ShowCaption="False" Index="1" RelativeSize="50">
+              <LayoutItem Id="Warehouse" ViewItem="Warehouse" Index="0" RelativeSize="4.3184885290148447" />
+              <LayoutItem Id="State" ViewItem="State" Index="1" RelativeSize="3.2388663967611335" />
+              <LayoutItem Id="TaskStep" ViewItem="TaskStep" Index="2" RelativeSize="92.442645074224018" />
+            </LayoutGroup>
+            <LayoutGroup Id="StockItemControlStep" RelativeSize="6.0728744939271255" Index="3" Removed="True">
+              <LayoutGroup Id="StockItemControlStep_col1" RelativeSize="49.869451697127936">
+                <LayoutItem Id="Location" RelativeSize="100" Index="0" Removed="True" />
+                <LayoutItem Id="User" RelativeSize="28.571428571428573" Index="3" Removed="True" />
+                <LayoutItem Id="StockItemControl" RelativeSize="36.363636363636367" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="StockItemControlStep_col2" RelativeSize="50.130548302872064">
+                <LayoutItem Id="TaskStep" RelativeSize="100" Index="0" />
+                <LayoutItem Id="Index" RelativeSize="36.363636363636367" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="BaseObjectWarehouseState" RelativeSize="4.4534412955465585" Index="4" Removed="True">
+              <LayoutItem Id="Warehouse" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="BaseObjectState" RelativeSize="4.4534412955465585" Index="5" Removed="True">
+              <LayoutItem Id="State" ViewItem="State" Index="0" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="BaseObjectC" RelativeSize="74.224021592442639" Index="6" Removed="True">
+              <LayoutItem Id="SysCode" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="ObjectBase" Removed="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="StockItemControlStep_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="SysCode" Index="-1" />
+        <ColumnInfo Id="TaskStep" Index="-1" />
+        <ColumnInfo Id="State" Index="0" />
+        <ColumnInfo Id="StockItemControl" Index="1" Width="86" />
+        <ColumnInfo Id="Location" Index="2" />
+        <ColumnInfo Id="Index" Index="4" />
+      </Columns>
+      <MenuSettings Id="MenuSettings">
+        <MenuItem Name="Name" CallAction="TaskAssignedStockItemControl" Caption="Görev Ata" Image="dola_do_32x32" />
+        <MenuItem Name="TaskAssigned" CallAction="TaskAssigned" Caption="TaskAssigned" Image="dola_do_32x32" />
+      </MenuSettings>
+    </ListView>
+    <ListView Id="Trip_Orders_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="EntryLocation" Index="-1" />
+        <ColumnInfo Id="IntegrationCode" Index="-1" />
+        <ColumnInfo Id="Key" Index="-1" />
+        <ColumnInfo Id="LastEntryLocation" Index="-1" />
+        <ColumnInfo Id="LastTrip" Index="-1" />
+        <ColumnInfo Id="Latitude" Index="-1" />
+        <ColumnInfo Id="Longitude" Index="-1" />
+        <ColumnInfo Id="TaskTemplate" Index="-1" />
+        <ColumnInfo Id="Title" Index="-1" />
+        <ColumnInfo Id="SysCode" Width="163" />
+        <ColumnInfo Id="OrderType" Index="1" />
+        <ColumnInfo Id="VehicleType" Index="2" />
+        <ColumnInfo Id="RoutePlan" Index="4" />
+        <ColumnInfo Id="FromAddress" Index="5" />
+        <ColumnInfo Id="ToAddress" Index="6" />
+      </Columns>
+    </ListView>
+    <DashboardView Id="WarehouseStockItemControl_DashBoardView">
+      <Items Id="Items">
+        <DashboardViewItemRelation Id="StockItemControl" ViewId="StockItemControlStep_ListView" ActionsToolbarVisibility="Show" IsFirtLoad="False" Caption="Stok Coıntrol Task">
+          <RelationListViews Id="RelationListViews">
+            <DashBoardRelationView Name="StockItemControToItem" DashboardViewItem="StockItemItem" WherePropertyName="Location" WherePropertyNameValue="Location" />
+            <DashBoardRelationView Name="TaskStepTransaction" WherePropertyName="TaskStepIntegrationCode" WherePropertyNameValue="SysCode" DashboardViewItem="TransactionTempory" />
+          </RelationListViews>
+        </DashboardViewItemRelation>
+        <DashboardViewItemRelation Id="Location" ViewId="Location_ListView" Caption="StockItem Location" IsFirtLoad="True">
+          <RelationListViews Id="RelationListViews">
+            <DashBoardRelationView Name="@0d6281b6-01ec-4a2a-8ceb-792db34aa973" DashboardViewItem="StockItemControl" WherePropertyName="Location" WherePropertyNameValue="Code" />
+          </RelationListViews>
+        </DashboardViewItemRelation>
+      </Items>
+    </DashboardView>
+    <DashboardView Id="WarehouseStockItem_DashBoardView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Auto3b2888a8-762f-4951-bb77-1e94bb90614b">
+            <LayoutItem Id="TaskStepTransactionHistory_ListViewDashBoardView" ViewItem="TaskStepTransactionHistory_ListViewDashBoardView" />
+            <LayoutItem Id="StockItemItem_ListViewDashBoardView" ViewItem="StockItemItem_ListViewDashBoardView" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+      <Items Id="Items">
+        <DashboardViewItemRelation Id="Item">
+          <RelationListViews Id="RelationListViews">
+            <DashBoardRelationView Name="ItemToTransaction" DashboardViewItem="TaskStepTransactionHistory_ListViewDashBoardView" />
+            <DashBoardRelationView Name="ItemToStockItem" DashboardViewItem="StockItemItem_ListViewDashBoardView" />
+          </RelationListViews>
+        </DashboardViewItemRelation>
+      </Items>
+    </DashboardView>
+    <DashboardView Id="Warehouse_DashBoardView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <TabbedGroup Id="Item2">
+            <LayoutGroup Id="Item5">
+              <LayoutItem Id="Reservation" ViewItem="Reservation" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item4">
+              <LayoutItem Id="Label_ListView" ViewItem="Label_ListView" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+      <Items Id="Items">
+        <DashboardViewItemRelation Id="Order_GoodsInOut_ListView">
+          <RelationListViews Id="RelationListViews">
+            <DashBoardRelationView Name="OrderReservation" DashboardViewItem="Reservation" />
+            <DashBoardRelationView Name="OrderLabel_Relation" DashboardViewItem="Label_ListView" />
+          </RelationListViews>
+        </DashboardViewItemRelation>
+      </Items>
+    </DashboardView>
+    <DetailView Id="Trip_MasterlView">
+      <Items Id="Items">
+        <PropertyEditor Id="Points" PropertyName="Points" View="Trip_Points_ListView" />
+        <PropertyEditor Id="Orders" PropertyName="Orders" View="Trip_Orders_ListView" LinkView="Order_Create_ListView" />
+        <PropertyEditor Id="Location" PropertyName="Location" />
+      </Items>
+    </DetailView>
+    <ListView Id="Trip_ListViewDashBoardView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Location" PropertyName="Location" Width="70" Index="-1" />
+      </Columns>
+    </ListView>
+    <ListView Id="Trip_DisListViewDashBoardView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Location" PropertyName="Location" Width="70" Index="-1" />
+      </Columns>
+    </ListView>
+    <DashboardView Id="Trip_DashBoardView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Autoadd88513-32d8-4e52-8a42-90dad033b966">
+            <LayoutItem Id="Order_Ready_DashBoardView" ViewItem="Order_Ready_DashBoardView" />
+          </LayoutGroup>
+          <LayoutGroup Id="Auto1312a2ce-a17a-4d84-819c-af844b15f1f7">
+            <LayoutItem Id="Order_Trip_DashBoardView" ViewItem="Order_Trip_DashBoardView" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+      <Items Id="Items">
+        <DashboardViewItemRelation Id="Trip_DashBoardView">
+          <RelationListViews Id="RelationListViews">
+            <DashBoardRelationView Name="Trip_Order" DashboardViewItem="Order_Trip_DashBoardView" />
+          </RelationListViews>
+        </DashboardViewItemRelation>
+      </Items>
+    </DashboardView>
+    <ListView Id="Order_International_ListViewDHV">
+      <Columns Id="Columns">
+        <ColumnInfo Id="LastTrip" PropertyName="LastTrip" Width="70" Index="4" />
+        <ColumnInfo Id="Longitude" PropertyName="Longitude" Width="50" Index="-1" />
+        <ColumnInfo Id="Location" PropertyName="Location" Width="70" Index="-1" />
+        <ColumnInfo Id="Latitude" PropertyName="Latitude" Width="50" Index="-1" />
+      </Columns>
+    </ListView>
+    <ListView Id="Order_GoodsInOut_ListView">
+      <MenuSettings Id="MenuSettings">
+        <MenuItem Name="TaskAssignedFromOrder" CallAction="TaskAssignedFromOrder" ParentMenu="Menu" />
+        <MenuItem Name="Sipariş Rezeravasyon" CallAction="OrderPickingReservation" />
+        <MenuItem Name="Planlama" CallAction="OrderGoodsInOut" />
+        <MenuItem Name="Harita" CallAction="ShowOnMap" />
+      </MenuSettings>
+      <Columns Id="Columns">
+        <ColumnInfo Id="Longitude" PropertyName="Longitude" Width="50" Index="-1" />
+        <ColumnInfo Id="Location" PropertyName="Location" Width="70" Index="-1" />
+        <ColumnInfo Id="Latitude" PropertyName="Latitude" Width="50" Index="-1" />
+        <ColumnInfo Id="LastTrip" PropertyName="LastTrip" Width="70" Index="-1" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Order_Create_MasterDetailView">
+      <Items Id="Items">
+        <PropertyEditor Id="Trips" PropertyName="Trips" View="Order_Trips_ListView" />
+        <PropertyEditor Id="Location" PropertyName="Location" />
+        <PropertyEditor Id="LastTrip" PropertyName="LastTrip" />
+      </Items>
+    </DetailView>
+    <DetailView Id="Order_Create_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="Item3">
+              <LayoutItem Id="StockItemItems" ViewItem="StockItemItems" />
+            </LayoutGroup>
+            <LayoutGroup Id="OrderLineReservations">
+              <LayoutItem Id="StockItemItemReservation" ViewItem="StockItemItemReservation" />
+            </LayoutGroup>
+            <LayoutGroup Id="Labels">
+              <LayoutItem Id="Labels" ViewItem="Labels" />
+            </LayoutGroup>
+            <LayoutGroup Id="Tasks">
+              <LayoutItem Id="Tasks" ViewItem="Tasks" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+      <Items Id="Items">
+        <PropertyEditor Id="Trips" PropertyName="Trips" View="Order_Trips_ListView" />
+        <PropertyEditor Id="Location" PropertyName="Location" />
+        <PropertyEditor Id="LastTrip" PropertyName="LastTrip" />
+      </Items>
+    </DetailView>
+    <ListView Id="Location_ListViewDashBoardView" ClassName="dola.Module.Location">
+      <Columns Id="Columns">
+        <ColumnInfo Id="CreatedBy" PropertyName="CreatedBy" Width="70" Index="-1" />
+        <ColumnInfo Id="CreateTime" PropertyName="CreateTime" Width="70" Index="-1" />
+        <ColumnInfo Id="IsNewObject" PropertyName="IsNewObject" Width="50" Index="-1" />
+        <ColumnInfo Id="ObjectSpace" PropertyName="ObjectSpace" Width="70" Index="-1" />
+        <ColumnInfo Id="State" PropertyName="State" Width="70" Index="-1" />
+        <ColumnInfo Id="SysCode" PropertyName="SysCode" Width="400" Index="-1" />
+        <ColumnInfo Id="UpdateBy" PropertyName="UpdateBy" Width="70" Index="-1" />
+        <ColumnInfo Id="UpdateTime" PropertyName="UpdateTime" Width="70" Index="-1" />
+        <ColumnInfo Id="Zone" PropertyName="Zone" Width="70" Index="1" />
+        <ColumnInfo Id="OperationRow" PropertyName="OperationRow" Width="70" Index="2" />
+        <ColumnInfo Id="FunctionType" PropertyName="FunctionType" Width="70" Index="3" />
+        <ColumnInfo Id="Width" PropertyName="Width" Width="70" Index="4" />
+        <ColumnInfo Id="Height" PropertyName="Height" Width="70" Index="5" />
+        <ColumnInfo Id="Length" PropertyName="Length" Width="70" Index="6" />
+        <ColumnInfo Id="MaxLoadQuantityKg" PropertyName="MaxLoadQuantityKg" Width="70" Index="7" />
+        <ColumnInfo Id="MinTemperature" PropertyName="MinTemperature" Width="70" Index="8" />
+        <ColumnInfo Id="MaxTemperature" PropertyName="MaxTemperature" Width="70" Index="9" />
+        <ColumnInfo Id="PalleteCapacity" PropertyName="PalleteCapacity" Width="70" Index="10" />
+      </Columns>
+    </ListView>
+    <ListView Id="EntryLocation_ListViewDHV">
+      <MenuSettings Id="MenuSettings">
+        <MenuItem Name="ramp" CallAction="GoodsInOutFromEntry" />
+      </MenuSettings>
+      <Columns Id="Columns">
+        <ColumnInfo Id="Location" PropertyName="Location" Width="94" Index="3" Caption="Rampa" />
+      </Columns>
+    </ListView>
+    <DetailView Id="EntryLocation_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Auto51e816b4-40dd-41bd-87fd-6a021f3234c5">
+              <LayoutGroup Id="Auto61d89184-7bf6-4dd2-902e-8adc2cf82d2d">
+                <LayoutGroup Id="Auto334c0d98-53ec-4883-8d17-c0679b265ddd">
+                  <LayoutItem Id="Location" ViewItem="Location" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="Item_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <TabbedGroup Id="Tabs" RelativeSize="83.170466883821931" Removed="True">
+            <LayoutGroup Id="SmartMobiles" RelativeSize="100" Index="0" Removed="True">
+              <LayoutItem Id="SmartMobiles" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="Locations" RelativeSize="100" Removed="True">
+              <LayoutItem Id="Locations" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+          <LayoutGroup Id="SimpleEditors">
+            <TabbedGroup Id="Item5">
+              <LayoutGroup Id="SmartMobiles">
+                <LayoutItem Id="SmartMobiles" ViewItem="SmartMobiles" />
+              </LayoutGroup>
+              <LayoutGroup Id="Locations">
+                <LayoutItem Id="Locations" ViewItem="Locations" />
+              </LayoutGroup>
+              <LayoutGroup Id="Item6">
+                <LayoutGroup Id="Autoc862da0c-46fe-4411-8f75-47c77b9137ac">
+                  <LayoutGroup Id="Auto6fbab5ca-fd22-4c45-8046-379a1c289dbb">
+                    <LayoutItem Id="Volume" ViewItem="Volume" />
+                  </LayoutGroup>
+                </LayoutGroup>
+                <LayoutGroup Id="Autob89e1f9a-bd90-4371-8c9c-646ab2b1d027">
+                  <LayoutItem Id="UnitType" ViewItem="UnitType" />
+                  <LayoutItem Id="StockItemUnitType" ViewItem="StockItemUnitType" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </TabbedGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Item_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="StockItemUnitType" Index="9" />
+      </Columns>
+    </ListView>
+    <ListView Id="Item_LookupListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="StockItemUnitType" PropertyName="StockItemUnitType" Index="-1" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Order_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Auto8348b982-3346-43dd-a32c-4b0842b27bc2">
+              <LayoutGroup Id="Autof2c39942-667c-48bc-9103-488fa20aebfa">
+                <TabbedGroup Id="Item2">
+                  <LayoutGroup Id="Item3">
+                    <LayoutGroup Id="Auto3321ac2c-f5f3-4ae2-876c-facf7a1c851d">
+                      <LayoutItem Id="DocumentCode" ViewItem="DocumentCode" />
+                      <LayoutItem Id="LastTrip" ViewItem="LastTrip" />
+                    </LayoutGroup>
+                  </LayoutGroup>
+                </TabbedGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="Trips" RelativeSize="100">
+              <LayoutItem Id="Trips" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="ShippingContaineries" RelativeSize="100">
+              <LayoutItem Id="ShippingContaineries" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="PickingItems" RelativeSize="100">
+              <LayoutItem Id="PickingItems" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Order_EntryLocations_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Location" Index="0" SortIndex="0" SortOrder="Ascending" />
+      </Columns>
+    </ListView>
+    <ListView Id="Order_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="LastTrip" Index="6" />
+      </Columns>
+    </ListView>
+    <DetailView Id="OrderBase_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="OrderBase">
+              <LayoutGroup Id="OrderBase_col2">
+                <LayoutItem Id="Location" RelativeSize="13.043478260869565" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="OrderLine_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <TabbedGroup Id="Item1">
+              <LayoutGroup Id="Item2">
+                <LayoutGroup Id="Auto78f334d2-d217-4867-9552-ab74207e46d5">
+                  <LayoutItem Id="BoxQuantity" ViewItem="BoxQuantity" />
+                  <LayoutItem Id="PackageQuantity" ViewItem="PackageQuantity" />
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutGroup Id="OrderLine">
+                <LayoutGroup Id="OrderLine_col1">
+                  <LayoutGroup Id="Auto7a8ad2ef-033c-480d-b67d-565e89c8190a">
+                    <LayoutGroup Id="Auto78910cf2-418a-45e7-b286-f003395c49f7">
+                      <LayoutGroup Id="Autoe3a6d72a-f5f9-4281-a8a8-9303756e78bf">
+                        <LayoutItem Id="Reservation" ViewItem="Reservation" />
+                      </LayoutGroup>
+                    </LayoutGroup>
+                  </LayoutGroup>
+                </LayoutGroup>
+              </LayoutGroup>
+            </TabbedGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="OrderLineMetNP_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="StockItemItem" Width="77" Index="2" />
+        <ColumnInfo Id="QuantityAvaibleStockItem" Index="9" />
+        <ColumnInfo Id="QuantityReservationStockItem" Index="10" />
+        <ColumnInfo Id="StockItemItem.Location" PropertyName="StockItemItem.Location" Index="6" />
+        <ColumnInfo Id="StockItemItem.Batch" PropertyName="StockItemItem.Batch" Index="5" />
+        <ColumnInfo Id="StockItemItem.Temperature" PropertyName="StockItemItem.Temperature" Index="4" />
+        <ColumnInfo Id="StockItemItem.ExpireDate" PropertyName="StockItemItem.ExpireDate" Index="3" Width="91" />
+      </Columns>
+    </ListView>
+    <ListView Id="StockItem_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="CurentQuantity" Index="4" />
+        <ColumnInfo Id="Location" Index="6" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Task_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Task">
+              <LayoutGroup Id="Task_col1">
+                <LayoutItem Id="Assigned" RelativeSize="8.02675585284281" Index="4" Removed="True" />
+                <TabbedGroup Id="Item2">
+                  <LayoutGroup Id="Item1">
+                    <LayoutGroup Id="Autoa84f57fd-ba8c-4be8-9804-3140fec670c5">
+                      <LayoutGroup Id="Item6">
+                        <LayoutItem Id="Assigned" ViewItem="Assigned" />
+                      </LayoutGroup>
+                    </LayoutGroup>
+                  </LayoutGroup>
+                </TabbedGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Task_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Assigned" Index="3" />
+      </Columns>
+    </ListView>
+    <ListView Id="Task_TaskSteps_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Person" Index="6" />
+      </Columns>
+    </ListView>
+    <DetailView Id="TaskStep_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Auto96ed320c-253a-4c59-8eda-4d28b94e0a48">
+              <LayoutGroup Id="Auto3f0ae018-1151-40df-95cb-f0c243fe9959">
+                <LayoutGroup Id="Item2">
+                  <LayoutItem Id="Person" ViewItem="Person" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="TaskStep_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Person" Index="1" />
+      </Columns>
+    </ListView>
+    <ListView Id="TaskStepTransactionVW_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Location" Index="0" />
+      </Columns>
+    </ListView>
+    <DetailView Id="TaskTemplate_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <TabbedGroup Id="Item3">
+              <LayoutGroup Id="TaskTemplate">
+                <LayoutGroup Id="TaskTemplate_col1">
+                  <LayoutGroup Id="Auto11d0a96d-d81c-410f-95ad-9bcf43705c8f">
+                    <LayoutGroup Id="Auto90a9dcc8-e9bc-4e49-8902-69a10ec67ba7">
+                      <LayoutGroup Id="Auto55b12eb8-b8da-4819-95c7-9aeb92bf84eb">
+                        <LayoutGroup Id="Autof9b734be-eda7-4b1d-bd52-3bbcb567d05c">
+                          <LayoutItem Id="StockItemTransactionType" ViewItem="StockItemTransactionType" />
+                        </LayoutGroup>
+                      </LayoutGroup>
+                    </LayoutGroup>
+                  </LayoutGroup>
+                </LayoutGroup>
+              </LayoutGroup>
+            </TabbedGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="TaskTemplateItem_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <TabbedGroup Id="Tabs" RelativeSize="56.699029126213595">
+            <LayoutGroup Id="Templates" RelativeSize="100">
+              <LayoutItem Id="Templates" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="Items" RelativeSize="100">
+              <LayoutItem Id="Items" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="Trip_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Trip">
+              <TabbedGroup Id="Item2">
+                <LayoutGroup Id="Item3">
+                  <LayoutGroup Id="Auto28e8b86b-ea54-4864-8e71-5072c124d0c2">
+                    <LayoutItem Id="QuantityCheck" ViewItem="QuantityCheck" />
+                    <LayoutItem Id="PlanedTransporterQuantity" ViewItem="PlanedTransporterQuantity" />
+                  </LayoutGroup>
+                </LayoutGroup>
+              </TabbedGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="Orders" RelativeSize="100">
+              <LayoutItem Id="Orders" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+  <BOModel Id="BOModel">
+    <Class Name="dola.Module.Order">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="LastTrip" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxDefaultPropertyEditor" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+  <NavigationItems Id="NavigationItems">
+    <Items Id="Items">
+      <Item Id="Defination">
+        <Items Id="Items">
+          <Item Id="ShipingContainer" ViewId="ShippingContainer_ListView" />
+          <Item Id="@e470c9f2-a25f-4050-ab83-8c326c79fdc8" ViewId="Location_ListView" />
+        </Items>
+      </Item>
+      <Item Id="Operation">
+        <Items Id="Items">
+          <Item Id="Stok Takip" ViewId="StockItemItem_ListViewDashBoardView" />
+        </Items>
+      </Item>
+      <Item Id="Transport">
+        <Items Id="Items">
+          <Item Id="Transport" ViewId="Trip_Disposition_DashBoardView" />
+        </Items>
+      </Item>
+      <Item Id="Planed">
+        <Items Id="Items">
+          <Item Id="@7724079a-1f62-49c2-abba-085dfc02c01f" ViewId="Order_UnPlaned_ListView" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+</Application>

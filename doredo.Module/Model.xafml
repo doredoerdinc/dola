@@ -1,0 +1,1230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Company="dola" Copyright="2022" Logo="dola" PreferredLanguage="tr-TR">
+  <ActionDesign>
+    <Actions>
+      <Action Id="Link" Caption="Baglantı" />
+      <Action Id="OrganizeDashboard">
+        <DisableReasons>
+          <Reason Id="GenerateTaskForItemAcceptProcess" Caption="AllTime" IsNewNode="True" />
+          <Reason Id="GenerateTaskForItemPickProcess" Caption="AllTime" IsNewNode="True" />
+          <Reason Id="GenerateTaskForVehicleLoadProcess" Caption="AllTime" IsNewNode="True" />
+          <Reason Id="LabelCreateFromOrder" Caption="AllTime" IsNewNode="True" />
+          <Reason Id="OrderGoodsInOut" Caption="AllTime" IsNewNode="True" />
+          <Reason Id="OrderPickingReservation" Caption="AllTime" IsNewNode="True" />
+          <Reason Id="TaskAssigned" Caption="AllTime" IsNewNode="True" />
+          <Reason Id="TaskAssignedFromOrder" Caption="AllTime" IsNewNode="True" />
+          <Reason Id="TemplateLabelCreate" Caption="AllTime" IsNewNode="True" />
+        </DisableReasons>
+      </Action>
+      <Action Id="RelationVehicleOrder" ImageName="Truck32x32" />
+      <Action Id="ResetViewSettings">
+        <DisableReasons>
+          <Reason Id="Disable" Caption="Disable" IsNewNode="True" />
+        </DisableReasons>
+      </Action>
+      <Action Id="TaskAssigned" ConfirmationMessage="Görev Atamak İstiyor musunuz?" ImageName="EditTask_32x32" />
+      <Action Id="TemplateLabelCreate" ImageName="Barcode" />
+    </Actions>
+  </ActionDesign>
+  <BOModel>
+    <Class Name="dola.Module.RoutePlan">
+      <OwnMembers>
+        <Member Name="PlanedStartTime" DisplayFormat="{0:G}" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+  <NavigationItems ShowImages="True">
+    <Items>
+      <Item Id="Warehouse" Caption="Warehouse" ImageName="BO_Employee" ViewId="" Index="0" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="@1380e084-93a5-44cc-be6f-34095a1f1260" Caption="Sipariş giriş" Index="0" ImageName="ActionGroup_EasyTestRecorder" ViewId="Order_Create_ListView" IsNewNode="True" />
+          <Item Id="WarehouseIn" Caption="WarehouseIn" Index="0" ImageName="AddNewDataSource_16x16" ViewId="WarehouseIn_DashBoardView" IsNewNode="True" />
+          <Item Id="WarehouseOut" Index="1" ImageName="DeleteDataSource_16x16" ViewId="WarehouseOut_DashBoardView" IsNewNode="True" />
+          <Item Id="@0785791d-730a-4064-909e-a2a8a694229b" ViewId="Warehouse_Picking_DashBoardView" Index="2" ImageName="BOOrderLine_16x16" IsNewNode="True" />
+          <Item Id="@fcfae20d-13e9-4c43-b672-4249e0fa4076" Index="3" ImageName="Database_16x16" ViewId="WarehouseStock_DashBoardView" Caption=" Item Tracking" IsNewNode="True" />
+          <Item Id="@29b4d097-2099-4594-8acf-dfd33ae710b8" ViewId="Order_ListView" IsNewNode="True" />
+          <Item Id="@351e3522-d4d0-4d30-a214-9e70a8e33d97" ImageName="BugReport_16x16" ViewId="WarehouseStockControl_DashBoardView" IsNewNode="True" />
+          <Item Id="Stok Takip" ImageName="EditDataSource_16x16" ViewId="StockItem_ListViewDashBoardView" IsNewNode="True" />
+          <Item Id="WarehouseOrderTrancking" Caption="Warehouse Order Trancking" ViewId="WarehouseOrderTracking_DashBoardView" ImageName="warehouse16" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="Default" Visible="True" />
+      <Item Id="Defination" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="@e470c9f2-a25f-4050-ab83-8c326c79fdc8" ViewId="GlobalLocation_ListView" ImageName="Home_16x16" Index="1" IsNewNode="True" />
+          <Item Id="@e0fbef2d-760e-4362-b559-5aff2a640628" ViewId="ReportDataV2_ListView" Index="2" ImageName="Barcode_16x16" IsNewNode="True" />
+          <Item Id="@60fa44ea-dfb4-47fe-ab68-f189123da44b" ViewId="Item_ListView" ImageName="BOProduct_16x16" Index="3" IsNewNode="True" />
+          <Item Id="@4a827b8c-76c2-479f-b7b8-ca41c62ca7fe" ViewId="Role_ListView" Index="100" IsNewNode="True" />
+          <Item Id="@2878a06f-586c-44a7-9aca-58dc357103a2" ViewId="User_ListView" Index="101" IsNewNode="True" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+  <Options DataAccessMode="Server">
+    <LayoutManagerOptions CaptionLocation="Left" />
+  </Options>
+  <SchemaModules>
+    <SchemaModule Name="SystemAspNetModule" Version="20.1.15.0" IsNewNode="True" />
+    <SchemaModule Name="SystemModule" Version="20.1.15.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <DetailView Id="EntryLocation_DetailView">
+      <Items>
+        <PropertyEditor Id="Orders" View="" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100" Direction="Vertical" Caption="SimpleEditors">
+            <LayoutGroup Id="Auto51e816b4-40dd-41bd-87fd-6a021f3234c5" ShowCaption="False" Caption="" Direction="Horizontal" Index="0" RelativeSize="6.0803474484256244" IsNewNode="True">
+              <LayoutGroup Id="Autoc6095466-5543-47be-a7bb-c21cd9fc300b" ShowCaption="False" Caption="" Index="0" RelativeSize="33.370165745856355" IsNewNode="True">
+                <LayoutItem Id="Vehicle" ViewItem="Vehicle" Index="0" RelativeSize="57.142857142857146" IsNewNode="True" />
+                <LayoutItem Id="EntryTime" ViewItem="EntryTime" Index="1" RelativeSize="42.857142857142854" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Auto61d89184-7bf6-4dd2-902e-8adc2cf82d2d" ShowCaption="False" Caption="" Direction="Horizontal" Index="1" RelativeSize="66.629834254143645" IsNewNode="True">
+                <LayoutGroup Id="Auto29d2fae8-c654-47b5-a0cf-d42f842879f9" ShowCaption="False" Caption="" Index="0" RelativeSize="49.917081260364846" IsNewNode="True">
+                  <LayoutItem Id="LinkVehicle" ViewItem="LinkVehicle" Index="0" RelativeSize="57.142857142857146" IsNewNode="True" />
+                  <LayoutItem Id="ExitTime" ViewItem="ExitTime" Index="1" RelativeSize="42.857142857142854" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutGroup Id="Auto334c0d98-53ec-4883-8d17-c0679b265ddd" ShowCaption="False" Caption="" Index="1" RelativeSize="50.082918739635154" IsNewNode="True">
+                  <LayoutItem Id="Driver" ViewItem="Driver" Index="0" RelativeSize="57.142857142857146" IsNewNode="True" />
+                  <LayoutItem Id="GlobalLocation" ViewItem="GlobalLocation" Index="1" RelativeSize="42.857142857142854" IsNewNode="True" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="EntryLocation" RelativeSize="47.663551401869157" Index="1" Removed="True">
+              <LayoutGroup Id="EntryLocation_col1" RelativeSize="49.941927990708479" Caption="EntryLocation_col1">
+                <LayoutItem Id="Driver" RelativeSize="100" Index="0" Removed="True" />
+                <LayoutItem Id="LinkVehicle" RelativeSize="28.571428571428573" Index="0" Removed="True" />
+                <LayoutItem Id="Vehicle" RelativeSize="28.571428571428573" Index="0" Removed="True" />
+                <LayoutItem Id="State" RelativeSize="28.571428571428573" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="EntryLocation_col2" RelativeSize="50.058072009291521" Caption="EntryLocation_col2">
+                <LayoutItem Id="ExitTime" RelativeSize="36.363636363636367" Index="0" Removed="True" />
+                <LayoutItem Id="GlobalLocation" RelativeSize="50" Index="0" Removed="True" />
+                <LayoutItem Id="Warehouse" ViewItem="Warehouse" Index="0" RelativeSize="100" IsNewNode="True" />
+                <LayoutItem Id="EntryTime" RelativeSize="28.571428571428573" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="ObjectBase" RelativeSize="44.196428571428569" Index="1" Removed="True">
+              <LayoutGroup Id="ObjectBase_col1" RelativeSize="49.941927990708479">
+                <LayoutItem Id="CreatedBy" RelativeSize="36.363636363636367" />
+                <LayoutItem Id="CreateTime" RelativeSize="36.363636363636367" />
+                <LayoutItem Id="UpdateTime" RelativeSize="27.272727272727273" />
+              </LayoutGroup>
+              <LayoutGroup Id="ObjectBase_col2" RelativeSize="50.058072009291521">
+                <LayoutItem Id="ObjectSpace" RelativeSize="63.636363636363633" />
+                <LayoutItem Id="UpdateBy" RelativeSize="36.363636363636367" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutItem Id="Orders" ViewItem="Orders" Index="1" RelativeSize="93.919652551574373" IsNewNode="True" />
+            <LayoutGroup Id="BaseObjectI" RelativeSize="11.379310344827585" Caption="ID" Removed="True">
+              <LayoutItem Id="ID" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="BaseObjectWarehouseID" Caption="Warehouse" RelativeSize="22.758620689655171" Removed="True">
+              <LayoutItem Id="Warehouse" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Orders_Group" Direction="Horizontal" RelativeSize="84.690553745928341" Caption="Orders" Removed="True">
+            <LayoutItem Id="Orders" RelativeSize="100" Removed="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="EntryLocation_ListViewDHV" ClassName="dola.Module.EntryLocation" DataAccessMode="Server" AllowEdit="True" NewItemRowPosition="Top" Criteria="[ExitTime] Is Null" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="CreatedBy" PropertyName="CreatedBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreateTime" PropertyName="CreateTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ExitTime" PropertyName="ExitTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ID" PropertyName="ID" Width="400" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="IsNewObject" PropertyName="IsNewObject" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ObjectSpace" PropertyName="ObjectSpace" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="State" PropertyName="State" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateBy" PropertyName="UpdateBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateTime" PropertyName="UpdateTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Warehouse" PropertyName="Warehouse" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Vehicle" PropertyName="Vehicle" Width="100" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="Driver" PropertyName="Driver" Width="70" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="LinkVehicle" PropertyName="LinkVehicle" Width="70" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="EntryTime" PropertyName="EntryTime" Width="70" Index="3" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <DetailView Id="GoodsInOut_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="GoodsInOut" RelativeSize="100">
+              <LayoutItem Id="Ramp" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="NonePercentObject" Caption="Oid" RelativeSize="94.933333333333337" Removed="True">
+              <LayoutItem Id="Oid" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Item_ListViewDashBoardView" ClassName="dola.Module.Item" PageSize="10" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="CreatedBy" PropertyName="CreatedBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreateTime" PropertyName="CreateTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="IsNewObject" PropertyName="IsNewObject" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ObjectSpace" PropertyName="ObjectSpace" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateBy" PropertyName="UpdateBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateTime" PropertyName="UpdateTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SysCode" PropertyName="SysCode" Width="156" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="Name" PropertyName="Name" Width="226" SortIndex="0" SortOrder="Ascending" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="Barcode" PropertyName="Barcode" Width="70" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="Gtin" PropertyName="Gtin" Width="70" Index="8" IsNewNode="True" />
+        <ColumnInfo Id="ItemType" PropertyName="ItemType" Width="70" Index="15" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="Item_LookupListView">
+      <Columns>
+        <ColumnInfo Id="SysCode" PropertyName="SysCode" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="Barcode" PropertyName="Barcode" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="ItemType" PropertyName="ItemType" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="Name" Index="3" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Order_Create_DetailView" CaptionColon=":" EnableCaptionColon="True" CaptionLocation="Left" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" RequiredFieldMark="" ClassName="dola.Module.Order" IsNewNode="True">
+      <Items IsNewNode="True">
+        <PropertyEditor Id="CreatedBy" PropertyName="CreatedBy" IsNewNode="True" />
+        <PropertyEditor Id="CreateTime" PropertyName="CreateTime" IsNewNode="True" />
+        <PropertyEditor Id="Description" PropertyName="Description" IsNewNode="True" />
+        <PropertyEditor Id="EntryLocations" PropertyName="EntryLocations" View="Order_EntryLocations_ListView" IsNewNode="True" />
+        <PropertyEditor Id="Files" PropertyName="Files" View="Order_Files_ListView" IsNewNode="True" />
+        <PropertyEditor Id="FinishTime" PropertyName="FinishTime" IsNewNode="True" />
+        <PropertyEditor Id="FromAddress" PropertyName="FromAddress" IsNewNode="True" />
+        <PropertyEditor Id="Gross" PropertyName="Gross" IsNewNode="True" />
+        <PropertyEditor Id="IntegrationCode" PropertyName="IntegrationCode" IsNewNode="True" />
+        <PropertyEditor Id="IsNewObject" PropertyName="IsNewObject" IsNewNode="True" />
+        <PropertyEditor Id="Items" PropertyName="Items" LinkView="Order_Items_Create_ListView" View="Order_Items_Create_ListView" IsNewNode="True" />
+        <PropertyEditor Id="LastEntryLocation" PropertyName="LastEntryLocation" IsNewNode="True" />
+        <PropertyEditor Id="LastTrip" PropertyName="LastTrip" IsNewNode="True" />
+        <PropertyEditor Id="ObjectSpace" PropertyName="ObjectSpace" IsNewNode="True" />
+        <PropertyEditor Id="OrderType" PropertyName="OrderType" IsNewNode="True" />
+        <PropertyEditor Id="Owner" PropertyName="Owner" IsNewNode="True" />
+        <PropertyEditor Id="RequestFinishTime" PropertyName="RequestFinishTime" IsNewNode="True" />
+        <PropertyEditor Id="RequestTime" PropertyName="RequestTime" IsNewNode="True" />
+        <PropertyEditor Id="RoutePlan" PropertyName="RoutePlan" IsNewNode="True" />
+        <PropertyEditor Id="StartTime" PropertyName="StartTime" IsNewNode="True" />
+        <PropertyEditor Id="State" PropertyName="State" IsNewNode="True" />
+        <PropertyEditor Id="SysCode" PropertyName="SysCode" IsNewNode="True" />
+        <PropertyEditor Id="TaskTemplate" PropertyName="TaskTemplate" IsNewNode="True" />
+        <PropertyEditor Id="ToAddress" PropertyName="ToAddress" IsNewNode="True" />
+        <PropertyEditor Id="TransporterQuantity" PropertyName="TransporterQuantity" IsNewNode="True" />
+        <PropertyEditor Id="Trips" PropertyName="Trips" View="Order_Trips_ListView" IsNewNode="True" />
+        <PropertyEditor Id="UpdateBy" PropertyName="UpdateBy" IsNewNode="True" />
+        <PropertyEditor Id="UpdateTime" PropertyName="UpdateTime" IsNewNode="True" />
+        <PropertyEditor Id="VehicleType" PropertyName="VehicleType" IsNewNode="True" />
+        <PropertyEditor Id="Warehouse" PropertyName="Warehouse" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="24.156545209176787" IsNewNode="True">
+            <TabbedGroup Id="Item1" CaptionLocation="Top" Index="0" RelativeSize="100" IsNewNode="True">
+              <LayoutGroup Id="Order" ShowCaption="True" Index="0" RelativeSize="100" Caption="Basit" IsNewNode="True">
+                <LayoutGroup Id="Order_col2" ShowCaption="False" Index="0" RelativeSize="100" Direction="Horizontal" IsNewNode="True">
+                  <LayoutGroup Id="Auto3e611399-6bfa-47e2-b640-b87ac81e0c92" ShowCaption="False" Caption="Auto3e611399-6bfa-47e2-b640-b87ac81e0c92(6)" Index="0" RelativeSize="49.375" IsNewNode="True">
+                    <LayoutItem Id="OrderType" ViewItem="OrderType" Index="0" RelativeSize="23.529411764705884" IsNewNode="True" />
+                    <LayoutItem Id="Owner" ViewItem="Owner" Index="1" RelativeSize="17.647058823529413" IsNewNode="True" />
+                    <LayoutItem Id="FromAddress" ViewItem="FromAddress" Index="2" RelativeSize="17.647058823529413" IsNewNode="True" />
+                    <LayoutItem Id="ToAddress" ViewItem="ToAddress" Index="3" RelativeSize="17.647058823529413" IsNewNode="True" />
+                    <LayoutItem Id="IntegrationDocumentCode" ViewItem="IntegrationDocumentCode" Index="4" RelativeSize="23.529411764705884" IsNewNode="True" />
+                  </LayoutGroup>
+                  <LayoutGroup Id="Autoc2a491b4-e852-4e14-8750-eea749ec5c1d" ShowCaption="False" Caption="Autoc2a491b4-e852-4e14-8750-eea749ec5c1d(11)" Index="1" RelativeSize="50.625" IsNewNode="True">
+                    <LayoutItem Id="IntegrationCode" ViewItem="IntegrationCode" Index="0" RelativeSize="23.529411764705884" IsNewNode="True" />
+                    <LayoutItem Id="RequestTime" ViewItem="RequestTime" Index="1" RelativeSize="17.647058823529413" IsNewNode="True" />
+                    <LayoutItem Id="RequestFinishTime" ViewItem="RequestFinishTime" Index="2" RelativeSize="17.647058823529413" IsNewNode="True" />
+                    <LayoutItem Id="Description" ViewItem="Description" Index="3" RelativeSize="41.1764705882353" IsNewNode="True" />
+                  </LayoutGroup>
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="1" RelativeSize="100" Caption="Detay" IsNewNode="True">
+                <LayoutGroup Id="Auto547c5a6b-46ec-4990-af74-106aa9469ed4" ShowCaption="False" Caption="Auto547c5a6b-46ec-4990-af74-106aa9469ed4(17)" Index="0" RelativeSize="49.625" IsNewNode="True">
+                  <LayoutItem Id="State" ViewItem="State" Index="0" RelativeSize="23.529411764705884" IsNewNode="True" />
+                  <LayoutItem Id="GlobalLocation" ViewItem="GlobalLocation" Index="1" RelativeSize="17.647058823529413" IsNewNode="True" />
+                  <LayoutItem Id="TaskTemplate" ViewItem="TaskTemplate" Index="2" RelativeSize="17.647058823529413" IsNewNode="True" />
+                  <LayoutItem Id="SysCode" ViewItem="SysCode" Index="3" RelativeSize="41.1764705882353" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutGroup Id="Auto5a755c00-ba28-40de-8253-03c0b0570b42" ShowCaption="False" Caption="Auto5a755c00-ba28-40de-8253-03c0b0570b42(23)" Index="1" RelativeSize="50.375" IsNewNode="True">
+                  <LayoutGroup Id="Auto8303dd03-0cf4-4b95-ac1e-0c652d06031f" ShowCaption="False" Caption="Auto8303dd03-0cf4-4b95-ac1e-0c652d06031f(24)" Index="0" RelativeSize="100" IsNewNode="True">
+                    <LayoutItem Id="StartTime" ViewItem="StartTime" Index="0" RelativeSize="23.529411764705884" IsNewNode="True" />
+                    <LayoutItem Id="FinishTime" ViewItem="FinishTime" Index="1" RelativeSize="17.647058823529413" IsNewNode="True" />
+                    <LayoutItem Id="LastEntryLocation" ViewItem="LastEntryLocation" Index="2" RelativeSize="17.647058823529413" IsNewNode="True" />
+                    <LayoutItem Id="LastTrip" ViewItem="LastTrip" Index="3" RelativeSize="41.1764705882353" IsNewNode="True" />
+                  </LayoutGroup>
+                </LayoutGroup>
+              </LayoutGroup>
+            </TabbedGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" Index="1" RelativeSize="75.843454790823216" IsNewNode="True">
+            <LayoutGroup Id="Lines" Index="0" ShowCaption="True" RelativeSize="100" Caption="Items" IsNewNode="True">
+              <LayoutItem Id="Items" ViewItem="Items" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Tasks" Index="1" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="Tasks" ViewItem="Tasks" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Trips" Index="2" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="Trips" ViewItem="Trips" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Labels" Index="3" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="Labels" ViewItem="Labels" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Files" Index="4" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="Files" ViewItem="Files" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="EntryLocations" Index="5" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="EntryLocations" ViewItem="EntryLocations" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="OrderLineReservations" Index="6" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="StockItemReservation" ViewItem="StockItemReservation" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item3" ShowCaption="True" CaptionLocation="Top" Index="7" Caption="Stockıtems" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="StockItems" ViewItem="StockItems" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Order_Create_ListView" ClassName="dola.Module.Order" DetailRowView="Order_Create_DetailView" DetailViewID="Order_Create_DetailView" Criteria="[State.SysCode] In ('Created', 'Approved')" MasterDetailMode="ListViewAndDetailView" MasterDetailView="Order_Create_Master_DetailView" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="CreatedBy" PropertyName="CreatedBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreateTime" PropertyName="CreateTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Description" PropertyName="Description" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="EntryLocation" PropertyName="EntryLocation" Width="86" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="FinishTime" PropertyName="FinishTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="FromAddress" PropertyName="FromAddress" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Gross" PropertyName="Gross" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="IsNewObject" PropertyName="IsNewObject" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="LastEntryLocation" PropertyName="LastEntryLocation" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="LastTrip" PropertyName="LastTrip" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ObjectSpace" PropertyName="ObjectSpace" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Owner" PropertyName="Owner" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="RequestTime" PropertyName="RequestTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="RoutePlan" PropertyName="RoutePlan" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="StartTime" PropertyName="StartTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="TaskTemplate" PropertyName="TaskTemplate" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ToAddress" PropertyName="ToAddress" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="TransporterQuantity" PropertyName="TransporterQuantity" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateBy" PropertyName="UpdateBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateTime" PropertyName="UpdateTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="VehicleType" PropertyName="VehicleType" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Warehouse" PropertyName="Warehouse" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SysCode" PropertyName="SysCode" Width="87" SortIndex="0" SortOrder="Ascending" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="State" PropertyName="State" Width="70" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="OrderType" PropertyName="OrderType" Width="70" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="IntegrationCode" PropertyName="IntegrationCode" Width="70" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="RequestFinishTime" PropertyName="RequestFinishTime" Width="70" Index="4" IsNewNode="True" />
+      </Columns>
+      <SplitLayout Direction="Vertical" IsNewNode="True" />
+    </ListView>
+    <DetailView Id="Order_Create_Master_DetailView" CaptionColon=":" EnableCaptionColon="True" CaptionLocation="Left" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" RequiredFieldMark="" ClassName="dola.Module.Order" IsNewNode="True">
+      <Items IsNewNode="True">
+        <PropertyEditor Id="Items" PropertyName="Items" View="Order_Items_Create_ListView" LinkView="Order_Items_Create_ListView" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" Caption="Main" IsNewNode="True">
+          <LayoutItem Id="Items1" ViewItem="Items" Index="0" RelativeSize="100" IsNewNode="True" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="Order_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="19.761129207383281" Direction="Vertical">
+            <LayoutGroup Id="Auto8348b982-3346-43dd-a32c-4b0842b27bc2" ShowCaption="False" Direction="Horizontal" Index="0" RelativeSize="83.516483516483518" IsNewNode="True">
+              <LayoutGroup Id="Autof2c39942-667c-48bc-9103-488fa20aebfa" ShowCaption="False" Index="0" RelativeSize="52.3756906077348" IsNewNode="True">
+                <LayoutItem Id="Owner" ViewItem="Owner" Index="0" RelativeSize="21.05263157894737" IsNewNode="True" />
+                <LayoutItem Id="FromAddress" ViewItem="FromAddress" Index="1" RelativeSize="15.789473684210526" IsNewNode="True" />
+                <LayoutItem Id="ToAddress" ViewItem="ToAddress" Index="2" RelativeSize="15.789473684210526" IsNewNode="True" />
+                <LayoutItem Id="IntegrationCode" ViewItem="IntegrationCode" Index="3" RelativeSize="15.789473684210526" IsNewNode="True" />
+                <LayoutItem Id="OrderType" ViewItem="OrderType" Index="4" RelativeSize="15.789473684210526" IsNewNode="True" />
+                <LayoutItem Id="IntegrationDocumentCode" ViewItem="IntegrationDocumentCode" Index="5" RelativeSize="15.789473684210526" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Autoc9b3ac9a-7adc-437b-9670-bbf6d6721f41" ShowCaption="False" Index="1" RelativeSize="47.6243093922652" IsNewNode="True">
+                <LayoutItem Id="State" ViewItem="State" Index="0" RelativeSize="21.05263157894737" IsNewNode="True" />
+                <LayoutItem Id="SysCode" ViewItem="SysCode" Index="1" RelativeSize="15.789473684210526" IsNewNode="True" />
+                <LayoutItem Id="PlanedTransporterQuantity" ViewItem="PlanedTransporterQuantity" Index="2" RelativeSize="15.789473684210526" IsNewNode="True" />
+                <LayoutItem Id="StartTime" ViewItem="StartTime" Index="3" RelativeSize="15.789473684210526" IsNewNode="True" />
+                <LayoutItem Id="FinishTime" ViewItem="FinishTime" Index="4" RelativeSize="15.789473684210526" IsNewNode="True" />
+                <LayoutItem Id="GlobalLocation" ViewItem="GlobalLocation" Index="5" RelativeSize="15.789473684210526" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutItem Id="TransporterQuantity" ViewItem="TransporterQuantity" Index="1" RelativeSize="16.483516483516482" IsNewNode="True" />
+            <LayoutGroup Id="Order" ShowCaption="True" Index="5" RelativeSize="9.221311475409836" Direction="Horizontal" Removed="True" />
+            <LayoutGroup Id="OrderBase" ShowCaption="True" Direction="Horizontal" Index="5" RelativeSize="11.39240506329114" Removed="True" />
+            <LayoutGroup Id="BaseObjectState" ShowCaption="False" Index="6" RelativeSize="8.5714285714285712" Removed="True">
+              <LayoutItem Id="State" ViewItem="State" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="BaseObjectC" ShowCaption="False" Index="7" RelativeSize="9.4285714285714288" Removed="True">
+              <LayoutItem Id="SysCode" ViewItem="SysCode" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="ObjectBase" RelativeSize="16.363636363636363" Index="10" Direction="Horizontal" Removed="True">
+              <LayoutGroup Id="ObjectBase_col1" RelativeSize="100" Removed="True">
+                <LayoutItem Id="CreatedBy" RelativeSize="36.363636363636367" Removed="True" />
+                <LayoutItem Id="CreateTime" RelativeSize="100" Removed="True" />
+                <LayoutItem Id="UpdateTime" RelativeSize="50" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="ObjectBase_col2" RelativeSize="50.058072009291521" Removed="True">
+                <LayoutItem Id="ObjectSpace" RelativeSize="63.636363636363633" Removed="True" />
+                <LayoutItem Id="UpdateBy" RelativeSize="100" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="80.238870792616723">
+            <LayoutGroup Id="Trips" RelativeSize="100">
+              <LayoutItem Id="Trips" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="Items" RelativeSize="100">
+              <LayoutItem Id="Items" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="Files" RelativeSize="100">
+              <LayoutItem Id="Files" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="EntryLocations" RelativeSize="100">
+              <LayoutItem Id="EntryLocations" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Order_EntryLocations_ListView">
+      <Columns>
+        <ColumnInfo Id="Vehicle" Width="51" Index="1" />
+        <ColumnInfo Id="State" Index="2" />
+        <ColumnInfo Id="LinkVehicle" Index="3" />
+        <ColumnInfo Id="Driver" Index="4" />
+        <ColumnInfo Id="EntryTime" Index="5" />
+        <ColumnInfo Id="ExitTime" Index="6" />
+      </Columns>
+    </ListView>
+    <ListView Id="Order_Files_ListView">
+      <Columns>
+        <ColumnInfo Id="SysCode" Width="87" />
+      </Columns>
+    </ListView>
+    <ListView Id="Order_Item_ListViewDHV" ClassName="dola.Module.OrderLine" DataAccessMode="Server" PageSize="10" IsAdaptive="True" AllowLink="False" AllowNew="False" AllowUnlink="False" AllowDelete="False" AllowEdit="True" InlineEditMode="Batch" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="BoxQuantity" PropertyName="BoxQuantity" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreatedBy" PropertyName="CreatedBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreateTime" PropertyName="CreateTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="FinishQuantity" PropertyName="FinishQuantity" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="FinishTime" PropertyName="FinishTime" Width="82" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Groos" PropertyName="Groos" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="IsNewObject" PropertyName="IsNewObject" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ObjectSpace" PropertyName="ObjectSpace" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="OperationUnitType" PropertyName="OperationUnitType" Width="124" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Order" PropertyName="Order" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="PackageQuantity" PropertyName="PackageQuantity" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="PalleteQuantity" PropertyName="PalleteQuantity" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="QuantityCheck" PropertyName="QuantityCheck" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="StartTime" PropertyName="StartTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="State" PropertyName="State" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SysCode" PropertyName="SysCode" Width="200" SortIndex="-1" SortOrder="None" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="TransporterQuantity" PropertyName="TransporterQuantity" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateBy" PropertyName="UpdateBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateTime" PropertyName="UpdateTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="VehicleQuantity" PropertyName="VehicleQuantity" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Warehouse" PropertyName="Warehouse" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Item" PropertyName="Item" Width="71" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="RequestQuantity" PropertyName="RequestQuantity" Width="86" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="DocumentQuantity" PropertyName="DocumentQuantity" Width="115" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="ReservationQuantity" PropertyName="ReservationQuantity" Index="3" SortIndex="0" SortOrder="Ascending" Width="139" IsNewNode="True" />
+        <ColumnInfo Id="OperationQuantity" PropertyName="OperationQuantity" Width="108" Index="4" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="Order_Items_Create_ListView" ClassName="dola.Module.OrderLine" DataAccessMode="Client" AllowEdit="True" NewItemRowPosition="Top" IsAdaptive="True" IsFooterVisible="True" InlineEditMode="Inline" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="Item" PropertyName="Item" Width="64" Index="0" AllowEdit="True" LookupEditorMode="AllItemsWithSearch" ImmediatePostData="True" IsNewNode="True" />
+        <ColumnInfo Id="RequestQuantity" PropertyName="RequestQuantity" Width="86" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="Item.Barcode" PropertyName="Item.Barcode" Index="2" AllowEdit="False" IsNewNode="True" />
+        <ColumnInfo Id="Item.SysCode" PropertyName="Item.SysCode" Index="3" AllowEdit="False" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="Order_Items_ListView" AllowEdit="True" InlineEditMode="Inline" NewItemRowPosition="Top" IsAdaptive="True" IsFooterVisible="True" ShowAutoFilterRow="False">
+      <Columns>
+        <ColumnInfo Id="BoxQuantity" Index="-1" />
+        <ColumnInfo Id="DocumentQuantity" Index="-1" Width="115" />
+        <ColumnInfo Id="FinishQuantity" Index="-1" Width="74" />
+        <ColumnInfo Id="FinishTime" Index="-1" />
+        <ColumnInfo Id="Groos" Index="-1" />
+        <ColumnInfo Id="Item.Name" PropertyName="Item.Name" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="OperationQuantity" Index="-1" />
+        <ColumnInfo Id="OperationUnitType" Index="-1" Width="120" />
+        <ColumnInfo Id="Order" Index="-1" Width="93" />
+        <ColumnInfo Id="PackageQuantity" Index="-1" />
+        <ColumnInfo Id="PalleteQuantity" Index="-1" />
+        <ColumnInfo Id="QuantityCheck" Index="-1" />
+        <ColumnInfo Id="ReservationQuantity" Width="120" Index="-1" />
+        <ColumnInfo Id="StartTime" Index="-1" />
+        <ColumnInfo Id="SysCode" Width="87" Index="-1" SortIndex="-1" SortOrder="None" />
+        <ColumnInfo Id="TransporterQuantity" Index="-1" />
+        <ColumnInfo Id="VehicleQuantity" Index="-1" />
+        <ColumnInfo Id="Item.SysCode" PropertyName="Item.SysCode" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="Item.Barcode" PropertyName="Item.Barcode" Index="1" Width="83" SortIndex="0" SortOrder="Ascending" IsNewNode="True" />
+        <ColumnInfo Id="Item" Index="2" Width="64" />
+        <ColumnInfo Id="RequestQuantity" Index="3" Width="86" />
+      </Columns>
+    </ListView>
+    <ListView Id="Order_ListView">
+      <Columns>
+        <ColumnInfo Id="VehicleType" Index="-1" />
+        <ColumnInfo Id="SysCode" Width="87" Index="0" />
+        <ColumnInfo Id="TaskTemplate" Index="1" />
+        <ColumnInfo Id="OrderType" Index="3" />
+        <ColumnInfo Id="IntegrationCode" Index="4" />
+        <ColumnInfo Id="RoutePlan" Index="5" />
+        <ColumnInfo Id="LastTrip" Index="6" />
+        <ColumnInfo Id="LastEntryLocation" Index="7" />
+      </Columns>
+    </ListView>
+    <ListView Id="Order_OutIn_ListViewDHV" ClassName="dola.Module.Order" DataAccessMode="DataView" Criteria="" MasterDetailView="Order_Simple_DetailView" DetailViewID="Order_Simple_DetailView" IsAdaptive="True" AllowDelete="False" AllowLink="False" AllowNew="False" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="CreatedBy" PropertyName="CreatedBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreateTime" PropertyName="CreateTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Description" PropertyName="Description" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="FinishTime" PropertyName="FinishTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="FromAddress" PropertyName="FromAddress" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Gross" PropertyName="Gross" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="IsNewObject" PropertyName="IsNewObject" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="LastEntryLocation" PropertyName="LastEntryLocation" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="LastTrip" PropertyName="LastTrip" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ObjectSpace" PropertyName="ObjectSpace" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Owner" PropertyName="Owner" Width="300" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="RequestFinishTime" PropertyName="RequestFinishTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="RequestTime" PropertyName="RequestTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="RoutePlan" PropertyName="RoutePlan" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="StartTime" PropertyName="StartTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SysCode" PropertyName="SysCode" Width="94" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="TaskTemplate" PropertyName="TaskTemplate" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateBy" PropertyName="UpdateBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateTime" PropertyName="UpdateTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="VehicleType" PropertyName="VehicleType" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Warehouse" PropertyName="Warehouse" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ToAddress" PropertyName="ToAddress" Width="90" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="OrderType" PropertyName="OrderType" Width="108" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="State" PropertyName="State" Width="85" Index="2" SortIndex="0" SortOrder="Ascending" IsNewNode="True" />
+        <ColumnInfo Id="IntegrationCode" PropertyName="IntegrationCode" Width="86" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="TransporterQuantity" PropertyName="TransporterQuantity" Width="83" Index="4" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="Order_Pick_ListViewDHV" ClassName="dola.Module.Order" DataAccessMode="DataView" Criteria="" MasterDetailView="Order_Simple_DetailView" DetailViewID="Order_Simple_DetailView" IsAdaptive="True" AllowDelete="False" AllowLink="False" AllowNew="False" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="CreatedBy" PropertyName="CreatedBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreateTime" PropertyName="CreateTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Description" PropertyName="Description" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="FinishTime" PropertyName="FinishTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="FromAddress" PropertyName="FromAddress" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Gross" PropertyName="Gross" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="IsNewObject" PropertyName="IsNewObject" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="LastEntryLocation" PropertyName="LastEntryLocation" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="LastTrip" PropertyName="LastTrip" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ObjectSpace" PropertyName="ObjectSpace" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Owner" PropertyName="Owner" Width="300" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="RequestFinishTime" PropertyName="RequestFinishTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="RequestTime" PropertyName="RequestTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="RoutePlan" PropertyName="RoutePlan" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="StartTime" PropertyName="StartTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SysCode" PropertyName="SysCode" Width="94" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="TaskTemplate" PropertyName="TaskTemplate" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateBy" PropertyName="UpdateBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateTime" PropertyName="UpdateTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="VehicleType" PropertyName="VehicleType" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Warehouse" PropertyName="Warehouse" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ToAddress" PropertyName="ToAddress" Width="90" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="OrderType" PropertyName="OrderType" Width="108" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="State" PropertyName="State" Width="85" Index="2" SortIndex="0" SortOrder="Ascending" IsNewNode="True" />
+        <ColumnInfo Id="IntegrationCode" PropertyName="IntegrationCode" Width="86" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="TransporterQuantity" PropertyName="TransporterQuantity" Width="83" Index="4" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Order_Simple_DetailView" CaptionColon=":" EnableCaptionColon="True" CaptionLocation="Left" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" RequiredFieldMark="" ClassName="dola.Module.Order" IsNewNode="True">
+      <Items IsNewNode="True">
+        <PropertyEditor Id="CreatedBy" PropertyName="CreatedBy" IsNewNode="True" />
+        <PropertyEditor Id="CreateTime" PropertyName="CreateTime" IsNewNode="True" />
+        <PropertyEditor Id="Description" PropertyName="Description" IsNewNode="True" />
+        <PropertyEditor Id="EntryLocations" PropertyName="EntryLocations" View="Order_EntryLocations_ListView" IsNewNode="True" />
+        <PropertyEditor Id="Files" PropertyName="Files" View="Order_Files_ListView" IsNewNode="True" />
+        <PropertyEditor Id="FinishTime" PropertyName="FinishTime" IsNewNode="True" />
+        <PropertyEditor Id="FromAddress" PropertyName="FromAddress" IsNewNode="True" />
+        <PropertyEditor Id="Gross" PropertyName="Gross" IsNewNode="True" />
+        <PropertyEditor Id="IntegrationCode" PropertyName="IntegrationCode" IsNewNode="True" />
+        <PropertyEditor Id="IsNewObject" PropertyName="IsNewObject" IsNewNode="True" />
+        <PropertyEditor Id="Items" PropertyName="Items" View="Order_Items_ListView" IsNewNode="True" />
+        <PropertyEditor Id="LastEntryLocation" PropertyName="LastEntryLocation" IsNewNode="True" />
+        <PropertyEditor Id="LastTrip" PropertyName="LastTrip" IsNewNode="True" />
+        <PropertyEditor Id="ObjectSpace" PropertyName="ObjectSpace" IsNewNode="True" />
+        <PropertyEditor Id="OrderType" PropertyName="OrderType" IsNewNode="True" />
+        <PropertyEditor Id="Owner" PropertyName="Owner" IsNewNode="True" />
+        <PropertyEditor Id="RequestFinishTime" PropertyName="RequestFinishTime" IsNewNode="True" />
+        <PropertyEditor Id="RequestTime" PropertyName="RequestTime" IsNewNode="True" />
+        <PropertyEditor Id="RoutePlan" PropertyName="RoutePlan" IsNewNode="True" />
+        <PropertyEditor Id="StartTime" PropertyName="StartTime" IsNewNode="True" />
+        <PropertyEditor Id="State" PropertyName="State" IsNewNode="True" />
+        <PropertyEditor Id="SysCode" PropertyName="SysCode" IsNewNode="True" />
+        <PropertyEditor Id="TaskTemplate" PropertyName="TaskTemplate" IsNewNode="True" />
+        <PropertyEditor Id="ToAddress" PropertyName="ToAddress" IsNewNode="True" />
+        <PropertyEditor Id="TransporterQuantity" PropertyName="TransporterQuantity" IsNewNode="True" />
+        <PropertyEditor Id="Trips" PropertyName="Trips" View="Order_Trips_ListView" IsNewNode="True" />
+        <PropertyEditor Id="UpdateBy" PropertyName="UpdateBy" IsNewNode="True" />
+        <PropertyEditor Id="UpdateTime" PropertyName="UpdateTime" IsNewNode="True" />
+        <PropertyEditor Id="VehicleType" PropertyName="VehicleType" IsNewNode="True" />
+        <PropertyEditor Id="Warehouse" PropertyName="Warehouse" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="24.156545209176787" IsNewNode="True">
+            <TabbedGroup Id="Item1" CaptionLocation="Top" Index="0" RelativeSize="100" IsNewNode="True">
+              <LayoutGroup Id="Order" ShowCaption="True" Index="0" RelativeSize="100" Caption="Basit" IsNewNode="True">
+                <LayoutGroup Id="Order_col2" ShowCaption="False" Index="0" RelativeSize="100" Caption="Order_col2" Direction="Horizontal" IsNewNode="True">
+                  <LayoutGroup Id="Auto3e611399-6bfa-47e2-b640-b87ac81e0c92" ShowCaption="False" Caption="Auto3e611399-6bfa-47e2-b640-b87ac81e0c92(6)" Index="0" RelativeSize="49.375" IsNewNode="True">
+                    <LayoutItem Id="OrderType" ViewItem="OrderType" Index="0" RelativeSize="23.529411764705884" IsNewNode="True" />
+                    <LayoutItem Id="Owner" ViewItem="Owner" Index="1" RelativeSize="17.647058823529413" IsNewNode="True" />
+                    <LayoutItem Id="FromAddress" ViewItem="FromAddress" Index="2" RelativeSize="17.647058823529413" IsNewNode="True" />
+                    <LayoutItem Id="ToAddress" ViewItem="ToAddress" Index="3" RelativeSize="17.647058823529413" IsNewNode="True" />
+                    <LayoutItem Id="IntegrationDocumentCode" ViewItem="IntegrationDocumentCode" Index="4" RelativeSize="23.529411764705884" IsNewNode="True" />
+                  </LayoutGroup>
+                  <LayoutGroup Id="Autoc2a491b4-e852-4e14-8750-eea749ec5c1d" ShowCaption="False" Caption="Autoc2a491b4-e852-4e14-8750-eea749ec5c1d(11)" Index="1" RelativeSize="50.625" IsNewNode="True">
+                    <LayoutItem Id="IntegrationCode" ViewItem="IntegrationCode" Index="0" RelativeSize="23.529411764705884" IsNewNode="True" />
+                    <LayoutItem Id="RequestTime" ViewItem="RequestTime" Index="1" RelativeSize="17.647058823529413" IsNewNode="True" />
+                    <LayoutItem Id="RequestFinishTime" ViewItem="RequestFinishTime" Index="2" RelativeSize="17.647058823529413" IsNewNode="True" />
+                    <LayoutItem Id="Description" ViewItem="Description" Index="3" RelativeSize="41.1764705882353" IsNewNode="True" />
+                  </LayoutGroup>
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="1" RelativeSize="100" Caption="Detay" IsNewNode="True">
+                <LayoutGroup Id="Auto547c5a6b-46ec-4990-af74-106aa9469ed4" ShowCaption="False" Caption="Auto547c5a6b-46ec-4990-af74-106aa9469ed4(17)" Index="0" RelativeSize="49.625" IsNewNode="True">
+                  <LayoutItem Id="State" ViewItem="State" Index="0" RelativeSize="23.529411764705884" IsNewNode="True" />
+                  <LayoutItem Id="GlobalLocation" ViewItem="GlobalLocation" Index="1" RelativeSize="17.647058823529413" IsNewNode="True" />
+                  <LayoutItem Id="TaskTemplate" ViewItem="TaskTemplate" Index="2" RelativeSize="17.647058823529413" IsNewNode="True" />
+                  <LayoutItem Id="SysCode" ViewItem="SysCode" Index="3" RelativeSize="41.1764705882353" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutGroup Id="Auto5a755c00-ba28-40de-8253-03c0b0570b42" ShowCaption="False" Caption="Auto5a755c00-ba28-40de-8253-03c0b0570b42(23)" Direction="Vertical" Index="1" RelativeSize="50.375" IsNewNode="True">
+                  <LayoutGroup Id="Auto8303dd03-0cf4-4b95-ac1e-0c652d06031f" ShowCaption="False" Caption="Auto8303dd03-0cf4-4b95-ac1e-0c652d06031f(24)" Index="0" RelativeSize="100" IsNewNode="True">
+                    <LayoutItem Id="StartTime" ViewItem="StartTime" Index="0" RelativeSize="23.529411764705884" IsNewNode="True" />
+                    <LayoutItem Id="FinishTime" ViewItem="FinishTime" Index="1" RelativeSize="17.647058823529413" IsNewNode="True" />
+                    <LayoutItem Id="LastEntryLocation" ViewItem="LastEntryLocation" Index="2" RelativeSize="17.647058823529413" IsNewNode="True" />
+                    <LayoutItem Id="LastTrip" ViewItem="LastTrip" Index="3" RelativeSize="41.1764705882353" IsNewNode="True" />
+                  </LayoutGroup>
+                </LayoutGroup>
+              </LayoutGroup>
+            </TabbedGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" Index="1" RelativeSize="75.843454790823216" IsNewNode="True">
+            <LayoutGroup Id="Lines" Index="0" ShowCaption="True" RelativeSize="100" Caption="Items" Direction="Vertical" IsNewNode="True">
+              <LayoutItem Id="Items" ViewItem="Items" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Tasks" Index="1" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="Tasks" ViewItem="Tasks" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Trips" Index="2" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="Trips" ViewItem="Trips" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Labels" Index="3" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="Labels" ViewItem="Labels" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Files" Index="4" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="Files" ViewItem="Files" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="EntryLocations" Index="5" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="EntryLocations" ViewItem="EntryLocations" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="OrderLineReservations" Index="6" ShowCaption="True" RelativeSize="100" Direction="Vertical" IsNewNode="True">
+              <LayoutItem Id="StockItemReservation" ViewItem="StockItemReservation" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item3" ShowCaption="True" CaptionLocation="Top" Direction="Vertical" Index="7" Caption="Stockıtems" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="StockItems" ViewItem="StockItems" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Order_Trips_ListView">
+      <Columns>
+        <ColumnInfo Id="SysCode" Width="87" SortIndex="-1" SortOrder="None" />
+        <ColumnInfo Id="Vehicle" Width="51" />
+        <ColumnInfo Id="Employee" Width="64" />
+      </Columns>
+    </ListView>
+    <DetailView Id="OrderFile_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="OrderFile" RelativeSize="9.0119435396308365">
+              <LayoutItem Id="Description" RelativeSize="38.554216867469883" />
+              <LayoutItem Id="Order" RelativeSize="28.91566265060241" />
+              <LayoutItem Id="File" RelativeSize="32.53012048192771" />
+            </LayoutGroup>
+            <LayoutGroup Id="BaseObjectC" RelativeSize="90.988056460369165">
+              <LayoutItem Id="SysCode" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="ObjectBase" Removed="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="OrderLine_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="20.917678812415655">
+            <TabbedGroup Id="Item1" CaptionLocation="Top" Index="0" RelativeSize="100" IsNewNode="True">
+              <LayoutGroup Id="OrderLine" ShowCaption="True" Caption="Basit" Direction="Vertical" Index="0" RelativeSize="100" IsNewNode="True">
+                <LayoutGroup Id="OrderLine_col1" ShowCaption="False" Index="0" RelativeSize="100" Caption="OrderLine_col1" Direction="Vertical" IsNewNode="True">
+                  <LayoutGroup Id="Auto7a8ad2ef-033c-480d-b67d-565e89c8190a" ShowCaption="False" Caption="" Direction="Horizontal" Index="0" RelativeSize="100" IsNewNode="True">
+                    <LayoutGroup Id="Auto49b6901b-711a-47c8-bbf0-2ddd98c12967" ShowCaption="False" Caption="" Index="0" RelativeSize="50" IsNewNode="True">
+                      <LayoutItem Id="Item" ViewItem="Item" Index="0" RelativeSize="28.571428571428573" IsNewNode="True" />
+                      <LayoutItem Id="OperationQuantity" ViewItem="OperationQuantity" Index="1" RelativeSize="21.428571428571427" IsNewNode="True" />
+                      <LayoutItem Id="RequestQuantity" ViewItem="RequestQuantity" Index="2" RelativeSize="50" IsNewNode="True" />
+                    </LayoutGroup>
+                    <LayoutGroup Id="Auto78910cf2-418a-45e7-b286-f003395c49f7" ShowCaption="False" Caption="" Direction="Vertical" Index="1" RelativeSize="50" IsNewNode="True">
+                      <LayoutGroup Id="Autoe3a6d72a-f5f9-4281-a8a8-9303756e78bf" ShowCaption="False" Caption="" Index="0" RelativeSize="100" IsNewNode="True">
+                        <LayoutItem Id="DocumentQuantity" ViewItem="DocumentQuantity" Index="0" RelativeSize="28.571428571428573" IsNewNode="True" />
+                        <LayoutItem Id="StartTime" ViewItem="StartTime" Index="1" RelativeSize="21.428571428571427" IsNewNode="True" />
+                        <LayoutItem Id="FinishTime" ViewItem="FinishTime" Index="2" RelativeSize="21.428571428571427" IsNewNode="True" />
+                        <LayoutItem Id="Reservation" ViewItem="Reservation" Index="3" RelativeSize="28.571428571428573" IsNewNode="True" />
+                      </LayoutGroup>
+                    </LayoutGroup>
+                  </LayoutGroup>
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="1" Caption="Detay" RelativeSize="100" IsNewNode="True">
+                <LayoutGroup Id="Auto78f334d2-d217-4867-9552-ab74207e46d5" ShowCaption="False" Caption="" Index="0" RelativeSize="50" IsNewNode="True">
+                  <LayoutItem Id="Order" ViewItem="Order" Index="0" RelativeSize="28.571428571428573" IsNewNode="True" />
+                  <LayoutItem Id="TransporterQuantity" ViewItem="TransporterQuantity" Index="1" RelativeSize="21.428571428571427" IsNewNode="True" />
+                  <LayoutItem Id="PackageQuantity" ViewItem="PackageQuantity" Index="2" RelativeSize="21.428571428571427" IsNewNode="True" />
+                  <LayoutItem Id="BoxQuantity" ViewItem="BoxQuantity" Index="3" RelativeSize="28.571428571428573" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutGroup Id="Auto8c66072f-8bd5-438b-90ac-1e5702c7410a" ShowCaption="False" Caption="" Direction="Vertical" Index="1" RelativeSize="50" IsNewNode="True">
+                  <LayoutGroup Id="Auto38733c3d-7cf0-4c52-9a9d-76f055771337" ShowCaption="False" Caption="" Index="0" RelativeSize="100" IsNewNode="True">
+                    <LayoutItem Id="SysCode" ViewItem="SysCode" Index="0" RelativeSize="28.571428571428573" IsNewNode="True" />
+                    <LayoutItem Id="State" ViewItem="State" Index="1" RelativeSize="21.428571428571427" IsNewNode="True" />
+                    <LayoutItem Id="FinishQuantity" ViewItem="FinishQuantity" Index="2" RelativeSize="21.428571428571427" IsNewNode="True" />
+                    <LayoutItem Id="CreateTime" ViewItem="CreateTime" Index="3" RelativeSize="28.571428571428573" IsNewNode="True" />
+                  </LayoutGroup>
+                </LayoutGroup>
+              </LayoutGroup>
+            </TabbedGroup>
+            <LayoutGroup Id="ObjectBase" RelativeSize="23.660714285714285" Index="0" Removed="True">
+              <LayoutGroup Id="ObjectBase_col1" RelativeSize="49.941927990708479" Caption="ObjectBase_col1">
+                <LayoutItem Id="CreatedBy" RelativeSize="100" Index="0" Removed="True" />
+                <LayoutItem Id="UpdateTime" RelativeSize="50" Index="0" Removed="True" />
+                <LayoutItem Id="CreateTime" RelativeSize="36.363636363636367" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="ObjectBase_col2" RelativeSize="50.058072009291521" Caption="ObjectBase_col2">
+                <LayoutItem Id="ObjectSpace" RelativeSize="100" Index="0" Removed="True" />
+                <LayoutItem Id="UpdateBy" RelativeSize="50" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="BaseObjectState" RelativeSize="10.860655737704919" Index="11" Caption="State" Removed="True">
+              <LayoutItem Id="State" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="BaseObjectC" RelativeSize="10.655737704918034" Index="12" Caption="Sys Code" Removed="True">
+              <LayoutItem Id="SysCode" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="BaseObjectWarehouseState" RelativeSize="19.45945945945946" Removed="True">
+              <LayoutItem Id="Warehouse" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="OrderLine" Removed="True" />
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="79.082321187584341">
+            <LayoutGroup Id="Transactions" RelativeSize="100">
+              <LayoutItem Id="Transactions" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="OrderLine_Transactions_ListView">
+      <Columns>
+        <ColumnInfo Id="Task" Index="-1" />
+        <ColumnInfo Id="SysCode" Width="87" SortIndex="-1" SortOrder="None" />
+        <ColumnInfo Id="TaskStep" Index="2" SortIndex="0" SortOrder="Ascending" />
+        <ColumnInfo Id="LabelItem" Index="3" />
+        <ColumnInfo Id="TaskTemplate" Index="4" />
+        <ColumnInfo Id="Item" Index="5" />
+        <ColumnInfo Id="TransporterBarcode" Index="6" />
+        <ColumnInfo Id="ExpireDate" Index="7" />
+        <ColumnInfo Id="Quantity" Index="8" />
+        <ColumnInfo Id="BatchCode" Index="9" />
+        <ColumnInfo Id="Heat" Index="10" />
+        <ColumnInfo Id="TaskStepIntegrationCode" Index="11" />
+        <ColumnInfo Id="TaskIntegrationObject" Index="12" />
+        <ColumnInfo Id="TaskIntegrationCode" Index="13" />
+        <ColumnInfo Id="TaskStepIntegrationObject" Index="14" />
+        <ColumnInfo Id="TaskStepState" Index="15" />
+        <ColumnInfo Id="Client" Index="16" />
+      </Columns>
+    </ListView>
+    <ListView Id="OrderLineMetNP_ListView" DataAccessMode="Client" />
+    <ListView Id="PermissionPolicyRoleBase_TypePermissions_ListView">
+      <Columns>
+        <ColumnInfo Id="ID" Removed="True" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Person_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="Person" RelativeSize="6.7318132464712273" Direction="Vertical">
+            <LayoutGroup Id="Person_col2" RelativeSize="100" Index="0" Direction="Horizontal">
+              <LayoutGroup Id="Auto5492674f-bcc1-491e-98aa-4a759cfd3e05" ShowCaption="False" Index="0" RelativeSize="66.629834254143645" IsNewNode="True">
+                <LayoutGroup Id="Autob9eb1898-3da8-424d-9a86-e177b1946f5e" ShowCaption="False" Direction="Horizontal" Index="0" RelativeSize="51.612903225806448" IsNewNode="True">
+                  <LayoutItem Id="IdentityCode" ViewItem="IdentityCode" Index="0" RelativeSize="49.917081260364846" IsNewNode="True" />
+                  <LayoutItem Id="FullName" ViewItem="FullName" Index="1" RelativeSize="50.082918739635154" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutItem Id="PhoneNumber" ViewItem="PhoneNumber" Index="1" RelativeSize="48.387096774193552" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="Address1" Index="1" RelativeSize="61.304347826086953" Removed="True" />
+              <LayoutItem Id="Address2" Index="1" RelativeSize="94.788273615635177" Removed="True" />
+              <LayoutGroup Id="Auto549a5ea8-60ca-4003-92a5-4b1cc29ee7eb" ShowCaption="False" Index="1" RelativeSize="33.370165745856355" IsNewNode="True">
+                <LayoutItem Id="Email" ViewItem="Email" Index="0" RelativeSize="51.612903225806448" IsNewNode="True" />
+                <LayoutItem Id="Department" ViewItem="Department" Index="1" RelativeSize="48.387096774193552" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="Birthday" Index="1" RelativeSize="30.652173913043477" Removed="True" />
+              <LayoutItem Id="Email" ViewItem="Email" Index="1" RelativeSize="33.259668508287291" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Person_col1" RelativeSize="33.370165745856355" Removed="True">
+              <LayoutItem Id="DisplayName" Index="0" RelativeSize="100" Removed="True" />
+              <LayoutItem Id="LastName" Index="1" RelativeSize="5.2173913043478262" Removed="True" />
+              <LayoutItem Id="MiddleName" Index="1" RelativeSize="34.565217391304351" Removed="True" />
+              <LayoutItem Id="FirstName" Removed="True" />
+              <LayoutItem Id="FullName" RelativeSize="6.9565217391304346" Removed="True" />
+            </LayoutGroup>
+            <LayoutItem Id="Photo" RelativeSize="33.370165745856355" Removed="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="State_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="12.595005428881651">
+            <LayoutGroup Id="State" RelativeSize="71.551724137931032">
+              <LayoutItem Id="ParentState" RelativeSize="38.554216867469883" />
+              <LayoutItem Id="Color" RelativeSize="28.91566265060241" />
+            </LayoutGroup>
+            <LayoutGroup Id="BaseObjectC" RelativeSize="28.448275862068964">
+              <LayoutItem Id="SysCode" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="ObjectBase" Removed="True" />
+          </LayoutGroup>
+          <LayoutGroup Id="States_Group" Direction="Vertical" RelativeSize="87.404994571118351">
+            <LayoutItem Id="States" RelativeSize="100" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="State_ListView" InlineEditMode="Batch" AllowEdit="True" NewItemRowPosition="Top">
+      <Columns>
+        <ColumnInfo Id="SysCode" Index="0" />
+        <ColumnInfo Id="TranslateValue" Width="189" Index="1" />
+        <ColumnInfo Id="Color" Index="2" />
+        <ColumnInfo Id="ParentState" Index="3" />
+        <ColumnInfo Id="CreateTime" Index="4" />
+      </Columns>
+    </ListView>
+    <ListView Id="TaskStepTransactionVW_ListView">
+      <Columns>
+        <ColumnInfo Id="Client" Index="-1" />
+        <ColumnInfo Id="CreateTime" Index="-1" />
+        <ColumnInfo Id="Task_SysCode" Index="-1" />
+        <ColumnInfo Id="TaskIntegrationCode" Index="-1" />
+        <ColumnInfo Id="TaskIntegrationObject" Index="-1" />
+        <ColumnInfo Id="TaskStep_SysCode" Index="-1" />
+        <ColumnInfo Id="TaskStepIntegrationCode" Index="-1" />
+        <ColumnInfo Id="TaskStepIntegrationObject" Index="-1" />
+        <ColumnInfo Id="TaskStepState" Index="-1" />
+        <ColumnInfo Id="TaskTemplate_SysCode" Index="-1" />
+        <ColumnInfo Id="TransactionCode" Index="-1" />
+        <ColumnInfo Id="Warehouse_SysCode" Index="-1" />
+        <ColumnInfo Id="Batch" Index="2" />
+        <ColumnInfo Id="Quantity" Index="3" />
+        <ColumnInfo Id="ExpireDate" Index="4" />
+        <ColumnInfo Id="Heat" Index="5" />
+      </Columns>
+    </ListView>
+    <DashboardView Id="Transport_DashBoardView" AllowDelete="False" AllowNew="False" EnableLayoutGroupImages="False" ImageName="AddNewDataSource_16x16" IsNewNode="True">
+      <HiddenActions IsNewNode="True">
+        <ActionLink ActionId="GenerateTaskForItemAcceptProcess" IsNewNode="True" />
+        <ActionLink ActionId="GenerateTaskForItemAcceptProcess_Copy" IsNewNode="True" />
+        <ActionLink ActionId="GenerateTaskForItemPickProcess" IsNewNode="True" />
+        <ActionLink ActionId="GenerateTaskForVehicleLoadProcess" IsNewNode="True" />
+        <ActionLink ActionId="OrganizeDashboard" IsNewNode="True" />
+        <ActionLink ActionId="Print" IsNewNode="True" />
+        <ActionLink ActionId="Refresh" IsNewNode="True" />
+        <ActionLink ActionId="ResetViewSettings" IsNewNode="True" />
+        <ActionLink ActionId="showOnMap" IsNewNode="True" />
+      </HiddenActions>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" ShowCaption="False" Index="0" RelativeSize="100" Direction="Horizontal" CaptionLocation="Bottom" IsNewNode="True">
+          <LayoutGroup Id="Auto1312a2ce-a17a-4d84-819c-af844b15f1f7" ShowCaption="False" Caption="Auto1312a2ce-a17a-4d84-819c-af844b15f1f7(2)" Index="0" RelativeSize="49.6437054631829" IsNewNode="True">
+            <LayoutItem Id="Entry_Vehicle_DashBoardView" ViewItem="Entry_Vehicle_DashBoardView" Index="0" RelativeSize="49.6199782844734" IsNewNode="True" />
+            <LayoutItem Id="Order_Entry_DashBoardView" ViewItem="Order_Entry_DashBoardView" Index="1" RelativeSize="50.3800217155266" IsNewNode="True" />
+          </LayoutGroup>
+          <LayoutGroup Id="Autoadd88513-32d8-4e52-8a42-90dad033b966" ShowCaption="False" Caption="Autoadd88513-32d8-4e52-8a42-90dad033b966(3)" Index="1" RelativeSize="50.3562945368171" IsNewNode="True">
+            <LayoutItem Id="Order_Ready_DashBoardView" ViewItem="Order_Ready_DashBoardView" Index="0" RelativeSize="49.6199782844734" IsNewNode="True" />
+            <LayoutItem Id="Order_Item_DashBoardView" ViewItem="Order_Item_DashBoardView" Index="1" RelativeSize="50.3800217155266" IsNewNode="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DashboardView>
+    <ListView Id="Trip_ListViewDashBoardView" ClassName="dola.Module.Trip" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="CreatedBy" PropertyName="CreatedBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreateTime" PropertyName="CreateTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Description" PropertyName="Description" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="FinishTime" PropertyName="FinishTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="FromAddress" PropertyName="FromAddress" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Gross" PropertyName="Gross" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="IsNewObject" PropertyName="IsNewObject" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ObjectSpace" PropertyName="ObjectSpace" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Owner" PropertyName="Owner" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="RequestFinishTime" PropertyName="RequestFinishTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="RequestTime" PropertyName="RequestTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="StartTime" PropertyName="StartTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="State" PropertyName="State" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ToAddress" PropertyName="ToAddress" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="TransporterQuantity" PropertyName="TransporterQuantity" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateBy" PropertyName="UpdateBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateTime" PropertyName="UpdateTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Warehouse" PropertyName="Warehouse" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SysCode" PropertyName="SysCode" Width="400" SortIndex="0" SortOrder="Ascending" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="Vehicle" PropertyName="Vehicle" Width="70" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="Employee" PropertyName="Employee" Width="70" Index="2" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="Trip_Order_ListViewDHV" ClassName="dola.Module.Order" DataAccessMode="DataView" Criteria="" MasterDetailView="Order_Simple_DetailView" DetailViewID="Order_Simple_DetailView" IsAdaptive="True" AllowDelete="False" AllowLink="False" AllowNew="False" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="CreatedBy" PropertyName="CreatedBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreateTime" PropertyName="CreateTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Description" PropertyName="Description" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="FinishTime" PropertyName="FinishTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="FromAddress" PropertyName="FromAddress" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Gross" PropertyName="Gross" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="IsNewObject" PropertyName="IsNewObject" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="LastEntryLocation" PropertyName="LastEntryLocation" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="LastTrip" PropertyName="LastTrip" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ObjectSpace" PropertyName="ObjectSpace" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Owner" PropertyName="Owner" Width="300" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="RequestFinishTime" PropertyName="RequestFinishTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="RequestTime" PropertyName="RequestTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="RoutePlan" PropertyName="RoutePlan" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="StartTime" PropertyName="StartTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SysCode" PropertyName="SysCode" Width="94" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="TaskTemplate" PropertyName="TaskTemplate" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateBy" PropertyName="UpdateBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateTime" PropertyName="UpdateTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="VehicleType" PropertyName="VehicleType" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Warehouse" PropertyName="Warehouse" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ToAddress" PropertyName="ToAddress" Width="90" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="OrderType" PropertyName="OrderType" Width="108" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="State" PropertyName="State" Width="85" Index="2" SortIndex="0" SortOrder="Ascending" IsNewNode="True" />
+        <ColumnInfo Id="IntegrationCode" PropertyName="IntegrationCode" Width="86" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="TransporterQuantity" PropertyName="TransporterQuantity" Width="83" Index="4" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Vehicle_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <TabbedGroup Id="Item1" CaptionLocation="Top" Index="0" RelativeSize="23.995656894679698" IsNewNode="True">
+              <LayoutGroup Id="Vehicle" ShowCaption="True" Direction="Vertical" Index="0" RelativeSize="100" IsNewNode="True">
+                <LayoutGroup Id="Vehicle_col1" ShowCaption="False" Index="0" RelativeSize="100" Caption="Vehicle_col1" Direction="Horizontal" IsNewNode="True">
+                  <LayoutItem Id="VehicleIdentifier" ViewItem="VehicleIdentifier" Index="0" RelativeSize="33.333333333333336" IsNewNode="True" />
+                  <LayoutItem Id="DefaultDriver" ViewItem="DefaultDriver" Index="1" RelativeSize="33.333333333333336" IsNewNode="True" />
+                  <LayoutItem Id="Trailer" ViewItem="Trailer" Index="2" RelativeSize="33.333333333333336" IsNewNode="True" />
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="1" RelativeSize="100" IsNewNode="True">
+                <LayoutGroup Id="Autoe14ea0bf-24f4-42ac-81f2-7059f5634ad2" ShowCaption="False" Index="0" RelativeSize="33.333333333333336" IsNewNode="True">
+                  <LayoutItem Id="FirstRegistirationDate" ViewItem="FirstRegistirationDate" Index="0" RelativeSize="17.391304347826086" IsNewNode="True" />
+                  <LayoutItem Id="ChassisCode" ViewItem="ChassisCode" Index="1" RelativeSize="13.043478260869565" IsNewNode="True" />
+                  <LayoutItem Id="OwnerMain" ViewItem="OwnerMain" Index="2" RelativeSize="13.043478260869565" IsNewNode="True" />
+                  <LayoutItem Id="VehicleJobTitle" ViewItem="VehicleJobTitle" Index="3" RelativeSize="13.043478260869565" IsNewNode="True" />
+                  <LayoutItem Id="RegionVehicle" ViewItem="RegionVehicle" Index="4" RelativeSize="13.043478260869565" IsNewNode="True" />
+                  <LayoutItem Id="Latitude" ViewItem="Latitude" Index="5" RelativeSize="13.043478260869565" IsNewNode="True" />
+                  <LayoutItem Id="Key" ViewItem="Key" Index="6" RelativeSize="17.391304347826086" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutGroup Id="Auto351e0e3e-8931-448d-b24b-f60b1f18db0b" ShowCaption="False" Direction="Horizontal" Index="1" RelativeSize="66.666666666666671" IsNewNode="True">
+                  <LayoutGroup Id="Auto6b06e38b-148a-48ef-bd6b-f72a6608c3ac" ShowCaption="False" Index="0" RelativeSize="50" IsNewNode="True">
+                    <LayoutItem Id="InspectionValidityDate" ViewItem="InspectionValidityDate" Index="0" RelativeSize="17.391304347826086" IsNewNode="True" />
+                    <LayoutItem Id="MotorCode" ViewItem="MotorCode" Index="1" RelativeSize="13.043478260869565" IsNewNode="True" />
+                    <LayoutItem Id="VehicleModel" ViewItem="VehicleModel" Index="2" RelativeSize="13.043478260869565" IsNewNode="True" />
+                    <LayoutItem Id="DigitalTachograph" ViewItem="DigitalTachograph" Index="3" RelativeSize="13.043478260869565" IsNewNode="True" />
+                    <LayoutItem Id="LastVehiclePosition" ViewItem="LastVehiclePosition" Index="4" RelativeSize="13.043478260869565" IsNewNode="True" />
+                    <LayoutItem Id="Longitude" ViewItem="Longitude" Index="5" RelativeSize="13.043478260869565" IsNewNode="True" />
+                    <LayoutItem Id="SysCode" ViewItem="SysCode" Index="6" RelativeSize="17.391304347826086" IsNewNode="True" />
+                  </LayoutGroup>
+                  <LayoutGroup Id="Auto9f360260-52fa-4141-a566-ab3059e3e5c5" ShowCaption="False" Index="1" RelativeSize="50" IsNewNode="True">
+                    <LayoutItem Id="RegistrationDate" ViewItem="RegistrationDate" Index="0" RelativeSize="17.391304347826086" IsNewNode="True" />
+                    <LayoutItem Id="OwnerAssigned" ViewItem="OwnerAssigned" Index="1" RelativeSize="13.043478260869565" IsNewNode="True" />
+                    <LayoutItem Id="ModelYear" ViewItem="ModelYear" Index="2" RelativeSize="13.043478260869565" IsNewNode="True" />
+                    <LayoutItem Id="IntegrationCode" ViewItem="IntegrationCode" Index="3" RelativeSize="13.043478260869565" IsNewNode="True" />
+                    <LayoutItem Id="Title" ViewItem="Title" Index="4" RelativeSize="13.043478260869565" IsNewNode="True" />
+                    <LayoutItem Id="State" ViewItem="State" Index="5" RelativeSize="30.434782608695652" IsNewNode="True" />
+                  </LayoutGroup>
+                </LayoutGroup>
+              </LayoutGroup>
+            </TabbedGroup>
+            <LayoutGroup Id="Vehicle" Index="0" RelativeSize="68.867924528301884" Removed="True">
+              <LayoutGroup Id="Vehicle_col1" RelativeSize="49.941927990708479">
+                <LayoutItem Id="ChassisCode" RelativeSize="6.8181818181818183" />
+                <LayoutItem Id="Description" RelativeSize="6.8181818181818183" />
+                <LayoutItem Id="Driver" RelativeSize="9.0909090909090917" />
+                <LayoutItem Id="FirstRegistirationDate" RelativeSize="6.8181818181818183" />
+                <LayoutItem Id="InspectionValidityDate" RelativeSize="6.8181818181818183" />
+                <LayoutItem Id="ModelYear" RelativeSize="6.8181818181818183" />
+                <LayoutItem Id="MotorCode" RelativeSize="6.8181818181818183" />
+                <LayoutItem Id="OwnerAssigned" RelativeSize="6.8181818181818183" />
+                <LayoutItem Id="OwnerMain" RelativeSize="6.8181818181818183" />
+                <LayoutItem Id="OwnType" RelativeSize="9.0909090909090917" />
+                <LayoutItem Id="RegistrationDate" RelativeSize="6.8181818181818183" />
+                <LayoutItem Id="Trailer" RelativeSize="6.8181818181818183" />
+                <LayoutItem Id="VehicleIdentifier" RelativeSize="6.8181818181818183" />
+                <LayoutItem Id="VehicleModel" RelativeSize="6.8181818181818183" />
+              </LayoutGroup>
+              <LayoutGroup Id="Vehicle_col2" RelativeSize="50.058072009291521">
+                <LayoutItem Id="DefaultDriver" RelativeSize="6.8181818181818183" />
+                <LayoutItem Id="DigitalTachograph" RelativeSize="6.8181818181818183" />
+                <LayoutItem Id="IntegrationCode" RelativeSize="6.8181818181818183" />
+                <LayoutItem Id="Key" RelativeSize="6.8181818181818183" />
+                <LayoutItem Id="LastVehiclePosition" RelativeSize="6.8181818181818183" />
+                <LayoutItem Id="Latitude" RelativeSize="6.8181818181818183" />
+                <LayoutItem Id="LinkVehicle" RelativeSize="9.0909090909090917" />
+                <LayoutItem Id="Longitude" RelativeSize="15.909090909090908" />
+                <LayoutItem Id="RegionVehicle" RelativeSize="6.8181818181818183" />
+                <LayoutItem Id="Title" RelativeSize="6.8181818181818183" />
+                <LayoutItem Id="TrackingDeviceCode" RelativeSize="6.8181818181818183" />
+                <LayoutItem Id="VehicleJobTitle" RelativeSize="6.8181818181818183" />
+                <LayoutItem Id="VehicleType" RelativeSize="6.8181818181818183" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <TabbedGroup Id="Tabs" Index="1" RelativeSize="76.0043431053203" IsNewNode="True">
+              <LayoutGroup Id="Positions" ShowCaption="True" Index="0" RelativeSize="100" IsNewNode="True">
+                <LayoutItem Id="Positions" ViewItem="Positions" Index="0" RelativeSize="100" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Fuels" ShowCaption="True" Index="1" RelativeSize="100" IsNewNode="True">
+                <LayoutItem Id="Fuels" ViewItem="Fuels" Index="0" RelativeSize="100" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Documents" ShowCaption="True" Index="2" RelativeSize="100" IsNewNode="True">
+                <LayoutItem Id="Documents" ViewItem="Documents" Index="0" RelativeSize="100" IsNewNode="True" />
+              </LayoutGroup>
+            </TabbedGroup>
+            <LayoutGroup Id="BaseObjectState" Index="20" RelativeSize="13.526570048309178" Removed="True">
+              <LayoutItem Id="State" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="BaseObjectC" Index="21" RelativeSize="14.97584541062802" Removed="True">
+              <LayoutItem Id="SysCode" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="ObjectBase" Index="21" RelativeSize="14.0625" Removed="True">
+              <LayoutGroup Id="ObjectBase_col1" RelativeSize="49.941927990708479">
+                <LayoutItem Id="CreatedBy" RelativeSize="36.363636363636367" />
+                <LayoutItem Id="CreateTime" RelativeSize="36.363636363636367" />
+                <LayoutItem Id="UpdateTime" RelativeSize="27.272727272727273" />
+              </LayoutGroup>
+              <LayoutGroup Id="ObjectBase_col2" RelativeSize="50.058072009291521">
+                <LayoutItem Id="ObjectSpace" RelativeSize="63.636363636363633" />
+                <LayoutItem Id="UpdateBy" RelativeSize="36.363636363636367" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="75.3528773072747" Removed="True">
+            <LayoutGroup Id="Documents" RelativeSize="100">
+              <LayoutItem Id="Documents" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="Fuels" RelativeSize="100">
+              <LayoutItem Id="Fuels" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="Positions" Direction="Vertical" RelativeSize="100">
+              <LayoutItem Id="Positions" ViewItem="Positions" Index="0" RelativeSize="100" IsNewNode="True" Removed="True" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Vehicle_ListViewDBV" ClassName="dola.Module.Vehicle" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="ChassisCode" PropertyName="ChassisCode" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreatedBy" PropertyName="CreatedBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreateTime" PropertyName="CreateTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DefaultDriver" PropertyName="DefaultDriver" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DigitalTachograph" PropertyName="DigitalTachograph" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="FirstRegistirationDate" PropertyName="FirstRegistirationDate" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="InspectionValidityDate" PropertyName="InspectionValidityDate" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="IntegrationCode" PropertyName="IntegrationCode" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="IsNewObject" PropertyName="IsNewObject" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Key" PropertyName="Key" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="LastVehiclePosition" PropertyName="LastVehiclePosition" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Latitude" PropertyName="Latitude" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Longitude" PropertyName="Longitude" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ModelYear" PropertyName="ModelYear" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MotorCode" PropertyName="MotorCode" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ObjectSpace" PropertyName="ObjectSpace" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="OwnerAssigned" PropertyName="OwnerAssigned" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="OwnerMain" PropertyName="OwnerMain" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="OwnType" PropertyName="OwnType" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="RegionVehicle" PropertyName="RegionVehicle" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="RegistrationDate" PropertyName="RegistrationDate" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="State" PropertyName="State" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SysCode" PropertyName="SysCode" Width="143" SortIndex="0" SortOrder="Ascending" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Title" PropertyName="Title" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="TrackingDeviceCode" PropertyName="TrackingDeviceCode" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateBy" PropertyName="UpdateBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateTime" PropertyName="UpdateTime" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="VehicleJobTitle" PropertyName="VehicleJobTitle" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="VehicleModel" PropertyName="VehicleModel" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="VehicleType" PropertyName="VehicleType" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="VehicleIdentifier" PropertyName="VehicleIdentifier" Width="70" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="Trailer" PropertyName="Trailer" Width="70" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="Driver" PropertyName="Driver" Width="70" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="Description" PropertyName="Description" Width="70" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="LinkVehicle" PropertyName="LinkVehicle" Width="70" Index="4" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <DashboardView Id="Warehouse_Picking_DashBoardView" Caption="Warehouse Order Pickink" AllowDelete="False" AllowNew="False" EnableLayoutGroupImages="False" ImageName="BOOrderLine_32x32" IsNewNode="True">
+      <HiddenActions IsNewNode="True">
+        <ActionLink ActionId="GenerateTaskForItemAcceptProcess" IsNewNode="True" />
+        <ActionLink ActionId="GenerateTaskForItemAcceptProcess_Copy" IsNewNode="True" />
+        <ActionLink ActionId="GenerateTaskForItemPickProcess" IsNewNode="True" />
+        <ActionLink ActionId="GenerateTaskForVehicleLoadProcess" IsNewNode="True" />
+        <ActionLink ActionId="OrganizeDashboard" IsNewNode="True" />
+        <ActionLink ActionId="Print" IsNewNode="True" />
+        <ActionLink ActionId="Refresh" IsNewNode="True" />
+        <ActionLink ActionId="RelationVehicleOrder" IsNewNode="True" />
+        <ActionLink ActionId="ResetViewSettings" IsNewNode="True" />
+        <ActionLink ActionId="showOnMap" IsNewNode="True" />
+      </HiddenActions>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" ShowCaption="False" CaptionLocation="Bottom" Direction="Horizontal" Index="0" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="Auto1312a2ce-a17a-4d84-819c-af844b15f1f7" ShowCaption="False" Caption="Auto1312a2ce-a17a-4d84-819c-af844b15f1f7(2)" Index="0" RelativeSize="49.6" IsNewNode="True">
+            <LayoutItem Id="Order_Ready_DashBoardView" ViewItem="Order_Ready_DashBoardView" SizeConstraintsType="Default" MinSize="15, 457" MaxSize="0, 457" Index="0" RelativeSize="49.6" ShowCaption="True" CaptionLocation="Top" IsNewNode="True" />
+            <LayoutItem Id="Item1" Index="1" RelativeSize="50.4" IsNewNode="True" />
+          </LayoutGroup>
+          <LayoutGroup Id="Autoadd88513-32d8-4e52-8a42-90dad033b966" ShowCaption="False" Caption="Autoadd88513-32d8-4e52-8a42-90dad033b966(3)" Index="1" RelativeSize="50.4" IsNewNode="True">
+            <LayoutItem Id="Order_Item_DashBoardView" ViewItem="Order_Item_DashBoardView" SizeConstraintsType="Default" MinSize="666, 460" MaxSize="666, 460" Index="0" RelativeSize="49.866666666666667" ShowCaption="True" CaptionLocation="Top" IsNewNode="True" />
+            <LayoutItem Id="OrderStockItemReservation_DashBoardView" ViewItem="OrderStockItemReservation_DashBoardView" SizeConstraintsType="Default" MinSize="15, 461" MaxSize="0, 461" Index="1" RelativeSize="50.133333333333333" ShowCaption="True" CaptionLocation="Top" IsNewNode="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DashboardView>
+    <DashboardView Id="WarehouseIn_DashBoardView" AllowDelete="False" AllowNew="False" EnableLayoutGroupImages="False" ImageName="AddNewDataSource_16x16" IsNewNode="True">
+      <HiddenActions IsNewNode="True">
+        <ActionLink ActionId="GenerateTaskForItemAcceptProcess" IsNewNode="True" />
+        <ActionLink ActionId="GenerateTaskForItemAcceptProcess_Copy" IsNewNode="True" />
+        <ActionLink ActionId="GenerateTaskForItemPickProcess" IsNewNode="True" />
+        <ActionLink ActionId="GenerateTaskForVehicleLoadProcess" IsNewNode="True" />
+        <ActionLink ActionId="OrganizeDashboard" IsNewNode="True" />
+        <ActionLink ActionId="Print" IsNewNode="True" />
+        <ActionLink ActionId="Refresh" IsNewNode="True" />
+        <ActionLink ActionId="ResetViewSettings" IsNewNode="True" />
+        <ActionLink ActionId="showOnMap" IsNewNode="True" />
+      </HiddenActions>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" ShowCaption="False" Index="0" RelativeSize="100" Direction="Horizontal" CaptionLocation="Bottom" IsNewNode="True">
+          <LayoutGroup Id="Auto1312a2ce-a17a-4d84-819c-af844b15f1f7" ShowCaption="False" Caption="Auto1312a2ce-a17a-4d84-819c-af844b15f1f7(2)" Index="0" RelativeSize="50" IsNewNode="True">
+            <LayoutItem Id="Entry_Vehicle_DashBoardView" ViewItem="Entry_Vehicle_DashBoardView" Index="0" RelativeSize="33.333333333333336" ShowCaption="True" CaptionLocation="Top" IsNewNode="True" />
+            <LayoutItem Id="Order_Entry_DashBoardView" ViewItem="Order_Entry_DashBoardView" Index="1" RelativeSize="33.333333333333336" ShowCaption="True" CaptionLocation="Top" IsNewNode="True" />
+            <LayoutItem Id="TaskStepTransaction" ViewItem="TaskStepTransaction" Index="2" RelativeSize="33.333333333333336" ShowCaption="True" CaptionLocation="Top" IsNewNode="True" />
+          </LayoutGroup>
+          <LayoutGroup Id="Autoadd88513-32d8-4e52-8a42-90dad033b966" ShowCaption="False" Caption="Autoadd88513-32d8-4e52-8a42-90dad033b966(3)" Index="1" RelativeSize="50" IsNewNode="True">
+            <LayoutItem Id="Order_Ready_DashBoardView" ViewItem="Order_Ready_DashBoardView" Index="0" RelativeSize="49.9457111834962" ShowCaption="True" CaptionLocation="Top" IsNewNode="True" />
+            <LayoutItem Id="Order_Item_DashBoardView" ViewItem="Order_Item_DashBoardView" Index="1" RelativeSize="50.0542888165038" ShowCaption="True" CaptionLocation="Top" IsNewNode="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DashboardView>
+    <DashboardView Id="WarehouseOrderTracking_DashBoardView" Caption="WarehouseOrderTracking" AllowDelete="False" AllowNew="False" EnableLayoutGroupImages="False" ImageName="DeleteDataSource2_16x16" IsNewNode="True">
+      <HiddenActions IsNewNode="True">
+        <ActionLink ActionId="GenerateTaskForItemAcceptProcess" IsNewNode="True" />
+        <ActionLink ActionId="GenerateTaskForItemAcceptProcess_Copy" IsNewNode="True" />
+        <ActionLink ActionId="GenerateTaskForItemPickProcess" IsNewNode="True" />
+        <ActionLink ActionId="GenerateTaskForVehicleLoadProcess" IsNewNode="True" />
+        <ActionLink ActionId="OrganizeDashboard" IsNewNode="True" />
+        <ActionLink ActionId="Print" IsNewNode="True" />
+        <ActionLink ActionId="Refresh" IsNewNode="True" />
+        <ActionLink ActionId="RelationVehicleOrder" IsNewNode="True" />
+        <ActionLink ActionId="ResetViewSettings" IsNewNode="True" />
+        <ActionLink ActionId="showOnMap" IsNewNode="True" />
+      </HiddenActions>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" ShowCaption="False" Index="0" RelativeSize="100" Caption="Main" Direction="Vertical" IsNewNode="True">
+          <LayoutGroup Id="Autoa3cd5f10-0af4-4bbc-a9e0-15a1ab113982" ShowCaption="False" Caption="Autoa3cd5f10-0af4-4bbc-a9e0-15a1ab113982(2)" Direction="Horizontal" Index="0" RelativeSize="100" IsNewNode="True">
+            <LayoutGroup Id="Auto7202d955-87ce-4c00-b4fc-dc6690b606dd" ShowCaption="False" Caption="" Index="0" RelativeSize="49.954254345837143" IsNewNode="True">
+              <LayoutItem Id="Order_Ready_DashBoardView" ShowCaption="True" ViewItem="Order_Ready_DashBoardView" CaptionLocation="Top" Index="0" RelativeSize="33.333333333333336" IsNewNode="True" />
+              <LayoutItem Id="Order_Item_DashBoardView" ShowCaption="True" ViewItem="Order_Item_DashBoardView" CaptionLocation="Top" Index="1" RelativeSize="33.333333333333336" IsNewNode="True" />
+              <LayoutItem Id="TemporyStockItem" ShowCaption="True" ViewItem="TemporyStockItem" CaptionLocation="Top" Index="2" RelativeSize="33.333333333333336" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto0b5b6b1f-63ac-4ac7-881a-1f482438f580" ShowCaption="False" Caption="" Index="1" RelativeSize="50.045745654162857" IsNewNode="True">
+              <LayoutItem Id="StockItem_ListViewDashBoardView" ShowCaption="True" ViewItem="StockItem_ListViewDashBoardView" CaptionLocation="Top" Index="0" RelativeSize="49.9457111834962" IsNewNode="True" />
+              <LayoutItem Id="TransactionHistory_ListViewDashBoardView" ShowCaption="True" ViewItem="TransactionHistory_ListViewDashBoardView" CaptionLocation="Top" Index="1" RelativeSize="50.0542888165038" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DashboardView>
+    <DashboardView Id="WarehouseOut_DashBoardView" Caption="Warehouse Out" AllowDelete="False" AllowNew="False" EnableLayoutGroupImages="False" ImageName="DeleteDataSource2_16x16" IsNewNode="True">
+      <HiddenActions IsNewNode="True">
+        <ActionLink ActionId="GenerateTaskForItemAcceptProcess" IsNewNode="True" />
+        <ActionLink ActionId="GenerateTaskForItemAcceptProcess_Copy" IsNewNode="True" />
+        <ActionLink ActionId="GenerateTaskForItemPickProcess" IsNewNode="True" />
+        <ActionLink ActionId="GenerateTaskForVehicleLoadProcess" IsNewNode="True" />
+        <ActionLink ActionId="OrganizeDashboard" IsNewNode="True" />
+        <ActionLink ActionId="Print" IsNewNode="True" />
+        <ActionLink ActionId="Refresh" IsNewNode="True" />
+        <ActionLink ActionId="ResetViewSettings" IsNewNode="True" />
+        <ActionLink ActionId="showOnMap" IsNewNode="True" />
+      </HiddenActions>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" ShowCaption="False" Index="0" RelativeSize="100" Direction="Horizontal" CaptionLocation="Bottom" IsNewNode="True">
+          <LayoutGroup Id="Auto1312a2ce-a17a-4d84-819c-af844b15f1f7" ShowCaption="False" Caption="Auto1312a2ce-a17a-4d84-819c-af844b15f1f7(2)" Index="0" RelativeSize="49.6" IsNewNode="True">
+            <LayoutItem Id="Entry_Vehicle_DashBoardView" ViewItem="Entry_Vehicle_DashBoardView" Index="0" RelativeSize="49.6" ShowCaption="True" CaptionLocation="Top" IsNewNode="True" />
+            <LayoutItem Id="Order_Entry_DashBoardView" ViewItem="Order_Entry_DashBoardView" Index="1" RelativeSize="50.4" ShowCaption="True" CaptionLocation="Top" IsNewNode="True" />
+          </LayoutGroup>
+          <LayoutGroup Id="Autoadd88513-32d8-4e52-8a42-90dad033b966" ShowCaption="False" Caption="Autoadd88513-32d8-4e52-8a42-90dad033b966(3)" Index="1" RelativeSize="50.4" IsNewNode="True">
+            <LayoutItem Id="Order_Ready_DashBoardView" ViewItem="Order_Ready_DashBoardView" Index="0" RelativeSize="49.6" ShowCaption="True" CaptionLocation="Top" IsNewNode="True" />
+            <LayoutItem Id="Order_Item_DashBoardView" ViewItem="Order_Item_DashBoardView" Index="1" RelativeSize="50.4" ShowCaption="True" CaptionLocation="Top" IsNewNode="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DashboardView>
+    <DashboardView Id="WarehouseStock_DashBoardView" Caption="Warehouse Out" AllowDelete="False" AllowNew="False" EnableLayoutGroupImages="False" ImageName="DeleteDataSource2_16x16" IsNewNode="True">
+      <HiddenActions IsNewNode="True">
+        <ActionLink ActionId="GenerateTaskForItemAcceptProcess" IsNewNode="True" />
+        <ActionLink ActionId="GenerateTaskForItemAcceptProcess_Copy" IsNewNode="True" />
+        <ActionLink ActionId="GenerateTaskForItemPickProcess" IsNewNode="True" />
+        <ActionLink ActionId="GenerateTaskForVehicleLoadProcess" IsNewNode="True" />
+        <ActionLink ActionId="OrganizeDashboard" IsNewNode="True" />
+        <ActionLink ActionId="Print" IsNewNode="True" />
+        <ActionLink ActionId="Refresh" IsNewNode="True" />
+        <ActionLink ActionId="RelationVehicleOrder" IsNewNode="True" />
+        <ActionLink ActionId="ResetViewSettings" IsNewNode="True" />
+        <ActionLink ActionId="showOnMap" IsNewNode="True" />
+      </HiddenActions>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" ShowCaption="False" Direction="Horizontal" Index="0" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="Autob4187955-b286-4d75-b250-84c73ac71be2" ShowCaption="False" Index="0" RelativeSize="50" IsNewNode="True">
+            <LayoutItem Id="Item" ViewItem="Item" Index="0" RelativeSize="49.866666666666667" ShowCaption="True" CaptionLocation="Top" IsNewNode="True" />
+            <LayoutItem Id="Item1" Index="1" RelativeSize="50.133333333333333" IsNewNode="True" />
+          </LayoutGroup>
+          <LayoutGroup Id="Auto3b2888a8-762f-4951-bb77-1e94bb90614b" ShowCaption="False" Index="1" RelativeSize="50" IsNewNode="True">
+            <LayoutItem Id="StockItem_ListViewDashBoardView" ViewItem="StockItem_ListViewDashBoardView" Index="0" RelativeSize="49.866666666666667" ShowCaption="True" CaptionLocation="Top" IsNewNode="True" />
+            <LayoutItem Id="TaskStepTransactionHistory_ListViewDashBoardView" ViewItem="TaskStepTransactionHistory_ListViewDashBoardView" Index="1" RelativeSize="50.133333333333333" ShowCaption="True" CaptionLocation="Top" IsNewNode="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DashboardView>
+    <DashboardView Id="WarehouseStockControl_DashBoardView" Caption="Stock Control" EnableLayoutGroupImages="False" AllowNew="False" AllowDelete="False" EnableCaptionColon="False" IsNewNode="True">
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" ShowCaption="False" Caption="Main" Direction="Horizontal" Index="0" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="Auto311c51a5-68d0-4142-992f-428b2147d51f" ShowCaption="False" Caption="Auto311c51a5-68d0-4142-992f-428b2147d51f(2)" Index="0" RelativeSize="50" IsNewNode="True">
+            <LayoutItem Id="StockControl" ViewItem="StockControl" CaptionLocation="Top" Index="0" RelativeSize="49.8371335504886" SizeConstraintsType="Custom" MinSize="15, 459" MaxSize="0, 459" IsNewNode="True" />
+            <LayoutItem Id="Item1" Index="1" RelativeSize="50.1628664495114" IsNewNode="True" />
+          </LayoutGroup>
+          <LayoutGroup Id="Autoa588ca58-5037-4470-9bdb-3946423a62a1" ShowCaption="False" Caption="Autoa588ca58-5037-4470-9bdb-3946423a62a1(5)" Index="1" RelativeSize="50" IsNewNode="True">
+            <LayoutItem Id="GlobalLocation" ViewItem="GlobalLocation" CaptionLocation="Top" Index="0" RelativeSize="49.8371335504886" SizeConstraintsType="Custom" MinSize="15, 459" MaxSize="0, 459" IsNewNode="True" />
+            <LayoutItem Id="StockItem" ViewItem="StockItem" CaptionLocation="Top" Index="1" RelativeSize="50.1628664495114" SizeConstraintsType="Custom" MinSize="15, 462" MaxSize="0, 462" IsNewNode="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DashboardView>
+  </Views>
+</Application>

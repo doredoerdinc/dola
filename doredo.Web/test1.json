@@ -1,0 +1,18 @@
+{
+  "origin": {
+    "location": {
+      "latLng": {
+        "latitude": 40.974422454833984,
+        "longitude": 28.869411468505859
+      }
+    }
+  },
+  "destination": {
+    "location": {
+      "latLng": {
+        "latitude": 41.004867553710938,
+        "longitude": 29.044914245605469
+      }
+    }
+  }
+}

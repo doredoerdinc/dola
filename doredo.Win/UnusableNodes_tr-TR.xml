@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <ActionDesign Id="ActionDesign">
+    <Actions Id="Actions">
+      <Action Id="ShowOnMap" Caption="Harita" />
+      <Action Id="LabelCreateFromOrder" Caption="Sipariş Etiketi Oluştur" />
+      <Action Id="TaskAssignedFromOrder" Caption="Siparişe Görev Ata" />
+    </Actions>
+  </ActionDesign>
+  <Views Id="Views">
+    <ListView Id="Trip_Order_ListViewDHV">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Location" Caption="Adres" />
+      </Columns>
+    </ListView>
+    <ListView Id="Item_Locations_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Width" Caption="Genişlik" />
+        <ColumnInfo Id="Height" Caption="Yükseklik" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Location_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Location" Caption="Adres" />
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="Items" Caption="Malzemeeler" />
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+      <Items Id="Items">
+        <PropertyEditor Id="Height" Caption="Yükseklik" />
+        <PropertyEditor Id="Items" Caption="Malzemeeler" />
+        <PropertyEditor Id="PalleteCapacity" Caption="Palet Kapasite" />
+        <PropertyEditor Id="Width" Caption="Genişlik" />
+      </Items>
+    </DetailView>
+    <ListView Id="Order_Trips_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Location" Caption="Adres" />
+        <ColumnInfo Id="RequestFinishTime" Caption="Talep Bitiş Zaman" />
+        <ColumnInfo Id="Warehouse" Caption="Depo" />
+      </Columns>
+    </ListView>
+    <DetailView Id="StockItemCheckNP_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="StockItemCheckNP" Caption="Stok Kontrol" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="StockItemControl_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="StockItemControl" Caption="Stok Kontrol" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="StockItemControlStep_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors" Caption="SimpleEditors">
+            <LayoutGroup Id="Auto8e3df65a-6eec-480d-a46f-8313c4e8d294" Caption="" />
+            <LayoutGroup Id="Auto026d9de8-d53a-48ca-9e2a-4b0dda802992" Caption="" />
+            <LayoutGroup Id="StockItemControlStep">
+              <LayoutGroup Id="StockItemControlStep_col1" Caption="StockItemControlStep_col1" />
+              <LayoutGroup Id="StockItemControlStep_col2" Caption="StockItemControlStep_col2" />
+            </LayoutGroup>
+            <LayoutGroup Id="BaseObjectState" Caption="Aşama" />
+            <LayoutGroup Id="BaseObjectC" Caption="Sys Code" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Trip_Orders_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Location" Caption="Adres" />
+        <ColumnInfo Id="RequestFinishTime" Caption="Talep Bitiş Zaman" />
+        <ColumnInfo Id="Warehouse" Caption="Depo" />
+      </Columns>
+    </ListView>
+    <ListView Id="Location_Items_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="ItemType" Caption="Malzeme Tür" />
+      </Columns>
+    </ListView>
+    <ListView Id="Location_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Width" Caption="Genişlik" />
+        <ColumnInfo Id="Height" Caption="Yükseklik" />
+      </Columns>
+    </ListView>
+    <ListView Id="TaskTemplateItem_Items_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="ItemType" Caption="Malzeme Tür" />
+      </Columns>
+    </ListView>
+    <DetailView Id="UserControlDashboardOrganizationItem_DetailView" Caption="Kullanıcı Kontrol" />
+    <ListView Id="Trip_ListViewDashBoardView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Location" Caption="Adres" />
+      </Columns>
+    </ListView>
+    <ListView Id="Trip_DisListViewDashBoardView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Location" Caption="Adres" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Order_Create_MasterDetailView">
+      <Items Id="Items">
+        <PropertyEditor Id="Location" Caption="Adres" />
+      </Items>
+    </DetailView>
+    <DetailView Id="Order_Create_DetailView">
+      <Items Id="Items">
+        <PropertyEditor Id="Location" Caption="Adres" />
+      </Items>
+    </DetailView>
+    <ListView Id="Location_ListViewDashBoardView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Width" Caption="Genişlik" />
+        <ColumnInfo Id="Height" Caption="Yükseklik" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Item_DetailView">
+      <Items Id="Items">
+        <PropertyEditor Id="Locations" Caption="Stok Adres" />
+      </Items>
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="Locations" Caption="Stok Adres" />
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="LocationOperation_OperationTariffs_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Location" Caption="Adres" />
+        <ColumnInfo Id="StockItemItemType" Caption="Stok Ürün Tip" />
+      </Columns>
+    </ListView>
+    <DetailView Id="LocationOperationTariff_DetailView">
+      <Items Id="Items">
+        <PropertyEditor Id="Location" Caption="Adres" />
+        <PropertyEditor Id="StockItemItemType" Caption="Stok Ürün Tip" />
+      </Items>
+    </DetailView>
+    <ListView Id="LocationOperationTariff_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Location" Caption="Adres" />
+        <ColumnInfo Id="StockItemItemType" Caption="Stok Ürün Tip" />
+      </Columns>
+    </ListView>
+    <ListView Id="OrderBase_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Location" Caption="Adres" />
+      </Columns>
+    </ListView>
+    <ListView Id="OrderLine_Transactions_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Location" Caption="Adres" />
+      </Columns>
+    </ListView>
+    <DetailView Id="OrderLineMetNP_DetailView">
+      <Items Id="Items">
+        <PropertyEditor Id="QuantityReservationStockItem" Caption="Rezervasyon" />
+      </Items>
+    </DetailView>
+    <ListView Id="OrderLineMetNP_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="QuantityReservationStockItem" Caption="Rezervasyon" />
+      </Columns>
+    </ListView>
+    <ListView Id="OrderLineMetNP_LookupListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="QuantityReservationStockItem" Caption="Rezervasyon" />
+      </Columns>
+    </ListView>
+    <ListView Id="RoutePlan_Trips_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Location" Caption="Adres" />
+      </Columns>
+    </ListView>
+    <DetailView Id="TaskTemplateItem_DetailView">
+      <Items Id="Items">
+        <PropertyEditor Id="Items" Caption="Malzemeler" />
+      </Items>
+    </DetailView>
+    <ListView Id="Trip_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Location" Caption="Adres" />
+      </Columns>
+    </ListView>
+  </Views>
+  <BOModel Id="BOModel">
+    <Class Name="DevExpress.ExpressApp.Web.Editors.UserControlDashboardOrganizationItem" Caption="Kullanıcı Kontrol" />
+    <Class Name="dola.Module.Location" Caption="Stok Adres">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="Height" Caption="Yükseklik" />
+        <Member Name="Items" Caption="Malzemeeler" />
+        <Member Name="PalleteCapacity" Caption="Palet Kapasite" />
+        <Member Name="Width" Caption="Genişlik" />
+      </OwnMembers>
+    </Class>
+    <Class Name="dola.Module.StockItemCheckNP">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="StockItemControl" Caption="Stok Kontrol" />
+      </OwnMembers>
+    </Class>
+    <Class Name="dola.Module.StockItemControl" Caption="Stok Kontrol" />
+    <Class Name="dola.Module.StockItemControlStep">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="StockItemControl" Caption="Stok Kontrol" />
+      </OwnMembers>
+    </Class>
+    <Class Name="dola.Module.EntryLocation">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="Location" Caption="Stok Adres" />
+      </OwnMembers>
+    </Class>
+    <Class Name="dola.Module.Item">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="Locations" Caption="Stok Adres" />
+      </OwnMembers>
+    </Class>
+    <Class Name="dola.Module.LocationGeo">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="Name" Caption="İsim" />
+      </OwnMembers>
+    </Class>
+    <Class Name="dola.Module.LocationOperationTariff">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="Location" Caption="Adres" />
+        <Member Name="StockItemItemType" Caption="Stok Ürün Tip" />
+      </OwnMembers>
+    </Class>
+    <Class Name="dola.Module.Order">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="LastTrip" Caption="Son Sefer" />
+        <Member Name="Trips" Caption="Seferler" />
+      </OwnMembers>
+    </Class>
+    <Class Name="dola.Module.OrderBase">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="Location" Caption="Stok Adres" />
+      </OwnMembers>
+    </Class>
+    <Class Name="dola.Module.OrderLine">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="BoxQuantity" Caption="Koli İçi Ambalaj Miktar" />
+        <Member Name="PackageQuantity" Caption="Koli Miktar" />
+        <Member Name="PalleteQuantity" Caption="Palet Miktar" />
+      </OwnMembers>
+    </Class>
+    <Class Name="dola.Module.OrderLineMetNP">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="QuantityAvaibleStockItem" Caption="Kullanılabilir Stok" />
+        <Member Name="QuantityReservationStockItem" Caption="Rezervasyon" />
+        <Member Name="StockItemItem" Caption="Stok Malzeme" />
+      </OwnMembers>
+    </Class>
+    <Class Name="dola.Module.Task">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="Assigned" Caption="Atandı" />
+      </OwnMembers>
+    </Class>
+    <Class Name="dola.Module.TaskTemplateItem">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="Items" Caption="Malzemeler" />
+      </OwnMembers>
+    </Class>
+    <Class Name="dola.Module.Trip">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="Orders" Caption="Siparişler" />
+      </OwnMembers>
+    </Class>
+    <Class Name="LgsLib.Base.Region">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="Name" Caption="İsim" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+  <CreatableItems Id="CreatableItems">
+    <CreatableItem ClassName="dola.Module.Location" Caption="Stok Adres" />
+  </CreatableItems>
+  <ViewItems Id="ViewItems">
+    <PropertyEditor Name="PropertyEditors">
+      <RegisteredPropertyEditor PropertyType="DevExpress.Persistent.Base.IMapsMarker" DefaultDisplayFormat="{0:G}" />
+      <RegisteredPropertyEditor PropertyType="System.Byte[]" DefaultDisplayFormat="{0:G}" />
+    </PropertyEditor>
+  </ViewItems>
+  <NavigationItems Id="NavigationItems">
+    <Items Id="Items">
+      <Item Id="Default">
+        <Items Id="Items">
+          <Item Id="StockItemControl_ListView" Caption="Stok Kontrol" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+</Application>

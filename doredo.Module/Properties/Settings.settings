@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="dola.Module.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="dola_Module_tr_gov_turkiye_servis_UdhbUetdsEsyaWsService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://servis.turkiye.gov.tr/services/g2g/kdgm/test/uetdsesya</Value>
+    </Setting>
+    <Setting Name="KYS_Module_tr_gov_turkiye_servis_UdhbUetdsEsyaWsService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://servis.turkiye.gov.tr/services/g2g/kdgm/test/uetdsesya</Value>
+    </Setting>
+    <Setting Name="dola_Module_tr_gov_turkiye_servisLive_UdhbUetdsEsyaWsService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://servis.turkiye.gov.tr/services/g2g/kdgm/uetdsesya</Value>
+    </Setting>
+    <Setting Name="gologdo_Module_tr_gov_turkiye_servisLive_UdhbUetdsEsyaWsService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://servis.turkiye.gov.tr/services/g2g/kdgm/uetdsesya</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
