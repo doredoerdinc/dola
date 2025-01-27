@@ -84,12 +84,6 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Google.OrTools, Version=9.11.4210.0, Culture=neutral, PublicKeyToken=53dbb1ea090cbef7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.OrTools.9.11.4210\lib\net462\Google.OrTools.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Protobuf, Version=3.26.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Protobuf.3.26.1\lib\net45\Google.Protobuf.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -261,27 +255,6 @@
     <Content Include="BusinessObjects\SQL\ProcedureStockUpdate.txt" />
     <Compile Include="BusinessObjects\Stock.cs" />
     <Compile Include="BusinessObjects\DataAnalysis.cs" />
-    <Content Include="orLogo.png" />
-    <None Include="algorithms\set_cover.proto" />
-    <None Include="bop\bop_parameters.proto" />
-    <None Include="constraint_solver\assignment.proto" />
-    <None Include="constraint_solver\demon_profiler.proto" />
-    <None Include="constraint_solver\routing_enums.proto" />
-    <None Include="constraint_solver\routing_ils.proto" />
-    <None Include="constraint_solver\routing_parameters.proto" />
-    <None Include="constraint_solver\search_limit.proto" />
-    <None Include="constraint_solver\search_stats.proto" />
-    <None Include="constraint_solver\solver_parameters.proto" />
-    <None Include="glop\parameters.proto" />
-    <None Include="graph\flow_problem.proto" />
-    <None Include="linear_solver\linear_solver.proto" />
-    <None Include="pdlp\solvers.proto" />
-    <None Include="pdlp\solve_log.proto" />
-    <None Include="README.md" />
-    <None Include="sat\boolean_problem.proto" />
-    <None Include="sat\cp_model.proto" />
-    <None Include="sat\cp_model_service.proto" />
-    <None Include="sat\sat_parameters.proto" />
     <None Include="UnusableNodes.xml">
       <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
       <SubType>Designer</SubType>
@@ -366,7 +339,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="qrproblem.cs" />
     <Compile Include="Web References\tr.gov.turkiye.servisLive\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -433,8 +405,6 @@
     <Compile Include="BusinessObjects\DoredoDbContext.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="util\int128.proto" />
-    <None Include="util\optional_boolean.proto" />
     <None Include="Web References\tr.gov.turkiye.servisLive\esyaservisi.xsd">
       <SubType>Designer</SubType>
     </None>

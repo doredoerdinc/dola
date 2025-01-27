@@ -11,10 +11,10 @@ using Newtonsoft.Json.Linq;
 using System.Collections.Specialized;
 using System.Web;
 using DevExpress.ExpressApp;
+ 
 
 namespace dola.Module.Web
-{
-
+{ 
     public class GOrigin
     {
         public GLocation location { get; set; }

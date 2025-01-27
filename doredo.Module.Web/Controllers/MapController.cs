@@ -25,6 +25,7 @@ using System.Web;
 using System.Net.Http.Json;
 //using System.Web.Script.Serialization;
 
+
 namespace dola.Module.Web
 { 
     public static class MapStatic
@@ -198,22 +199,23 @@ width=600,height=300,left=100,top=100`;
 
         private void mapDistanceAddressQuatity_Execute(object sender, SimpleActionExecuteEventArgs e)
         {
-            var newObjectSpace = Application.CreateObjectSpace();
-            List<Address> orginAddress = new List<Address>(); 
-            foreach (var item in View.SelectedObjects)
-            {
-                var keyValue = newObjectSpace.GetKeyValue(item);
-                var criteria = CriteriaOperator.Parse("SysCode =?", keyValue);
-                var locationGeo = newObjectSpace.GetObjectByKey<Address>(keyValue);
-                if (locationGeo != null)
-                {
-                    orginAddress.Add(locationGeo);
-                }
+            VrpPickupDelivery.qrtools();
+            //var newObjectSpace = Application.CreateObjectSpace();
+            //List<Address> orginAddress = new List<Address>(); 
+            //foreach (var item in View.SelectedObjects)
+            //{
+            //    var keyValue = newObjectSpace.GetKeyValue(item);
+            //    var criteria = CriteriaOperator.Parse("SysCode =?", keyValue);
+            //    var locationGeo = newObjectSpace.GetObjectByKey<Address>(keyValue);
+            //    if (locationGeo != null)
+            //    {
+            //        orginAddress.Add(locationGeo);
+            //    }
 
-            }
-            getCountMapMatrix(orginAddress, newObjectSpace);
-            newObjectSpace.CommitChanges();
-            View.ObjectSpace.CommitChanges();
+            //}
+            //getCountMapMatrix(orginAddress, newObjectSpace);
+            //newObjectSpace.CommitChanges();
+            //View.ObjectSpace.CommitChanges();
         }
 
 

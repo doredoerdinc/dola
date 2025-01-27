@@ -347,6 +347,7 @@
     <Content Include="Model.Tablet.xafml" />
     <Content Include="Model.xafml" />
     <Content Include="Model_tr-TR.xafml" />
+    <Content Include="libman.json" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Web.config" />
   </ItemGroup>
