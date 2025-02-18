@@ -36,6 +36,7 @@ namespace dola.Module.Web
          
             this.components = new System.ComponentModel.Container();
             this.mapDistanceAddress = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
+            this.mapDistanceAddressQuantity = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
 
             // 
             // OrderPlanedGoodsOutInTask
@@ -47,17 +48,17 @@ namespace dola.Module.Web
             this.mapDistanceAddress.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.mapDistanceAddress_Execute);
             this.Actions.Add(this.mapDistanceAddress);
 
-            this.mapDistanceAddress = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
+           
 
             // 
             // OrderPlanedGoodsOutInTask
             // 
-            this.mapDistanceAddress.Caption = "mapDistanceAddressQuantity";
-            this.mapDistanceAddress.ConfirmationMessage = null;
-            this.mapDistanceAddress.Id = "mapDistanceAddressQuantity";
-            this.mapDistanceAddress.ToolTip = null;
-            this.mapDistanceAddress.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.mapDistanceAddressQuatity_Execute);
-            this.Actions.Add(this.mapDistanceAddress);
+            this.mapDistanceAddressQuantity.Caption = "mapDistanceAddressQuantity";
+            this.mapDistanceAddressQuantity.ConfirmationMessage = null;
+            this.mapDistanceAddressQuantity.Id = "mapDistanceAddressQuantity";
+            this.mapDistanceAddressQuantity.ToolTip = null;
+            this.mapDistanceAddressQuantity.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.mapDistanceAddressQuatity_Execute);
+            this.Actions.Add(this.mapDistanceAddressQuantity);
 
         }
         private DevExpress.ExpressApp.Actions.SimpleAction mapDistanceAddress;

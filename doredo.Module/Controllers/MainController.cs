@@ -534,11 +534,9 @@ namespace dola.Module
             {
                 stepMap.Person = taskStep.Assigned.FullName;
             }
-           
             stepMap.TaskTemplateCode = template.SysCode;
             stepMap.TaskStepIntegrationCode = taskStep.TaskStepIntegrationCode;
             stepMap.TaskStepIntegrationObject = taskStep.TaskStepIntegrationObject;
-
             foreach (var tmp in template.TemplateItems)
             {
                 var taskStepItemMap = new TaskStepItemMap();
@@ -1133,7 +1131,11 @@ namespace dola.Module
                         var step = newObjectSpace.GetObject<TaskStep>(objLine);
                         setState(newObjectSpace, objLine.TaskStepIntegrationObject, objLine.TaskStepIntegrationCode, stateTaskStepVisible);
                         step.State = stateTaskStepVisible;
-                        step.Assigned = newObjectSpace.GetObject<Person>(clientModel.Person);
+                        if (clientModel.Person != null)
+                        {
+                            step.Assigned = newObjectSpace.GetObject<Person>(clientModel.Person);
+                        }
+                       
                         var taskstepItems = getTaskStepItems(newObjectSpace, template, objLine, step);
                         //if (objLine.OrderLine != null)
                         //{

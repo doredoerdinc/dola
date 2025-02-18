@@ -305,25 +305,9 @@
     <Compile Include="GlobalWindowsController.Designer.cs">
       <DependentUpon>GlobalWindowsController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202501221442324_a.cs" />
-    <Compile Include="Migrations\202501221442324_a.designer.cs">
-      <DependentUpon>202501221442324_a.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202501221559430_b.cs" />
-    <Compile Include="Migrations\202501221559430_b.designer.cs">
-      <DependentUpon>202501221559430_b.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202501221612064_c.cs" />
-    <Compile Include="Migrations\202501221612064_c.designer.cs">
-      <DependentUpon>202501221612064_c.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202501221948327_a1.cs" />
-    <Compile Include="Migrations\202501221948327_a1.designer.cs">
-      <DependentUpon>202501221948327_a1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202501222001263_a2.cs" />
-    <Compile Include="Migrations\202501222001263_a2.designer.cs">
-      <DependentUpon>202501222001263_a2.cs</DependentUpon>
+    <Compile Include="Migrations\202502070945105_test.cs" />
+    <Compile Include="Migrations\202502070945105_test.Designer.cs">
+      <DependentUpon>202502070945105_test.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Module.cs">
@@ -358,20 +342,8 @@
     <EmbeddedResource Include="Controllers\MainDashBoardController.resx">
       <DependentUpon>MainDashBoardController.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202501221442324_a.resx">
-      <DependentUpon>202501221442324_a.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202501221559430_b.resx">
-      <DependentUpon>202501221559430_b.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202501221612064_c.resx">
-      <DependentUpon>202501221612064_c.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202501221948327_a1.resx">
-      <DependentUpon>202501221948327_a1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202501222001263_a2.resx">
-      <DependentUpon>202501222001263_a2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202502070945105_test.resx">
+      <DependentUpon>202502070945105_test.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Model.DesignedDiffs.xafml" />
     <EmbeddedResource Include="Module.resx">

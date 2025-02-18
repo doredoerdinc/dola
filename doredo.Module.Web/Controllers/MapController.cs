@@ -175,7 +175,10 @@ namespace dola.Module.Web
             SimpleAction mapViewTripCargoAction = new SimpleAction(this, "mapViewTripCargoAction", PredefinedCategory.Edit);
             mapViewAction.Execute += MapViewAction_Execute;
             mapViewTripCargoAction.Execute += MapViewTripCargoAction_Execute;
-             
+            mapViewTripCargoAction.TargetObjectType = typeof(TripCargo);
+            mapDistanceAddress.TargetObjectType= typeof(Address);
+            mapDistanceAddressQuantity.TargetObjectType = typeof(Address);
+
             mapViewAction.SetClientScript(CallMapView());
             mapViewTripCargoAction.SetClientScript(CallMapView());
         } 
@@ -199,23 +202,22 @@ width=600,height=300,left=100,top=100`;
 
         private void mapDistanceAddressQuatity_Execute(object sender, SimpleActionExecuteEventArgs e)
         {
-            VrpPickupDelivery.qrtools();
-            //var newObjectSpace = Application.CreateObjectSpace();
-            //List<Address> orginAddress = new List<Address>(); 
-            //foreach (var item in View.SelectedObjects)
-            //{
-            //    var keyValue = newObjectSpace.GetKeyValue(item);
-            //    var criteria = CriteriaOperator.Parse("SysCode =?", keyValue);
-            //    var locationGeo = newObjectSpace.GetObjectByKey<Address>(keyValue);
-            //    if (locationGeo != null)
-            //    {
-            //        orginAddress.Add(locationGeo);
-            //    }
+            var newObjectSpace = Application.CreateObjectSpace();
+            List<Address> orginAddress = new List<Address>();
+            foreach (var item in View.SelectedObjects)
+            {
+                var keyValue = newObjectSpace.GetKeyValue(item);
+                var criteria = CriteriaOperator.Parse("SysCode =?", keyValue);
+                var locationGeo = newObjectSpace.GetObjectByKey<Address>(keyValue);
+                if (locationGeo != null)
+                {
+                    orginAddress.Add(locationGeo);
+                }
 
-            //}
-            //getCountMapMatrix(orginAddress, newObjectSpace);
-            //newObjectSpace.CommitChanges();
-            //View.ObjectSpace.CommitChanges();
+            }
+            getCountMapMatrix(orginAddress, newObjectSpace);
+            newObjectSpace.CommitChanges();
+            View.ObjectSpace.CommitChanges();
         }
 
 
