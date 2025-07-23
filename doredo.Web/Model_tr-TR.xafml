@@ -666,8 +666,9 @@
       </Item>
       <Item Id="Transport" Caption="Sevkiyat">
         <Items>
+          <Item Id="@3aa84604-d146-4503-8bd9-96ce16191198" Caption="Depo Transfer" />
+          <Item Id="Trip" Caption="Magaza Transfer" />
           <Item Id="Transport" Caption="Araçlar" />
-          <Item Id="Trip" Caption="Seferler" />
         </Items>
       </Item>
       <Item Id="Operation" Caption="Depo" />

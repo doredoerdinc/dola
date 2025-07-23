@@ -3,8 +3,12 @@
   <ActionDesign>
     <Actions>
       <Action Id="GenerateTaskForVehicleLoadProcess" PaintStyle="Image" ImageName="AddNewDataSource_32x32" />
+      <Action Id="LabelCreateFromOrderLine" ImageName="Truck16X16" />
       <Action Id="Link" Caption="Baglantı" />
+      <Action Id="mapDistanceAddress" ImageName="Distributed_32x32" />
+      <Action Id="mapDistanceAddressQuantity" ImageName="LoadMap_32x32" />
       <Action Id="MapViewAction" ImageName="ColorizerMap_32x32" PaintStyle="Image" />
+      <Action Id="mapViewTripCargoAction" ImageName="ColorizerMap_32x32" />
       <Action Id="OrderItemExtoMap" ImageName="AddNewDataSource_32x32" />
       <Action Id="OrderItemImport" ImageName="Action_Export_ToExcel_32x32" />
       <Action Id="OrderItemPrint" ImageName="DefaultPrinter_32x32" />
@@ -57,12 +61,11 @@
     <Class Name="dola.Module.Order" EditorTypeName="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridListEditor" />
     <Class Name="dola.Module.Trip" EditorTypeName="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridListEditor" />
     <Class Name="dola.Module.VehiclePosition" EditorTypeName="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridListEditor" />
-    <Class Name="LgsLib.Base.MapMultiplePoint" EditorTypeName="DevExpress.ExpressApp.PivotGrid.Web.ASPxPivotGridListEditor" />
     <Class Name="LgsLib.Base.MapPointLGS" EditorTypeName="DevExpress.ExpressApp.PivotGrid.Web.ASPxPivotGridListEditor" />
   </BOModel>
   <NavigationItems ShowImages="True">
     <Items>
-      <Item Id="Order" Index="0" ImageName="kfc_logo_32x32" Shortcut="0" ViewId="OrderOneToOne_ListView" Caption="Order" IsNewNode="True">
+      <Item Id="Order" Index="0" ImageName="BOOrderItem_16x16" Shortcut="0" ViewId="OrderOneToOne_ListView" Caption="Order" IsNewNode="True">
         <Items IsNewNode="True">
           <Item Id="Order" Index="0" Caption="Order" ImageName="BOOrderItem_16x16" ViewId="Order_ListView" IsNewNode="True" />
           <Item Id="@1987996e-26f7-4892-bee1-0caf626de846" ViewId="ExTernalOrderItem_ListView" IsNewNode="True" />
@@ -73,9 +76,10 @@
       </Item>
       <Item Id="Transport" Index="2" Caption="Transport" ImageName="Truck16X16" IsNewNode="True">
         <Items IsNewNode="True">
-          <Item Id="Transport" Index="0" ImageName="Truck16X16" ViewId="Vehicle_ListView" IsNewNode="True" />
+          <Item Id="@3aa84604-d146-4503-8bd9-96ce16191198" Index="0" ViewId="Trip_ListView" ImageName="warehouse16" IsNewNode="True" />
           <Item Id="Trip" ImageName="BOCountry_16x16" Index="0" ViewId="TripCargo_ListView" IsNewNode="True" />
           <Item Id="RoutePlan" ViewId="RoutePlan_ListView" ImageName="PieMap_16x16" Index="1" IsNewNode="True" />
+          <Item Id="Transport" Index="5" ImageName="Truck16X16" ViewId="Vehicle_ListView" IsNewNode="True" />
           <Item Id="@1d5293f3-568f-47d9-9a91-ea08b6c4334a" ViewId="DeliveryPlan_Daily_ListView" Caption="Delivery Plan Daily" ImageName="BOReport_16x16" IsNewNode="True" />
         </Items>
       </Item>
@@ -135,22 +139,39 @@
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
           <LayoutGroup Id="SimpleEditors" RelativeSize="100">
-            <LayoutGroup Id="Address" RelativeSize="9.3376764386536379" Direction="Horizontal">
-              <LayoutGroup Id="Autoa591f8b8-889e-4407-89b9-b93db6511b37" ShowCaption="False" Caption="Autoa591f8b8-889e-4407-89b9-b93db6511b37(4)" Index="0" RelativeSize="33.333333333333336" IsNewNode="True">
-                <LayoutItem Id="AddressType" ViewItem="AddressType" Index="0" RelativeSize="37.2093023255814" IsNewNode="True" />
-                <LayoutItem Id="SysCode" ViewItem="SysCode" Index="1" RelativeSize="27.906976744186046" IsNewNode="True" />
-                <LayoutItem Id="Owner" ViewItem="Owner" Index="2" RelativeSize="34.883720930232556" IsNewNode="True" />
-              </LayoutGroup>
-              <LayoutGroup Id="Auto14f42fde-6335-4024-90ae-54484fb082e7" ShowCaption="False" Caption="Auto14f42fde-6335-4024-90ae-54484fb082e7(8)" Direction="Horizontal" Index="1" RelativeSize="66.666666666666671" IsNewNode="True">
-                <LayoutGroup Id="Autoa2e81896-3f00-48aa-b1c5-849ca45a5c1c" ShowCaption="False" Caption="Autoa2e81896-3f00-48aa-b1c5-849ca45a5c1c(9)" Index="0" RelativeSize="50" IsNewNode="True">
-                  <LayoutItem Id="City" ViewItem="City" Index="0" RelativeSize="37.2093023255814" IsNewNode="True" />
-                  <LayoutItem Id="District" ViewItem="District" Index="1" RelativeSize="27.906976744186046" IsNewNode="True" />
-                  <LayoutItem Id="Neighborhood" ViewItem="Neighborhood" Index="2" RelativeSize="34.883720930232556" IsNewNode="True" />
-                </LayoutGroup>
-                <LayoutGroup Id="Auto90895c7a-0c39-4bc7-9ad1-71ae00667a3b" ShowCaption="False" Caption="Auto90895c7a-0c39-4bc7-9ad1-71ae00667a3b(13)" Index="1" RelativeSize="50" IsNewNode="True">
-                  <LayoutItem Id="Name" ViewItem="Name" Index="0" RelativeSize="37.2093023255814" IsNewNode="True" />
-                  <LayoutItem Id="Description" ViewItem="Description" Index="1" RelativeSize="62.7906976744186" IsNewNode="True" />
-                </LayoutGroup>
+            <LayoutGroup Id="Address" RelativeSize="100" Direction="Vertical">
+              <LayoutGroup Id="Autoa591f8b8-889e-4407-89b9-b93db6511b37" ShowCaption="False" Caption="Autoa591f8b8-889e-4407-89b9-b93db6511b37(4)" Index="0" RelativeSize="100" IsNewNode="True">
+                <TabbedGroup Id="Item3" CaptionLocation="Top" Index="0" RelativeSize="100" IsNewNode="True">
+                  <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Index="0" RelativeSize="100" Caption="Base" Direction="Vertical" IsNewNode="True">
+                    <LayoutGroup Id="Auto188801b1-bb5d-4f8e-977b-a318d763008e" ShowCaption="False" Caption="" Direction="Horizontal" Index="0" RelativeSize="16.93548387096774" IsNewNode="True">
+                      <LayoutGroup Id="Item5" ShowCaption="True" Caption=" " CaptionLocation="Top" Index="0" RelativeSize="33.305988515176374" IsNewNode="True">
+                        <LayoutItem Id="AddressType" ViewItem="AddressType" Index="0" RelativeSize="28.571428571428573" IsNewNode="True" />
+                        <LayoutItem Id="SysCode" ViewItem="SysCode" Index="1" RelativeSize="21.428571428571427" IsNewNode="True" />
+                        <LayoutItem Id="Name" ViewItem="Name" Index="2" RelativeSize="21.428571428571427" IsNewNode="True" />
+                        <LayoutItem Id="Description" ViewItem="Description" Index="3" RelativeSize="28.571428571428573" IsNewNode="True" />
+                      </LayoutGroup>
+                      <LayoutGroup Id="Item6" ShowCaption="True" Caption=" " CaptionLocation="Top" Index="1" RelativeSize="33.305988515176374" IsNewNode="True">
+                        <LayoutItem Id="IntegrationCode" ViewItem="IntegrationCode" Index="0" RelativeSize="28.571428571428573" IsNewNode="True" />
+                        <LayoutItem Id="Owner" ViewItem="Owner" Index="1" RelativeSize="21.428571428571427" IsNewNode="True" />
+                        <LayoutItem Id="ContactPhone" ViewItem="ContactPhone" Index="2" RelativeSize="21.428571428571427" IsNewNode="True" />
+                        <LayoutItem Id="ContactName" ViewItem="ContactName" Index="3" RelativeSize="28.571428571428573" IsNewNode="True" />
+                      </LayoutGroup>
+                      <LayoutGroup Id="Item7" ShowCaption="True" Caption=" " CaptionLocation="Top" Index="2" RelativeSize="33.388022969647253" IsNewNode="True">
+                        <LayoutItem Id="City" ViewItem="City" Index="0" RelativeSize="28.571428571428573" IsNewNode="True" />
+                        <LayoutItem Id="District" ViewItem="District" Index="1" RelativeSize="21.428571428571427" IsNewNode="True" />
+                        <LayoutItem Id="Neighborhood" ViewItem="Neighborhood" Index="2" RelativeSize="50" IsNewNode="True" />
+                      </LayoutGroup>
+                    </LayoutGroup>
+                    <LayoutItem Id="OpenAddress" ViewItem="OpenAddress" Index="1" RelativeSize="83.064516129032256" IsNewNode="True" />
+                  </LayoutGroup>
+                  <LayoutGroup Id="Item4" ShowCaption="True" CaptionLocation="Top" Direction="Vertical" Index="1" Caption="Detail" RelativeSize="100" IsNewNode="True">
+                    <LayoutGroup Id="Autob085866c-4a56-461e-92df-cd5b49ba3f98" ShowCaption="False" Caption="" Direction="Horizontal" Index="0" RelativeSize="3.6866359447004609" IsNewNode="True">
+                      <LayoutItem Id="WorkingArea" ViewItem="WorkingArea" Index="0" RelativeSize="49.958982772764564" IsNewNode="True" />
+                      <LayoutItem Id="LocationGeo" ViewItem="LocationGeo" Index="1" RelativeSize="50.041017227235436" IsNewNode="True" />
+                    </LayoutGroup>
+                    <LayoutGroup Id="BaseObjectC" ShowCaption="False" Caption="Sys Code" Index="1" RelativeSize="96.313364055299544" IsNewNode="True" />
+                  </LayoutGroup>
+                </TabbedGroup>
               </LayoutGroup>
               <LayoutItem Id="Country" Index="1" RelativeSize="95.6343792633015" Removed="True" />
               <LayoutItem Id="City" Index="2" RelativeSize="33.333333333333336" Removed="True" />
@@ -159,8 +180,7 @@
               <LayoutItem Id="ZipPostal" Index="2" RelativeSize="76.6712141882674" Removed="True" />
               <LayoutItem Id="FullAddress" Removed="True" />
             </LayoutGroup>
-            <LayoutItem Id="OpenAddress" ViewItem="OpenAddress" Index="1" RelativeSize="2.6058631921824102" IsNewNode="True" />
-            <LayoutGroup Id="BaseObjectC" RelativeSize="88.056460369163958" Caption="Sys Code" Index="2">
+            <LayoutGroup Id="BaseObjectC" RelativeSize="75.684556407447971" Caption="Sys Code" Index="1" Removed="True">
               <LayoutItem Id="SysCode" RelativeSize="100" Removed="True" />
             </LayoutGroup>
             <LayoutGroup Id="BaseLookupC" RelativeSize="3.5830618892508141" Caption="BaseLookupC" Direction="Vertical" Removed="True">
@@ -1177,7 +1197,7 @@
         <ColumnInfo Id="SysCode" Width="87" />
       </Columns>
     </ListView>
-    <ListView Id="Order_GoodsInOut_ListView" ClassName="dola.Module.Order" IsNewNode="True">
+    <ListView Id="Order_GoodsInOut_ListView" ClassName="dola.Module.Order" Criteria="[OrderType.SysCode] In ('GoodsIn', 'Transport_GoodsIn')" IsNewNode="True">
       <Columns IsNewNode="True">
         <ColumnInfo Id="CancelReason" PropertyName="CancelReason" Width="70" Index="-1" IsNewNode="True" />
         <ColumnInfo Id="CreatedBy" PropertyName="CreatedBy" Width="70" Index="-1" IsNewNode="True" />
@@ -3455,7 +3475,7 @@
               <LayoutItem Id="SysCode" ViewItem="SysCode" Index="4" RelativeSize="85.964912280701753" IsNewNode="True" />
             </LayoutGroup>
             <LayoutGroup Id="BaseObjectC" ShowCaption="False" Caption="Sys Code" Index="1" RelativeSize="82.726045883940614" Removed="True" />
-            <LayoutGroup Id="VehicleType" RelativeSize="12.550607287449394" Index="3" Direction="Vertical" Removed="True">
+            <LayoutGroup Id="VehicleType" RelativeSize="12.550607287449393" Index="3" Direction="Vertical" Removed="True">
               <LayoutGroup Id="VehicleType_col2" RelativeSize="100" Index="0">
                 <LayoutItem Id="CubicMeter" RelativeSize="36.363636363636367" />
                 <LayoutItem Id="MaximumLoadingWeiht" RelativeSize="36.363636363636367" />

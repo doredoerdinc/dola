@@ -251,8 +251,7 @@ width=600,height=300,left=100,top=100`;
                 foreach (var item in clientModel.SelectedObjects)
                 {
                     var keyValue = newObjectSpace.GetKeyValue(item);
-                    var criteria = CriteriaOperator.Parse("IntegrationCode =?", keyValue);
-                  
+                    var criteria = CriteriaOperator.Parse("IntegrationCode =?", keyValue); 
                     var locationGeo = newObjectSpace.FindObject<LocationGeo>(criteria);
                   
                     
@@ -380,8 +379,29 @@ width=600,height=300,left=100,top=100`;
         {
             var points = new List<MapPointLGS>();
             var objectSpace = Application.CreateObjectSpace();
-            var mapModelObjectSpace = Application.CreateObjectSpace(typeof(Map));
-           
+            var mapModelObjectSpace = Application.CreateObjectSpace(typeof(Map)); 
+                foreach (var viewItem in View.SelectedObjects)
+                {
+                if ( viewItem is IMapPoint)
+                { 
+                    var point =viewItem as IMapPoint;
+                    var isPointAdd = MapStatic.StaticPointList.Find(x => x.Key == point.Key);
+                    if (isPointAdd == null)
+                    {
+                        var mapPoint1 = mapModelObjectSpace.CreateObject<MapPointLGS>();
+                        mapPoint1.Key = point.Key;
+                        mapPoint1.Latitude = point.Latitude;
+                        mapPoint1.Longitude = point.Longitude;
+                        mapPoint1.Title = point.Title;
+                        MapStatic.StaticMapPointOrderTransferList.Clear();
+                        MapStatic.StaticPointList.Add(mapPoint1);
+                    }
+
+                } 
+
+            }
+            if(View.CurrentObject is IRoute)
+            { 
             foreach (var obj in View.SelectedObjects)
             {
                 var order = obj as Order;
@@ -399,7 +419,8 @@ width=600,height=300,left=100,top=100`;
                 mapPoint2.Longitude = order.ToAddress.Longitude;
                 mapPoint2.Title = order.ToAddress.Name;
                 MapStatic.StaticPointList.Add(mapPoint2); 
-            } 
+            }
+            }
         } 
         protected override void OnActivated()
         { 

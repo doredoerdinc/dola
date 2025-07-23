@@ -4,7 +4,7 @@
  
 <html>
   <head>
-    <title>Advanced Marker Simple HTML</title>
+    <title>doredo Map</title>
 
     <link rel="stylesheet" type="text/css" href="./style.css" />
     <script type="module" src="./index.js"></script>

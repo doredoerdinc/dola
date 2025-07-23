@@ -537,6 +537,7 @@ namespace dola.Module
             stepMap.TaskTemplateCode = template.SysCode;
             stepMap.TaskStepIntegrationCode = taskStep.TaskStepIntegrationCode;
             stepMap.TaskStepIntegrationObject = taskStep.TaskStepIntegrationObject;
+           
             foreach (var tmp in template.TemplateItems)
             {
                 var taskStepItemMap = new TaskStepItemMap();
@@ -577,6 +578,8 @@ namespace dola.Module
                 if (fitCriteria.Value)
                 {
                     taskStepItemMap.SysValue = tempItem.SysValue;
+                    taskStepItemMap.IsEnableBarcodeScanner = 1;
+                    taskStepItemMap.IsEnableMultipleBarcodeScanner = 1;
                     if (tempItem.SysValueReferanceProperty != null)
                     {
 
@@ -595,7 +598,7 @@ namespace dola.Module
                                 properties = properties + "," + propertyValue;
                                    // dynamicProperties.Add(propertyValue.ToString());
                                 }
-
+                                
                             taskStepItemMap.SysValue = properties.Remove(0,1);
                           //  var dynamicProperty=GetPropertyByPath(referenceObject, tempItem.SysValueReferanceProperty);
 
@@ -842,7 +845,7 @@ namespace dola.Module
                     sortStockItem = stockItems.OrderBy(x => x.ExpireDate).OrderBy(x => x.Batch).OrderByDescending(x => x.CreateTime).OrderBy(x => x.Container.LocationWarehouse.SysCode).ToList();
                 }
                 else
-                {
+                { 
                     sortStockItem = stockItems.OrderBy(x => x.ExpireDate).OrderBy(x => x.Container.LocationWarehouse.SysCode).ToList();
                 }
 

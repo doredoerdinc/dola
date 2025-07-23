@@ -402,10 +402,10 @@ namespace dola.Module
     }
     public class TaskStepItemMap : ITaskTemplateItem
     {
-        public int Index { get; set; } 
-        public EnumVisible ListVisible {get;set;}
+        public int Index { get; set; }
+        public EnumVisible ListVisible { get; set; }
         public EnumVisible FormVisible { get; set; }
-        public string Name {get; set; }
+        public string Name { get; set; }
         public string DisplayName { get; set; }
         public string Type { get; set; }
         public string Criteria { get; set; }
@@ -415,6 +415,9 @@ namespace dola.Module
         public int CharacterLength { get; set; }
         public int IsLoop { get; set; }
 
+        public int IsEnableBarcodeScanner {get;set;}
+        public int IsEnableMultipleBarcodeScanner { get; set; }
+        
     }    
     public class SortByLocation
     { 
@@ -587,8 +590,7 @@ namespace dola.Module
         {
             get { return _IsLoop; }
             set { _IsLoop = value; }
-        } 
-
+        }  
         string _DisplayName;
         public string DisplayName
         {
@@ -890,10 +892,7 @@ namespace dola.Module
             get { return _Assigned; }
             set { _Assigned = value; }
         }
-
-
-
-
+          
     }
 
     [Table("TaskTransactionTempory")]

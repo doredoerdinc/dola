@@ -65,6 +65,43 @@
          <% 
             }
         }
+         if (MapStatic.StaticMapPointOrderTransferList != null)
+     {   
+         foreach (var item in MapStatic.StaticPointList){%>  
+
+            let divCardContainer<%=item.Key%>  = document.createElement("div");
+            let divCardHeader<%=item.Key%>  = document.createElement("div");
+            let divGridContainer<%=item.Key%>  = document.createElement("div");
+        
+            //	let divGridFromVal= document.createElement("div");
+            //	let divGridFromToVal= document.createElement("div");
+
+            divCardContainer<%=item.Key%> .className = 'card-container';
+            divGridContainer<%=item.Key%> .className = 'grid-container';
+            divCardHeader<%=item.Key%> .className = 'header';
+
+            divCardHeader<%=item.Key%> .textContent = '<%=item.Title%>'
+        
+            //	divGridFromVal.textContent='10'
+            //	divGridFromToVal.textContent='20'
+
+
+            divCardContainer<%=item.Key%> .appendChild(divCardHeader<%=item.Key%> );
+            divCardContainer<%=item.Key%> .appendChild(divGridContainer<%=item.Key%> );
+           
+            //divGridContainer.appendChild(divGridFromVal); 
+            //divGridContainer.appendChild(divGridFromToVal); 
+
+
+            let marker<%=item.Key%> = new AdvancedMarkerElement({
+                map,
+                position: { lat: <%=item.Latitude.ToString(nfi)%>, lng: <%=item.Longitude.ToString(nfi)%> },
+                content: divCardContainer<%=item.Key%> ,
+            });
+
+         <% 
+            }
+        }
 %> 
             function getRandomColor() {
                 var letters = '0123456789ABCDEF';

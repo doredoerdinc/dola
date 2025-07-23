@@ -63,11 +63,6 @@ namespace dola.Web {
                 args.ObjectSpaceProviders.Add(new EFObjectSpaceProvider(typeof(dolaDbContext), TypesInfo, null, (DbConnection)args.Connection));
             }
             else {
-
-
-
-
-
                 args.ObjectSpaceProviders.Add(new EFObjectSpaceProvider(typeof(dolaDbContext), TypesInfo, null, args.ConnectionString));
             }
             args.ObjectSpaceProviders.Add(new NonPersistentObjectSpaceProvider(TypesInfo, null));
