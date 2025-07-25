@@ -398,6 +398,7 @@ width=600,height=300,left=100,top=100`;
             var points = new List<MapPointLGS>();
             var objectSpace = Application.CreateObjectSpace();  
             var mapModelObjectSpace = Application.CreateObjectSpace(typeof(Map)); 
+            MapStatic.StaticPointList.RemoveAll(x=>x.Object==View.ObjectTypeInfo.FullName);  
                 foreach (var viewItem in View.SelectedObjects)
                 {
                 if ( viewItem is IMapPoint)
@@ -411,7 +412,7 @@ width=600,height=300,left=100,top=100`;
                         mapPoint1.Latitude = point.Latitude;
                         mapPoint1.Longitude = point.Longitude;
                         mapPoint1.Title = point.Title;
-                       
+                        mapPoint1.Object = View.ObjectTypeInfo.FullName; 
                         MapStatic.StaticPointList.Add(mapPoint1);
                     }
 
@@ -468,16 +469,7 @@ width=600,height=300,left=100,top=100`;
         protected override void OnDeactivated()
         {
              base.OnDeactivated();
-            foreach (var item in MapStatic.StaticMapPointOrderTransferList)
-            {
-                MapStatic.StaticMapPointOrderTransferList.Remove(item);
-
-            }
-            foreach (var item in MapStatic.StaticPointList)
-            {
-                MapStatic.StaticPointList.Remove(item);
-
-            }
+         
         }  
        
     }

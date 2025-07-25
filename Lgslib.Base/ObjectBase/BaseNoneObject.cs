@@ -132,6 +132,15 @@ namespace LgsLib.Base
             set { _Marker = value; }
         }
 
+        string _Object;
+        public string Object
+        {
+            get { return _Object; }
+            set { _Object = value; }
+        }
+
+
+
     }
 
     [DomainComponent]
