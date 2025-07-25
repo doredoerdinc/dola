@@ -23,13 +23,36 @@ using System.Runtime.Serialization;
 using System.Web.Script.Serialization;
 using System.Web;
 using System.Net.Http.Json;
+using System.Text.RegularExpressions;
 //using System.Web.Script.Serialization;
-
+using DevExpress.ExpressApp.Web.SystemModule;
+using DevExpress.ExpressApp.Web.Templates;
+using DevExpress.ExpressApp.Web.TestScripts;
 
 namespace dola.Module.Web
 { 
     public static class MapStatic
     {
+
+        public static string CallMapView()
+        {
+            return @"
+                            let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+width=600,height=300,left=100,top=100`;
+                            function openOnce(url, target){
+                                       var winref = window.open('','test',params);
+                                        if (winref.location.href === 'about:blank')
+                                        {
+                                            winref.location.href = url;
+                                        }
+                             
+                                        return winref;
+                                    }
+                                openOnce('../map/MapView.aspx', 'MyWindowName');
+                            ";
+        }
+
+
         static List<MapPointLGS> _StaticPointList;
         public static List<MapPointLGS> StaticPointList
         {
@@ -42,6 +65,18 @@ namespace dola.Module.Web
         {
             get { return _StaticMapPointOrderTransferList; }
             set { _StaticMapPointOrderTransferList = value; }
+        }
+
+        public static string RemoveIllegalCharacters(string text) // method alınacak
+        {
+            string cleanText=null;
+            if (!string.IsNullOrEmpty(text))
+            {
+                cleanText=Regex.Replace(text, @"[^a-zA-Z0-9ğüşöçıİĞÜŞÖÇ\s_]", "");
+            }
+            return cleanText;
+            // Harf, rakam, boşluk ve alt çizgi dışındaki her şeyi sil
+
         }
 
         static List<GoogleRouteDraw> _StaticRouteDrawList;
@@ -171,35 +206,18 @@ namespace dola.Module.Web
         {
             InitializeComponent();
             
-            SimpleAction mapViewAction = new SimpleAction(this, "MapViewAction", PredefinedCategory.Edit);
+          //  SimpleAction mapViewAction = new SimpleAction(this, "MapViewAction", PredefinedCategory.Edit);
             SimpleAction mapViewTripCargoAction = new SimpleAction(this, "mapViewTripCargoAction", PredefinedCategory.Edit);
-            mapViewAction.Execute += MapViewAction_Execute;
+          //  mapViewAction.Execute += MapViewAction_Execute;
             mapViewTripCargoAction.Execute += MapViewTripCargoAction_Execute;
             mapViewTripCargoAction.TargetObjectType = typeof(TripCargo);
             mapDistanceAddress.TargetObjectType= typeof(Address);
             mapDistanceAddressQuantity.TargetObjectType = typeof(Address);
 
-            mapViewAction.SetClientScript(CallMapView());
-            mapViewTripCargoAction.SetClientScript(CallMapView());
+        
+            //mapViewTripCargoAction.SetClientScript(CallMapView());
         } 
-        private static string CallMapView()
-        {
-            return @"
-                            let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
-width=600,height=300,left=100,top=100`;
-                            function openOnce(url, target){
-                                       var winref = window.open('','test',params);
-                                        if (winref.location.href === 'about:blank')
-                                        {
-                                            winref.location.href = url;
-                                        }
-                             
-                                        return winref;
-                                    }
-                                openOnce('../map/MapView.aspx', 'MyWindowName');
-                            ";
-        }
-
+ 
         private void mapDistanceAddressQuatity_Execute(object sender, SimpleActionExecuteEventArgs e)
         {
             var newObjectSpace = Application.CreateObjectSpace();
@@ -378,7 +396,7 @@ width=600,height=300,left=100,top=100`;
         private void MapViewAction_Execute(object sender, SimpleActionExecuteEventArgs e)
         {
             var points = new List<MapPointLGS>();
-            var objectSpace = Application.CreateObjectSpace();
+            var objectSpace = Application.CreateObjectSpace();  
             var mapModelObjectSpace = Application.CreateObjectSpace(typeof(Map)); 
                 foreach (var viewItem in View.SelectedObjects)
                 {
@@ -393,7 +411,7 @@ width=600,height=300,left=100,top=100`;
                         mapPoint1.Latitude = point.Latitude;
                         mapPoint1.Longitude = point.Longitude;
                         mapPoint1.Title = point.Title;
-                        MapStatic.StaticMapPointOrderTransferList.Clear();
+                       
                         MapStatic.StaticPointList.Add(mapPoint1);
                     }
 
@@ -419,9 +437,11 @@ width=600,height=300,left=100,top=100`;
                 mapPoint2.Longitude = order.ToAddress.Longitude;
                 mapPoint2.Title = order.ToAddress.Name;
                 MapStatic.StaticPointList.Add(mapPoint2); 
+             }
             }
-            }
-        } 
+         ((WebWindow)WebApplication.Instance.MainWindow).RegisterStartupScript("script",MapStatic.CallMapView()); 
+
+        }
         protected override void OnActivated()
         { 
             base.OnActivated();
@@ -431,15 +451,33 @@ width=600,height=300,left=100,top=100`;
                 MapStatic.StaticMapPointOrderTransferList = new List<MapPointOrderTransfer>();
             }
             
-        } 
+        }
+
+        protected override void OnAfterConstruction()
+        {
+            base.OnAfterConstruction();
+      
+        }
+
         protected override void OnViewControlsCreated()
         {
-            base.OnViewControlsCreated();  
+            base.OnViewControlsCreated();
+           
+
         } 
         protected override void OnDeactivated()
         {
              base.OnDeactivated();
-          
+            foreach (var item in MapStatic.StaticMapPointOrderTransferList)
+            {
+                MapStatic.StaticMapPointOrderTransferList.Remove(item);
+
+            }
+            foreach (var item in MapStatic.StaticPointList)
+            {
+                MapStatic.StaticPointList.Remove(item);
+
+            }
         }  
        
     }

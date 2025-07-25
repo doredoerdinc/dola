@@ -340,6 +340,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="map\sidebar.css" />
     <Content Include="map\style.css" />
     <Content Include="map\index.js" />
     <Content Include="map\MapView.aspx" />

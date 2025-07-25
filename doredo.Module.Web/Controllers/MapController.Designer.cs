@@ -37,6 +37,8 @@ namespace dola.Module.Web
             this.components = new System.ComponentModel.Container();
             this.mapDistanceAddress = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             this.mapDistanceAddressQuantity = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
+            this.mapViewAction = new DevExpress.ExpressApp.Actions.SimpleAction(this, "MapViewAction", PredefinedCategory.Edit);
+
 
             // 
             // OrderPlanedGoodsOutInTask
@@ -48,21 +50,30 @@ namespace dola.Module.Web
             this.mapDistanceAddress.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.mapDistanceAddress_Execute);
             this.Actions.Add(this.mapDistanceAddress);
 
-           
+            this.mapDistanceAddress.Caption = "mapDistanceAddress";
+            this.mapDistanceAddress.ConfirmationMessage = null;
+            this.mapDistanceAddress.Id = "mapDistanceAddress";
+            this.mapDistanceAddress.ToolTip = null;
+            this.mapDistanceAddress.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.mapDistanceAddress_Execute);
+            this.Actions.Add(this.mapDistanceAddress);
+
+            
 
             // 
             // OrderPlanedGoodsOutInTask
             // 
-            this.mapDistanceAddressQuantity.Caption = "mapDistanceAddressQuantity";
-            this.mapDistanceAddressQuantity.ConfirmationMessage = null;
-            this.mapDistanceAddressQuantity.Id = "mapDistanceAddressQuantity";
-            this.mapDistanceAddressQuantity.ToolTip = null;
-            this.mapDistanceAddressQuantity.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.mapDistanceAddressQuatity_Execute);
-            this.Actions.Add(this.mapDistanceAddressQuantity);
+            this.mapViewAction.Caption = "MapViewAction";
+            this.mapViewAction.ConfirmationMessage = null;
+            this.mapViewAction.Id = "MapViewAction";
+            this.mapViewAction.ToolTip = null;
+            this.mapViewAction.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.MapViewAction_Execute);
+          
+            this.Actions.Add(this.mapViewAction);
 
         }
         private DevExpress.ExpressApp.Actions.SimpleAction mapDistanceAddress;
         private DevExpress.ExpressApp.Actions.SimpleAction mapDistanceAddressQuantity;
+        private DevExpress.ExpressApp.Actions.SimpleAction mapViewAction;
 
         #endregion
 

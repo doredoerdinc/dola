@@ -7,9 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace dola.Web.map {
-    
-    
-    public partial class MapView {
+namespace dola.Web.map
+{
+
+
+    public partial class MapView
+    {
     }
 }

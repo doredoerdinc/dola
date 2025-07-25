@@ -779,6 +779,45 @@
         <ColumnInfo Id="Description" Index="3" Width="71" />
       </Columns>
     </ListView>
+    <DetailView Id="LocationGeo_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="14.348302300109529">
+            <LayoutGroup Id="LocationGeo" RelativeSize="100" Direction="Vertical">
+              <LayoutGroup Id="LocationGeo_col1" RelativeSize="100">
+                <LayoutItem Id="Title" RelativeSize="28.571428571428573" Index="0" />
+                <LayoutItem Id="Radius" RelativeSize="21.428571428571427" Index="1" />
+                <LayoutItem Id="Latitude" RelativeSize="21.428571428571427" />
+                <LayoutItem Id="Longitude" RelativeSize="28.571428571428573" />
+              </LayoutGroup>
+              <LayoutGroup Id="LocationGeo_col2" RelativeSize="50.048216007714558" Caption="LocationGeo_col2" Removed="True">
+                <LayoutItem Id="Marker" RelativeSize="50" Index="2" Removed="True" />
+                <LayoutItem Id="IntegrationCode" RelativeSize="71.428571428571431" Removed="True" />
+                <LayoutItem Id="Key" RelativeSize="21.428571428571427" Removed="True" />
+                <LayoutItem Id="LocationGeoType" RelativeSize="100" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="ObjectBase" RelativeSize="44.196428571428569" Index="1" Removed="True">
+              <LayoutGroup Id="ObjectBase_col1" RelativeSize="49.951783992285442">
+                <LayoutItem Id="CreatedBy" RelativeSize="36.363636363636367" />
+                <LayoutItem Id="CreateTime" RelativeSize="36.363636363636367" />
+                <LayoutItem Id="UpdateTime" RelativeSize="27.272727272727273" />
+              </LayoutGroup>
+              <LayoutGroup Id="ObjectBase_col2" RelativeSize="50.048216007714558">
+                <LayoutItem Id="ObjectSpace" RelativeSize="63.636363636363633" />
+                <LayoutItem Id="UpdateBy" RelativeSize="36.363636363636367" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="BaseObjectI" Caption="ID" RelativeSize="13.846153846153847" Removed="True">
+              <LayoutItem Id="ID" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Points_Group" Direction="Vertical" RelativeSize="85.651697699890477">
+            <LayoutItem Id="Points" RelativeSize="100" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
     <DetailView Id="Map_DetailView" AllowNew="False" AllowEdit="False" AllowDelete="False">
       <HiddenActions>
         <ActionLink ActionId="ResetViewSettings" IsNewNode="True" />

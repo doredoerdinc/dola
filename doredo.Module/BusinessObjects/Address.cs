@@ -44,8 +44,10 @@ namespace dola.Module
     {
         public Address()
         {
-
+            AddressRouteMatrixies = new List<AddressRouteMatrix>();
         }
+        [InverseProperty("FromAddress")]
+        public virtual IList<AddressRouteMatrix> AddressRouteMatrixies { get; set; }
 
 
         double? _DistanceMaptoAddressQuantity;

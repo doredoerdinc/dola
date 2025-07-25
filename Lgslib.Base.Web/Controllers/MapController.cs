@@ -21,6 +21,9 @@ using LgsLib.Base;
 using LgsLib.Base.Web;
 using System.Runtime.Serialization;
 using System.Web.Script.Serialization;
+using DevExpress.ExpressApp.Web.SystemModule;
+using DevExpress.ExpressApp.Web.Templates;
+using DevExpress.ExpressApp.Web.TestScripts;
 
 namespace Lgslib.Base.Web
 {
@@ -65,24 +68,19 @@ namespace Lgslib.Base.Web
         {
             base.OnViewControlsCreated();
             if (View.Model.Id == "MapPointLGS_ListView")
-            {
-
-
+            { 
                 webMapsListEditor = ((ListView)View).Editor as WebMapsListEditor;
                 if (webMapsListEditor != null)
                 {
                     mapViewer = webMapsListEditor.MapViewer;
-                }
-
+                } 
                 if (webMapsListEditor != null)
                 {
                     webMapsListEditor.MapViewer.ClientSideEvents.Customize = GetCustomizeRouteScript();
                 }
             }
 
-        }
-  
-       
+        } 
         protected override void OnDeactivated()
         {
             // Unsubscribe from previously subscribed events and release other references and resources.
@@ -95,10 +93,7 @@ namespace Lgslib.Base.Web
                 additionalObjectSpace.Dispose();
                 additionalObjectSpace = null;
             }
-        }
-
-  
-
+        } 
         private void ShowOnMap_Execute(object sender, SimpleActionExecuteEventArgs e)
         {
             var points = new List<MapPointLGS>(); 
