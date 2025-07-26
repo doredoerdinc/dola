@@ -55,7 +55,7 @@ namespace dola.Module {
         public DbSet<LocationHoll> LocationHoll { get; set; } 
         public DbSet<TaskStepTransactionVW> TaskStepTransactionVW { get; set; } 
         public DbSet<UnitConvert> UnitConvert { get; set; } 
-        public DbSet<RoutePlan> RoutePlan { get; set; }
+        public DbSet<RoutePlanTransport> RoutePlan { get; set; }
         public DbSet<StockControl> StockCheck { get; set; }
         public DbSet<StockControlStep> StockCheckLocation { get; set; }
         public DbSet<TaskStepStatic> TaskStepStatic { get; set; }
@@ -114,7 +114,7 @@ namespace dola.Module {
         public DbSet<TripCargo> TripCargo { get; set; }
         public DbSet<Town> Town { get; set; } 
         public DbSet<Neighborhood> Neighborhood { get; set; }
-        public DbSet<WorkingTimes> WorkingTimes { get; set; }
+        public DbSet<WorkingTime> WorkingTimes { get; set; }
         public DbSet<WorkingArea> WorkingArea { get; set; }
 
         public DbSet<AddressRouteMatrix> AddressRouteMatrix { get; set; }

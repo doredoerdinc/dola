@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <BOModel Id="BOModel">
+    <Class Name="dola.Module.RoutePlan">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="Description" Caption="Açıklama" />
+        <Member Name="Orders" Caption="Siparişler" />
+        <Member Name="Trips" Caption="Seferler" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+  <Views Id="Views">
+    <ListView Id="RoutePlan_Orders_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="RequestFinishTime" Caption="Talep Bitiş Zaman" />
+        <ColumnInfo Id="Warehouse" Caption="Depo" />
+      </Columns>
+    </ListView>
+    <ListView Id="RoutePlan_Trips_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="RequestFinishTime" Caption="Talep Bitiş Zaman" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

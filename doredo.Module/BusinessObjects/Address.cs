@@ -45,9 +45,11 @@ namespace dola.Module
         public Address()
         {
             AddressRouteMatrixies = new List<AddressRouteMatrix>();
+            WorkingTimes = new List<WorkingTime>();
         }
         [InverseProperty("FromAddress")]
         public virtual IList<AddressRouteMatrix> AddressRouteMatrixies { get; set; }
+        public virtual IList<WorkingTime> WorkingTimes { get; set; }
 
 
         double? _DistanceMaptoAddressQuantity;
@@ -55,16 +57,14 @@ namespace dola.Module
         {
             get { return _DistanceMaptoAddressQuantity; }
             set { _DistanceMaptoAddressQuantity = value; }
-        }
-
-
+        } 
 
         WorkingArea _WorkingArea;
         public virtual WorkingArea WorkingArea
         {
             get { return _WorkingArea; }
             set { _WorkingArea = value; }
-        }
+        } 
 
         LocationGeo _LocationGeo;
         public virtual LocationGeo LocationGeo
@@ -242,14 +242,21 @@ namespace dola.Module
 
     }
 
-    [Table("WorkingTimes")]
+    [Table("WorkingTime")]
     [DefaultClassOptions]
-    public class WorkingTimes : BaseObjectI
+    public class WorkingTime : BaseObjectI, IMapPoint
     {
-        public WorkingTimes()
+        public WorkingTime()
         {
 
-        }
+        } 
+
+        RoutePlanTransport _RoutePlanTransport;
+        public virtual RoutePlanTransport RoutePlanTransport
+        {
+            get { return _RoutePlanTransport; }
+            set { _RoutePlanTransport = value; }
+        } 
 
         Address _Address;
         public virtual Address Address
@@ -258,26 +265,116 @@ namespace dola.Module
             set { _Address = value; }
         }
 
-        int _DayOfWeek;
-        public int DayOfWeek
+        int? _DayOfWeek;
+        public int? DayOfWeek
         {
             get { return _DayOfWeek; }
             set { _DayOfWeek = value; }
         }
 
-        DateTime? _StartTime;
-        public DateTime? StartTime
+        TimeSpan? _StartTime;
+        public TimeSpan? StartTime
         {
             get { return _StartTime; }
             set { _StartTime = value; }
         }
 
-        DateTime? _EndTime;
-        public DateTime? EndTime
+        TimeSpan? _FinishTime;
+        public TimeSpan? FinishTime
         {
-            get { return _EndTime; }
-            set { _EndTime = value; }
+            get { return _FinishTime; }
+            set { _FinishTime = value; }
         }
+
+        int? _RouteRow;
+        public int? RouteRow
+        {
+            get { return _RouteRow; }
+            set { _RouteRow = value; }
+        }
+
+        public String Key
+        {
+            get
+            {
+                if (Address != null && Address.LocationGeo != null)
+                {
+                    return this.ID.ToString();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+        }
+
+
+        public double Latitude
+        {
+            get
+            {
+                if (Address != null && Address.LocationGeo != null)
+                {
+                    return Address. LocationGeo.Latitude;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+
+        }
+
+        public double Longitude
+        {
+            get
+            {
+                if (Address != null && Address.LocationGeo != null)
+                {
+                    return Address.LocationGeo.Longitude;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+
+        }
+
+        public String Marker
+        {
+            get
+            {
+                if (Address != null && Address.LocationGeo != null)
+                {
+                    return Address.LocationGeo.Marker;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+        }
+
+
+        public String Title
+        {
+            get
+            {
+                if (Address!=null&& Address.LocationGeo != null)
+                {
+                    return this.Address.Name;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+        }
+
     }
 }
 

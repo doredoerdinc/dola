@@ -164,8 +164,9 @@
 
 <div id="main">
    
-      <button id="openBtn" onclick="openNav()">☰ Open</button>
+    
      <div id="map"></div>
+      <button id="openBtn" onclick="openNav()">☰ Open</button>
 </div>
 
 <script>

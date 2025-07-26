@@ -6,8 +6,7 @@
       <Action Id="LabelCreateFromOrderLine" ImageName="Truck16X16" />
       <Action Id="Link" Caption="Baglantı" />
       <Action Id="mapDistanceAddress" ImageName="Distributed_32x32" />
-      <Action Id="mapDistanceAddressQuantity" ImageName="LoadMap_32x32" />
-      <Action Id="MapViewAction" ImageName="ColorizerMap_32x32" PaintStyle="Image" />
+      <Action Id="MapViewAction" ImageName="GeoPointMap_32x32" PaintStyle="Image" />
       <Action Id="mapViewTripCargoAction" ImageName="ColorizerMap_32x32" />
       <Action Id="OrderItemExtoMap" ImageName="AddNewDataSource_32x32" />
       <Action Id="OrderItemImport" ImageName="Action_Export_ToExcel_32x32" />
@@ -34,7 +33,6 @@
         </DisableReasons>
       </Action>
       <Action Id="ShowInReportV2" ImageName="DefaultPrinter_32x32" />
-      <Action Id="ShowOnMap" ImageName="GeoPoint_32x32" />
     </Actions>
     <DisableActions>
       <DisableAction Id="@7456f588-67fe-4182-aa64-ebdbb80249e2" Action="GoodsIn" Removed="True" />
@@ -81,6 +79,8 @@
           <Item Id="RoutePlan" ViewId="RoutePlan_ListView" ImageName="PieMap_16x16" Index="1" IsNewNode="True" />
           <Item Id="Transport" Index="5" ImageName="Truck16X16" ViewId="Vehicle_ListView" IsNewNode="True" />
           <Item Id="@1d5293f3-568f-47d9-9a91-ea08b6c4334a" ViewId="DeliveryPlan_Daily_ListView" Caption="Delivery Plan Daily" ImageName="BOReport_16x16" IsNewNode="True" />
+          <Item Id="@6469d767-2acf-4d47-ad8a-1372361fb5d9" ViewId="WorkingArea_ListView" IsNewNode="True" />
+          <Item Id="@7ded2bb5-4db4-4d3a-a507-aa2adb1ca34f" ViewId="RoutePlanTransport_ListView" ImageName="Truck16X16" IsNewNode="True" />
         </Items>
       </Item>
       <Item Id="Operation" Caption="WareHouse" ImageName="BO_Employee" Index="3" ViewId="" IsNewNode="True">
@@ -110,7 +110,6 @@
           <Item Id="@4a827b8c-76c2-479f-b7b8-ca41c62ca7fe" ViewId="Role_ListView" Index="100" IsNewNode="True" />
           <Item Id="@2878a06f-586c-44a7-9aca-58dc357103a2" ViewId="User_ListView" Index="101" IsNewNode="True" />
           <Item Id="@1d78e386-9b6a-4292-b288-4927f48d1546" ViewId="Owner_ListView" ImageName="Home_16x16" IsNewNode="True" />
-          <Item Id="@6469d767-2acf-4d47-ad8a-1372361fb5d9" ViewId="WorkingArea_ListView" IsNewNode="True" />
           <Item Id="@74a985e6-133e-4f80-b4a9-719a5133de0d" ViewId="Address_ListView" IsNewNode="True" />
           <Item Id="@971c24f4-7867-4339-b674-ed3bdc3f1001" ViewId="TaskTemplate_ListView" IsNewNode="True" />
         </Items>
@@ -2037,67 +2036,83 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
-    <DetailView Id="RoutePlan_DetailView">
+    <DetailView Id="RoutePlanTransport_DetailView">
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
-          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
-            <LayoutGroup Id="RoutePlan" RelativeSize="100">
-              <TabbedGroup Id="Item2" CaptionLocation="Top" Index="0" RelativeSize="100" IsNewNode="True">
-                <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Index="0" RelativeSize="100" Caption="Item1" IsNewNode="True">
-                  <LayoutItem Id="Description" ViewItem="Description" Index="0" RelativeSize="7.8048780487804876" IsNewNode="True" />
-                  <LayoutItem Id="StartAddress" ViewItem="StartAddress" Index="1" RelativeSize="5.8536585365853657" IsNewNode="True" />
-                  <LayoutItem Id="PlanedStartTime" ViewItem="PlanedStartTime" Index="2" RelativeSize="5.8536585365853657" IsNewNode="True" />
-                  <LayoutItem Id="PlanedFinishedTime" ViewItem="PlanedFinishedTime" Index="3" RelativeSize="5.8536585365853657" IsNewNode="True" />
-                  <LayoutItem Id="State" ViewItem="State" Index="4" RelativeSize="74.634146341463421" IsNewNode="True" />
+          <LayoutGroup Id="SimpleEditors" RelativeSize="14.348302300109529">
+            <LayoutGroup Id="RoutePlanTransport" RelativeSize="77.099236641221367" Caption="RoutePlanTransport" Direction="Horizontal">
+              <LayoutGroup Id="Auto2186406e-3c6e-4da0-ba21-9cf166934827" ShowCaption="False" Caption="Auto2186406e-3c6e-4da0-ba21-9cf166934827(4)" Index="0" RelativeSize="33.308383233532936" IsNewNode="True">
+                <LayoutItem Id="SysCode" ViewItem="SysCode" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
+                <LayoutItem Id="Owner" ViewItem="Owner" Index="1" RelativeSize="27.272727272727273" IsNewNode="True" />
+                <LayoutItem Id="State" ViewItem="State" Index="2" RelativeSize="36.363636363636367" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Autoffc8d5f5-d031-48e0-8cc7-d2699227b5d1" ShowCaption="False" Caption="Autoffc8d5f5-d031-48e0-8cc7-d2699227b5d1(11)" Direction="Horizontal" Index="1" RelativeSize="66.691616766467064" IsNewNode="True">
+                <LayoutGroup Id="Auto0b0d8a2f-17a3-46bf-8af8-7b55ea1ba854" ShowCaption="False" Caption="Auto0b0d8a2f-17a3-46bf-8af8-7b55ea1ba854(12)" Index="0" RelativeSize="49.943883277216614" IsNewNode="True">
+                  <LayoutItem Id="WorkingTime1" ViewItem="WorkingTime" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
+                  <LayoutItem Id="WorkingTime" ViewItem="WorkingTime" Index="1" RelativeSize="27.272727272727273" IsNewNode="True" />
+                  <LayoutItem Id="Description" ViewItem="Description" Index="2" RelativeSize="36.363636363636367" IsNewNode="True" />
                 </LayoutGroup>
-                <LayoutGroup Id="Trips" ShowCaption="True" Index="1" RelativeSize="100" IsNewNode="True">
-                  <LayoutItem Id="Trips" ViewItem="Trips" Index="0" RelativeSize="100" IsNewNode="True" />
+                <LayoutGroup Id="Auto8c83bc0c-c6e6-4fc4-86a4-27e9753373fe" ShowCaption="False" Caption="Auto8c83bc0c-c6e6-4fc4-86a4-27e9753373fe(15)" Index="1" RelativeSize="50.056116722783386" IsNewNode="True">
+                  <LayoutItem Id="TotalStation" ViewItem="TotalStation" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
+                  <LayoutItem Id="TotalKm" ViewItem="TotalKm" Index="1" RelativeSize="27.272727272727273" IsNewNode="True" />
+                  <LayoutItem Id="TotalDuration" ViewItem="TotalDuration" Index="2" RelativeSize="36.363636363636367" IsNewNode="True" />
                 </LayoutGroup>
-                <LayoutGroup Id="Orders" ShowCaption="True" Index="2" RelativeSize="100" IsNewNode="True">
-                  <LayoutItem Id="Orders" ViewItem="Orders" Index="0" RelativeSize="100" IsNewNode="True" />
-                </LayoutGroup>
-              </TabbedGroup>
-              <LayoutItem Id="Description" RelativeSize="29.906542056074766" Removed="True" />
-              <LayoutItem Id="StartAddress" RelativeSize="17.391304347826086" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="RoutePlanTransport_col1" Index="1" RelativeSize="16.616766467065869" Caption="RoutePlanTransport_col1" Removed="True">
+                <LayoutItem Id="Owner" RelativeSize="100" Index="0" Removed="True" />
+                <LayoutItem Id="Description" Removed="True" />
+                <LayoutItem Id="WorkingTime" RelativeSize="36.363636363636367" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="RoutePlanTransport_col2" Index="2" RelativeSize="16.91616766467066" Caption="RoutePlanTransport_col2" Removed="True">
+                <LayoutItem Id="TotalDuration" RelativeSize="36.363636363636367" Index="0" Removed="True" />
+                <LayoutItem Id="TotalKm" RelativeSize="100" Index="0" Removed="True" />
+                <LayoutItem Id="TotalStation" RelativeSize="36.363636363636367" Removed="True" />
+              </LayoutGroup>
             </LayoutGroup>
-            <LayoutGroup Id="ObjectBase" RelativeSize="41.422594142259413" Index="2" Removed="True">
-              <LayoutGroup Id="ObjectBase_col1" RelativeSize="49.914236706689536">
+            <LayoutGroup Id="BaseObjectC" RelativeSize="15.706806282722512" Index="1" Caption="Sys Code" Removed="True">
+              <LayoutItem Id="SysCode" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutItem Id="Description" ViewItem="Description" Index="1" RelativeSize="22.900763358778626" IsNewNode="True" />
+            <LayoutGroup Id="ObjectBase" RelativeSize="61.490683229813662" Index="1" Removed="True">
+              <LayoutGroup Id="ObjectBase_col1" RelativeSize="49.950835791543753">
                 <LayoutItem Id="CreatedBy" RelativeSize="36.363636363636367" />
                 <LayoutItem Id="CreateTime" RelativeSize="36.363636363636367" />
                 <LayoutItem Id="UpdateTime" RelativeSize="27.272727272727273" />
               </LayoutGroup>
-              <LayoutGroup Id="ObjectBase_col2" RelativeSize="50.085763293310464">
+              <LayoutGroup Id="ObjectBase_col2" RelativeSize="50.049164208456247">
                 <LayoutItem Id="ObjectSpace" RelativeSize="63.636363636363633" />
                 <LayoutItem Id="UpdateBy" RelativeSize="36.363636363636367" />
               </LayoutGroup>
             </LayoutGroup>
-            <LayoutGroup Id="BaseObjectC" Caption="Sys Code" RelativeSize="11.152416356877323" Removed="True">
-              <LayoutItem Id="SysCode" Removed="True" />
-            </LayoutGroup>
-            <LayoutGroup Id="BaseObjectState" RelativeSize="60.393873085339166" Caption="State" Removed="True">
+            <LayoutGroup Id="BaseObjectState" RelativeSize="10.859728506787331" Caption="State" Removed="True">
               <LayoutItem Id="State" RelativeSize="100" Removed="True" />
             </LayoutGroup>
           </LayoutGroup>
-          <TabbedGroup Id="Tabs" RelativeSize="59.080962800875277" Removed="True">
-            <LayoutGroup Id="Orders" RelativeSize="100" Index="0" Removed="True">
-              <LayoutItem Id="Orders" RelativeSize="100" />
-            </LayoutGroup>
-            <LayoutGroup Id="Trips" RelativeSize="100" Removed="True">
-              <LayoutItem Id="Trips" RelativeSize="100" />
-            </LayoutGroup>
-          </TabbedGroup>
+          <LayoutGroup Id="WorkingTimes_Group" Direction="Vertical" RelativeSize="85.651697699890477">
+            <LayoutItem Id="WorkingTimes" RelativeSize="100" />
+          </LayoutGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
-    <ListView Id="RoutePlan_ListView">
+    <ListView Id="RoutePlanTransport_ListView">
       <Columns>
-        <ColumnInfo Id="SysCode" Width="91" />
+        <ColumnInfo Id="SysCode" Width="241" />
+        <ColumnInfo Id="WorkingTime" Width="87" />
+        <ColumnInfo Id="Owner" Width="55" />
       </Columns>
     </ListView>
-    <ListView Id="RoutePlan_Orders_ListView">
+    <ListView Id="RoutePlanTransport_WorkingTimes_ListView" InlineEditMode="Batch" IsFooterVisible="True" IsAdaptive="True">
       <Columns>
-        <ColumnInfo Id="SysCode" Width="165" />
+        <ColumnInfo Id="Address" Index="-1" />
+        <ColumnInfo Id="ID" Index="-1" />
+        <ColumnInfo Id="RoutePlanTransport" Index="0" />
+        <ColumnInfo Id="Address.Name" PropertyName="Address.Name" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="Address.City" PropertyName="Address.City" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="Address.District" PropertyName="Address.District" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="DayOfWeek" Width="93" Index="4" />
+        <ColumnInfo Id="StartTime" Index="5" />
       </Columns>
+      <MapSettings ControlsEnabled="False" MarkersTooltipsEnabled="False" />
     </ListView>
     <DetailView Id="State_DetailView">
       <Layout>
@@ -3676,7 +3691,7 @@
     </ListView>
     <DetailView Id="WorkingArea_DetailView">
       <Items>
-        <PropertyEditor Id="Address" LinkView="Address_ListView" />
+        <PropertyEditor Id="Address" LinkView="Address_ListView" View="Address_LookupListView" />
       </Items>
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
@@ -3715,6 +3730,38 @@
     <ListView Id="WorkingArea_ListView">
       <Columns>
         <ColumnInfo Id="SysCode" Width="105" />
+      </Columns>
+    </ListView>
+    <ListView Id="WorkingTime_ListView">
+      <Columns>
+        <ColumnInfo Id="ID" Width="60" />
+        <ColumnInfo Id="Address.Owner" PropertyName="Address.Owner" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="Address.AddressType" PropertyName="Address.AddressType" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="Address.City" PropertyName="Address.City" Index="5" IsNewNode="True" />
+        <ColumnInfo Id="Address.District" PropertyName="Address.District" Index="6" IsNewNode="True" />
+        <ColumnInfo Id="Address.WorkingArea" PropertyName="Address.WorkingArea" Index="7" IsNewNode="True" />
+        <ColumnInfo Id="Address.DistanceMaptoAddressQuantity" PropertyName="Address.DistanceMaptoAddressQuantity" Index="8" IsNewNode="True" />
+        <ColumnInfo Id="Address.Town" PropertyName="Address.Town" Index="9" IsNewNode="True" />
+        <ColumnInfo Id="DayOfWeek" Index="10" />
+        <ColumnInfo Id="StartTime" Index="11" />
+        <ColumnInfo Id="FinishTime" Index="12" />
+      </Columns>
+    </ListView>
+    <ListView Id="WorkingTime_LookupListView">
+      <Columns>
+        <ColumnInfo Id="Address.Owner" PropertyName="Address.Owner" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="Address" PropertyName="Address" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="Address.District" PropertyName="Address.District" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="Address.City" PropertyName="Address.City" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="Address.Town" PropertyName="Address.Town" Index="5" IsNewNode="True" />
+        <ColumnInfo Id="Address.WorkingArea" PropertyName="Address.WorkingArea" Index="6" IsNewNode="True" />
+        <ColumnInfo Id="Address.ContactName" PropertyName="Address.ContactName" Index="7" IsNewNode="True" />
+        <ColumnInfo Id="Address.Name" PropertyName="Address.Name" Index="8" IsNewNode="True" />
+        <ColumnInfo Id="Address.OpenAddress" PropertyName="Address.OpenAddress" Index="9" IsNewNode="True" />
+        <ColumnInfo Id="Address.DistanceMaptoAddressQuantity" PropertyName="Address.DistanceMaptoAddressQuantity" Index="10" IsNewNode="True" />
+        <ColumnInfo Id="Address.ContactPhone" PropertyName="Address.ContactPhone" Index="11" IsNewNode="True" />
+        <ColumnInfo Id="Address.Description2" PropertyName="Address.Description2" Index="12" IsNewNode="True" />
+        <ColumnInfo Id="Address.Description" PropertyName="Address.Description" Index="13" IsNewNode="True" />
       </Columns>
     </ListView>
   </Views>

@@ -18,7 +18,6 @@
       <Action Id="SaveAndClose" Caption="Kaydet ve  Kapat " />
       <Action Id="SaveAndNew" Caption="Kaydet ve Yeni " />
       <Action Id="ShowInReportV2" Caption="Yazdır" ConfirmationMessage="Yazıcıya Göndereceksiniz " />
-      <Action Id="ShowOnMap" Caption="Harita" />
       <Action Id="Unlink" Caption="Çıkart" />
     </Actions>
     <ActionToContainerMapping>
@@ -349,13 +348,6 @@
         <Member Name="OrderRule" Caption="Sipariş Kuralı" />
         <Member Name="OrderType" Caption="Sipariş tip" />
         <Member Name="VehicleType" Caption="Araç Tip" />
-      </OwnMembers>
-    </Class>
-    <Class Name="dola.Module.RoutePlan">
-      <OwnMembers>
-        <Member Name="Description" Caption="Açıklama" />
-        <Member Name="Orders" Caption="Siparişler" />
-        <Member Name="Trips" Caption="Seferler" />
       </OwnMembers>
     </Class>
     <Class Name="dola.Module.Task">
@@ -1362,17 +1354,6 @@
     <ListView Id="RotaOperationSmart_ListView">
       <Columns>
         <ColumnInfo Id="ItemType" Caption="Malzeme Tür" />
-      </Columns>
-    </ListView>
-    <ListView Id="RoutePlan_Orders_ListView">
-      <Columns>
-        <ColumnInfo Id="RequestFinishTime" Caption="Talep Bitiş Zaman" />
-        <ColumnInfo Id="Warehouse" Caption="Depo" />
-      </Columns>
-    </ListView>
-    <ListView Id="RoutePlan_Trips_ListView">
-      <Columns>
-        <ColumnInfo Id="RequestFinishTime" Caption="Talep Bitiş Zaman" />
       </Columns>
     </ListView>
     <ListView Id="RuleSetValidationResultItem_ByTarget_ListView">

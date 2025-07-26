@@ -553,8 +553,8 @@ namespace dola.Module
             set { _IntegrationCode = value; }
         }
 
-        RoutePlan _RoutePlan;
-        public virtual RoutePlan RoutePlan
+        RoutePlanTransport _RoutePlan;
+        public virtual RoutePlanTransport RoutePlan
         {
             get { return _RoutePlan; }
             set { _RoutePlan = value; }

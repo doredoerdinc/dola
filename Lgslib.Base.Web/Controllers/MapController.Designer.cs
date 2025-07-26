@@ -29,24 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.ShowOnMap = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
-            // 
-            // ShowOnMap
-            // 
-            this.ShowOnMap.Caption = "Show On Map";
-            this.ShowOnMap.ConfirmationMessage = null;
-            this.ShowOnMap.Id = "ShowOnMap";
-            this.ShowOnMap.ToolTip = null;
-            this.ShowOnMap.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.ShowOnMap_Execute);
-            // 
-            // MapController
-            // 
-            this.Actions.Add(this.ShowOnMap);
-
+           
         }
 
         #endregion
 
-        private DevExpress.ExpressApp.Actions.SimpleAction ShowOnMap;
+        
     }
 }

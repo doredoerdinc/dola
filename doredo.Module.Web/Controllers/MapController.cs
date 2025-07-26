@@ -34,23 +34,9 @@ namespace dola.Module.Web
     public static class MapStatic
     {
 
-        public static string CallMapView()
+        public static string CallMapView(string path)
         {
-            return @"
-                            let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
-width=600,height=300,left=100,top=100`;
-                            function openOnce(url, target){
-                                       var winref = window.open('','test',params);
-                                        if (winref.location.href === 'about:blank')
-                                        {
-                                            winref.location.href = url;
-                                        }
-                             
-                                        return winref;
-                                    }
-                                openOnce('../map/MapView.aspx', 'MyWindowName');
-                            ";
-        }
+return @"let params=`scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=600,height=300,left=100,top=100`;function openOnce(url){var winref = window.open('','deneme',params);if (winref.location.href === 'about:blank'){winref.location.href = url;}else{winref.location.reload();}winref.focus();return winref;}var url='"+path+"';"+"" +"openOnce(url);";}
 
 
         static List<MapPointLGS> _StaticPointList;
@@ -213,6 +199,8 @@ width=600,height=300,left=100,top=100`;
             mapViewTripCargoAction.TargetObjectType = typeof(TripCargo);
             mapDistanceAddress.TargetObjectType= typeof(Address);
             mapDistanceAddressQuantity.TargetObjectType = typeof(Address);
+           // mapViewAction.TargetObjectType = typeof(IMapPoint);
+           // mapViewAction.TargetObjectType= typeof(IMapMultiplePoint);
 
         
             //mapViewTripCargoAction.SetClientScript(CallMapView());
@@ -397,7 +385,20 @@ width=600,height=300,left=100,top=100`;
         {
             var points = new List<MapPointLGS>();
             var objectSpace = Application.CreateObjectSpace();  
-            var mapModelObjectSpace = Application.CreateObjectSpace(typeof(Map)); 
+            var mapModelObjectSpace = Application.CreateObjectSpace(typeof(Map));
+            object firstObject=null;
+            if (View.CurrentObject != null)
+            {
+                firstObject = View.CurrentObject;
+            }else
+            {
+                firstObject= View.SelectedObjects.Cast<IMapPoint>().FirstOrDefault();
+            } 
+            var MapviewActionPath = "../map/MapView.aspx";
+            if (Frame is NestedFrame)
+            {
+                MapviewActionPath = "../../map/MapView.aspx";
+            }
             MapStatic.StaticPointList.RemoveAll(x=>x.Object==View.ObjectTypeInfo.FullName);  
                 foreach (var viewItem in View.SelectedObjects)
                 {
@@ -439,8 +440,10 @@ width=600,height=300,left=100,top=100`;
                 mapPoint2.Title = order.ToAddress.Name;
                 MapStatic.StaticPointList.Add(mapPoint2); 
              }
-            }
-         ((WebWindow)WebApplication.Instance.MainWindow).RegisterStartupScript("script",MapStatic.CallMapView()); 
+            } 
+            var callJavascript = MapStatic.CallMapView(MapviewActionPath);
+            Console.WriteLine(callJavascript);
+         ((WebWindow)WebApplication.Instance.MainWindow).RegisterStartupScript("script",callJavascript); 
 
         }
         protected override void OnActivated()
