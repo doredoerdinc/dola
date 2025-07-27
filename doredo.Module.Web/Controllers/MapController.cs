@@ -36,7 +36,40 @@ namespace dola.Module.Web
 
         public static string CallMapView(string path)
         {
-return @"let params=`scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=600,height=300,left=100,top=100`;function openOnce(url){var winref = window.open('','deneme',params);if (winref.location.href === 'about:blank'){winref.location.href = url;}else{winref.location.reload();}winref.focus();return winref;}var url='"+path+"';"+"" +"openOnce(url);";}
+            return @"
+let params = 'scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=600,height=300,left=100,top=100';
+let popupName = 'doredo';
+let popupRef = null;
+const bc = new BroadcastChannel('popup_channel');
+bc.onmessage = function(event) {
+    if (event.data === 'focus') {
+        if (popupRef && !popupRef.closed) popupRef.focus();
+    }
+};
+function openOnce(url) {
+    var absoluteUrl = new URL(url, window.location.origin).href;
+
+    if (!popupRef || popupRef.closed) {
+        popupRef = window.open(absoluteUrl, popupName, params);
+    } else {
+        try {
+            if (popupRef.location.href !== absoluteUrl) {
+                popupRef.location.href = absoluteUrl;
+            } else {
+                popupRef.location.reload();
+            }
+        } catch (e) {
+            popupRef.location.href = absoluteUrl;
+        }
+    }
+    popupRef.focus();
+    bc.postMessage('focus');
+    return popupRef;
+}  
+var url='" + path+"';"+"" +"" +
+"" +
+"openOnce(url);";
+        }
 
 
         static List<MapPointLGS> _StaticPointList;
@@ -133,7 +166,6 @@ return @"let params=`scrollbars=no,resizable=no,status=no,location=no,toolbar=no
 
 
     }
-
     public class GoogleRouteDraw
     {
 
@@ -175,8 +207,15 @@ return @"let params=`scrollbars=no,resizable=no,status=no,location=no,toolbar=no
             set { _EncodedPolyline = value; }
         }
 
-    }
+        String _Object;
+        public String Object
+        {
+            get { return _Object; }
+            set { _Object = value; }
+        }
 
+
+    }
     public class JSRouteSettings
     {
         public string mode;
@@ -199,6 +238,7 @@ return @"let params=`scrollbars=no,resizable=no,status=no,location=no,toolbar=no
             mapViewTripCargoAction.TargetObjectType = typeof(TripCargo);
             mapDistanceAddress.TargetObjectType= typeof(Address);
             mapDistanceAddressQuantity.TargetObjectType = typeof(Address);
+            MapRouteTruckAction.TargetObjectType = typeof(RoutePlanTransport);
            // mapViewAction.TargetObjectType = typeof(IMapPoint);
            // mapViewAction.TargetObjectType= typeof(IMapMultiplePoint);
 
@@ -244,7 +284,6 @@ return @"let params=`scrollbars=no,resizable=no,status=no,location=no,toolbar=no
                 {
                     orginLocationList.Add(locationGeo);
                 }
-               
             }
 
             this.ExecutePopupSimpleList<Address>((clientModel, nonObjectSpace) =>
@@ -384,27 +423,23 @@ return @"let params=`scrollbars=no,resizable=no,status=no,location=no,toolbar=no
         private void MapViewAction_Execute(object sender, SimpleActionExecuteEventArgs e)
         {
             var points = new List<MapPointLGS>();
-            var objectSpace = Application.CreateObjectSpace();  
+            var objectSpace = Application.CreateObjectSpace();
             var mapModelObjectSpace = Application.CreateObjectSpace(typeof(Map));
-            object firstObject=null;
+            ReloadMap(View);
+            object firstObject = null;
             if (View.CurrentObject != null)
             {
                 firstObject = View.CurrentObject;
-            }else
-            {
-                firstObject= View.SelectedObjects.Cast<IMapPoint>().FirstOrDefault();
-            } 
-            var MapviewActionPath = "../map/MapView.aspx";
-            if (Frame is NestedFrame)
-            {
-                MapviewActionPath = "../../map/MapView.aspx";
             }
-            MapStatic.StaticPointList.RemoveAll(x=>x.Object==View.ObjectTypeInfo.FullName);  
-                foreach (var viewItem in View.SelectedObjects)
+            else
+            {
+                firstObject = View.SelectedObjects.Cast<IMapPoint>().FirstOrDefault();
+            }
+            foreach (var viewItem in View.SelectedObjects)
+            {
+                if (viewItem is IMapPoint)
                 {
-                if ( viewItem is IMapPoint)
-                { 
-                    var point =viewItem as IMapPoint;
+                    var point = viewItem as IMapPoint;
                     var isPointAdd = MapStatic.StaticPointList.Find(x => x.Key == point.Key);
                     if (isPointAdd == null)
                     {
@@ -413,39 +448,169 @@ return @"let params=`scrollbars=no,resizable=no,status=no,location=no,toolbar=no
                         mapPoint1.Latitude = point.Latitude;
                         mapPoint1.Longitude = point.Longitude;
                         mapPoint1.Title = point.Title;
-                        mapPoint1.Object = View.ObjectTypeInfo.FullName; 
+                        mapPoint1.Object = View.ObjectTypeInfo.FullName;
                         MapStatic.StaticPointList.Add(mapPoint1);
                     }
 
-                } 
+                }
 
             }
-            if(View.CurrentObject is IRoute)
-            { 
-            foreach (var obj in View.SelectedObjects)
+            if (View.CurrentObject is IRoute)
             {
-                var order = obj as Order;
+                foreach (var obj in View.SelectedObjects)
+                {
+                    var order = obj as Order;
 
-                var mapPoint1 = mapModelObjectSpace.CreateObject<MapPointLGS>();
-                mapPoint1.Key = order.FromAddress.SysCode;
-                mapPoint1.Latitude = order.FromAddress.Latitude;
-                mapPoint1.Longitude = order.FromAddress.Longitude;
-                mapPoint1.Title = order.FromAddress.Name;
-                MapStatic.StaticPointList.Add(mapPoint1);
+                    var mapPoint1 = mapModelObjectSpace.CreateObject<MapPointLGS>();
+                    mapPoint1.Key = order.FromAddress.SysCode;
+                    mapPoint1.Latitude = order.FromAddress.Latitude;
+                    mapPoint1.Longitude = order.FromAddress.Longitude;
+                    mapPoint1.Title = order.FromAddress.Name;
+                    MapStatic.StaticPointList.Add(mapPoint1);
 
-                var mapPoint2 = mapModelObjectSpace.CreateObject<MapPointLGS>();
-                mapPoint2.Key = order.SysCode;
-                mapPoint2.Latitude = order.ToAddress.Latitude;
-                mapPoint2.Longitude = order.ToAddress.Longitude;
-                mapPoint2.Title = order.ToAddress.Name;
-                MapStatic.StaticPointList.Add(mapPoint2); 
-             }
-            } 
-            var callJavascript = MapStatic.CallMapView(MapviewActionPath);
-            Console.WriteLine(callJavascript);
-         ((WebWindow)WebApplication.Instance.MainWindow).RegisterStartupScript("script",callJavascript); 
+                    var mapPoint2 = mapModelObjectSpace.CreateObject<MapPointLGS>();
+                    mapPoint2.Key = order.SysCode;
+                    mapPoint2.Latitude = order.ToAddress.Latitude;
+                    mapPoint2.Longitude = order.ToAddress.Longitude;
+                    mapPoint2.Title = order.ToAddress.Name;
+                    MapStatic.StaticPointList.Add(mapPoint2);
+                }
+            }
+            ShowMapFrmScript();
 
         }
+
+        private void ShowMapFrmScript()
+        {
+           
+            var MapviewActionPath = "../map/MapView.aspx";
+            if (Frame is NestedFrame||View is DetailView)
+            {
+                MapviewActionPath = "../../map/MapView.aspx";
+            }
+            var callJavascript = MapStatic.CallMapView(MapviewActionPath);
+            ((WebWindow)WebApplication.Instance.MainWindow).RegisterStartupScript("script", callJavascript);
+        }
+
+        private void MapRouteTruckAction_Execute(object sender, SimpleActionExecuteEventArgs e)
+        {
+            var mapModelObjectSpace = Application.CreateObjectSpace(typeof(Map));
+            var objectSpace = Application.CreateObjectSpace();
+            ReloadMap(View);
+            object firstObject = null;
+            if (View.CurrentObject != null)
+            {
+                firstObject = View.CurrentObject;
+            }
+            else
+            {
+                firstObject = View.SelectedObjects.Cast<IMapPoint>().FirstOrDefault();
+            }
+
+            foreach (var routeItem in View.SelectedObjects)
+            {
+                var routeObjectKey = objectSpace.GetKeyValue(routeItem);
+                var routeObject = objectSpace.GetObjectByKey<RoutePlanTransport>(routeObjectKey);
+
+                for (int workTm = 0; workTm < routeObject.WorkingTimes.Count() - 1; workTm++)
+                {
+                    var workObjectFromKeyValue = objectSpace.GetKeyValue(routeObject.WorkingTimes[workTm]);
+                    var workObjectFrom = objectSpace.GetObjectByKey<WorkingTime>(workObjectFromKeyValue);
+
+                    var workObjectToKeyValue = objectSpace.GetKeyValue(routeObject.WorkingTimes[workTm + 1]);
+                    var workObjectTo = objectSpace.GetObjectByKey<WorkingTime>(workObjectToKeyValue);
+
+                    var findMat = GroupOperator.Combine(
+                       GroupOperatorType.And
+                       , new BinaryOperator("FromAddress.Syscode", workObjectFrom.Address.SysCode, BinaryOperatorType.Equal)
+                       , new BinaryOperator("ToAddressCode.SysCode", workObjectTo.Address.SysCode, BinaryOperatorType.Equal));
+
+                    GoogleRouteDraw newRouteDraw = null;
+                    var findMatRoute = objectSpace.FindObject<AddressRouteMatrix>(findMat);
+                    if (findMatRoute == null)
+                    {
+                        throw new System.ArgumentException(string.Format("Rota Matrisi bulunamadı FromId={0},{1}->ToId={2},{3}", workObjectFrom.ID.ToString(), workObjectFrom.Address.Name, workObjectTo.ID.ToString(), workObjectTo.Address.Name));
+                    }
+                    var routeKey = routeObject.SysCode + findMatRoute.ID.ToString();
+                    if (MapStatic.StaticRouteDrawList != null)
+                    {
+                        newRouteDraw = MapStatic.StaticRouteDrawList.Find(x => x.SysCode == routeKey);
+
+                        if (newRouteDraw == null && findMatRoute != null)
+                        {
+                            newRouteDraw = new GoogleRouteDraw();
+                            newRouteDraw.SysCode = routeKey;
+                            newRouteDraw.DictanceMeters = findMatRoute.DictanceMeters;
+                            newRouteDraw.Duration = findMatRoute.Duration;
+                            newRouteDraw.StaticDuration = findMatRoute.StaticDuration;
+                            newRouteDraw.EncodedPolyline = findMatRoute.EncodedPolyline;
+                            newRouteDraw.Object = View.ObjectTypeInfo.FullName;
+                            MapStatic.StaticRouteDrawList.Add(newRouteDraw);
+                            //
+
+                            MapPointLGS pointFrom = MapStatic.StaticPointList.Find(x => x.Key == workObjectFrom.Address.Key);
+                            if (pointFrom == null)
+                            {
+                                pointFrom = mapModelObjectSpace.CreateObject<MapPointLGS>();
+                                pointFrom.Key = workObjectFrom.Address.Key;
+                                pointFrom.Latitude = workObjectFrom.Address.Latitude;
+                                pointFrom.Longitude = workObjectFrom.Address.Longitude;
+                                pointFrom.Title = workObjectFrom.Address.Title;
+                                pointFrom.Object = View.ObjectTypeInfo.FullName;
+                                MapStatic.StaticPointList.Add(pointFrom);
+                            }
+
+                            MapPointLGS pointto = MapStatic.StaticPointList.Find(x => x.Key == workObjectFrom.Address.Key);
+                            if (pointto == null)
+                            {
+                                pointto = mapModelObjectSpace.CreateObject<MapPointLGS>();
+                                pointto.Key = workObjectTo.Address.Key;
+                                pointto.Latitude = workObjectTo.Address.Latitude;
+                                pointto.Longitude = workObjectTo.Address.Longitude;
+                                pointto.Title = workObjectTo.Address.Title;
+                                pointto.Object = View.ObjectTypeInfo.FullName;
+                                MapStatic.StaticPointList.Add(pointto);
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        MapStatic.StaticRouteDrawList = new List<GoogleRouteDraw>();
+                        newRouteDraw = new GoogleRouteDraw();
+                        newRouteDraw.SysCode = routeKey;
+                        newRouteDraw.DictanceMeters = findMatRoute.DictanceMeters;
+                        newRouteDraw.Duration = findMatRoute.Duration;
+                        newRouteDraw.StaticDuration = findMatRoute.StaticDuration;
+                        newRouteDraw.EncodedPolyline = findMatRoute.EncodedPolyline;
+                        newRouteDraw.Object = View.ObjectTypeInfo.FullName;
+                        MapStatic.StaticRouteDrawList.Add(newRouteDraw);
+                    }
+
+
+
+
+
+                }
+
+            }
+            ShowMapFrmScript();
+        }
+
+        private void ReloadMap(View view)
+        {
+            if (MapStatic.StaticRouteDrawList != null)
+            {
+                MapStatic.StaticRouteDrawList.RemoveAll(x => x.Object == view.ObjectTypeInfo.FullName);
+            }
+
+            if (MapStatic.StaticPointList != null)
+            {
+                MapStatic.StaticPointList.RemoveAll(x => x.Object == view.ObjectTypeInfo.FullName);
+
+            }
+        }
+
         protected override void OnActivated()
         { 
             base.OnActivated();

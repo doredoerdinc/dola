@@ -17,5 +17,10 @@ namespace dola.Web.map
         {
 
         }
+
+        protected override void OnUnload(EventArgs e)
+        {
+            base.OnUnload(e);
+        }
     }
 }

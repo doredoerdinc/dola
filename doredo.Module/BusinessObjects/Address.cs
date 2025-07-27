@@ -286,12 +286,13 @@ namespace dola.Module
             set { _FinishTime = value; }
         }
 
-        int? _RouteRow;
-        public int? RouteRow
+        double? _RouteRow;
+        public double? RouteRow
         {
             get { return _RouteRow; }
             set { _RouteRow = value; }
         }
+
 
         public String Key
         {

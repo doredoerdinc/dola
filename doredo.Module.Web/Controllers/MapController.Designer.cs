@@ -38,6 +38,7 @@ namespace dola.Module.Web
             this.mapDistanceAddress = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             this.mapDistanceAddressQuantity = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             this.mapViewAction = new DevExpress.ExpressApp.Actions.SimpleAction(this, "MapViewAction", PredefinedCategory.Edit);
+            this.MapRouteTruckAction = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
 
 
             // 
@@ -67,13 +68,27 @@ namespace dola.Module.Web
             this.mapViewAction.Id = "MapViewAction";
             this.mapViewAction.ToolTip = null;
             this.mapViewAction.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.MapViewAction_Execute);
-          
+
+
+            // 
+            // MapRouteTruck
+            // 
+            this.MapRouteTruckAction.Caption = "MapRouteTruckAction";
+            this.MapRouteTruckAction.ConfirmationMessage = null;
+            this.MapRouteTruckAction.Id = "mapRoutePlanTruck";
+            this.MapRouteTruckAction.ToolTip = null;
+            this.MapRouteTruckAction.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.MapRouteTruckAction_Execute);
+
+
+
             this.Actions.Add(this.mapViewAction);
+            this.Actions.Add(this.MapRouteTruckAction);
 
         }
         private DevExpress.ExpressApp.Actions.SimpleAction mapDistanceAddress;
         private DevExpress.ExpressApp.Actions.SimpleAction mapDistanceAddressQuantity;
         private DevExpress.ExpressApp.Actions.SimpleAction mapViewAction;
+        private DevExpress.ExpressApp.Actions.SimpleAction MapRouteTruckAction;
 
         #endregion
 

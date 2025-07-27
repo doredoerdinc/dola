@@ -51,6 +51,7 @@ namespace LgsLib.Base
         {
             // Unsubscribe from previously subscribed events and release other references and resources.
             base.OnDeactivated();
+            
          
         } 
         protected override void OnFrameAssigned()
