@@ -32,16 +32,13 @@ namespace dola.Module
         {
             get { return _WorkingTime; }
             set { _WorkingTime = value; }
-        }
-
-
+        } 
         Owner _Owner;
         public virtual Owner Owner
         {
             get { return _Owner; }
             set { _Owner = value; }
-        }
-
+        } 
         String _Description;
         public String Description
         {
@@ -80,6 +77,12 @@ namespace dola.Module
             }
         }
 
+        VehicleType _VehicleType;
+        public virtual VehicleType VehicleType
+        {
+            get { return _VehicleType; }
+            set { _VehicleType = value; }
+        } 
 
         public virtual IList<WorkingTime> WorkingTimes { get; set; }
 

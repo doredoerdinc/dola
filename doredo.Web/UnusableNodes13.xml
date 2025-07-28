@@ -1,0 +1,410 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DashboardView Id="WarehouseStockItemControl_DashBoardView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Auto4c1a780b-f5dc-46c4-9d53-ea2b321e1e45">
+            <LayoutGroup Id="Auto79408750-44c0-4af4-93c0-f0043b4d1a10">
+              <LayoutItem Id="StockItemControl" ViewItem="StockItemControl" />
+            </LayoutGroup>
+            <LayoutItem Id="Location" ViewItem="Location" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DashboardView>
+    <DashboardView Id="WarehouseStockItem_DashBoardView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Auto3b2888a8-762f-4951-bb77-1e94bb90614b">
+            <LayoutItem Id="TaskStepTransactionHistory_ListViewDashBoardView" ViewItem="TaskStepTransactionHistory_ListViewDashBoardView" />
+            <LayoutItem Id="StockItemItem_ListViewDashBoardView" ViewItem="StockItemItem_ListViewDashBoardView" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+      <Items Id="Items">
+        <DashboardViewItemRelation Id="Item">
+          <RelationListViews Id="RelationListViews">
+            <DashBoardRelationView Name="ItemToTransaction" DashboardViewItem="TaskStepTransactionHistory_ListViewDashBoardView" />
+            <DashBoardRelationView Name="ItemToStockItem" DashboardViewItem="StockItemItem_ListViewDashBoardView" />
+          </RelationListViews>
+        </DashboardViewItemRelation>
+      </Items>
+    </DashboardView>
+    <DashboardView Id="Warehouse_DashBoardView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <TabbedGroup Id="Item2">
+            <LayoutGroup Id="Item5">
+              <LayoutItem Id="Reservation" ViewItem="Reservation" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item4">
+              <LayoutItem Id="Label_ListView" ViewItem="Label_ListView" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+      <Items Id="Items">
+        <DashboardViewItemRelation Id="Order_GoodsInOut_ListView">
+          <RelationListViews Id="RelationListViews">
+            <DashBoardRelationView Name="OrderReservation" DashboardViewItem="Reservation" />
+            <DashBoardRelationView Name="OrderLabel_Relation" DashboardViewItem="Label_ListView" />
+          </RelationListViews>
+        </DashboardViewItemRelation>
+      </Items>
+    </DashboardView>
+    <ListView Id="Trip_Order_ListViewDHV" MasterDetailView="Order_Simple_DetailView" DetailViewID="Order_Simple_DetailView">
+      <MenuSettings Id="MenuSettings">
+        <MenuItem Name="TaskAssignedFromOrder" CallAction="TaskAssignedFromOrder" ParentMenu="Menu" />
+        <MenuItem Name="CreateTask_OrderGoodsInOut" CallAction="OrderGoodsInOut" ParentMenu="Menu" />
+      </MenuSettings>
+    </ListView>
+    <DetailView Id="Trip_MasterlView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="Points">
+              <LayoutItem Id="Points" ViewItem="Points" />
+            </LayoutGroup>
+            <LayoutGroup Id="Orders">
+              <LayoutItem Id="Orders" ViewItem="Orders" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DashboardView Id="Trip_DashBoardView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Autoadd88513-32d8-4e52-8a42-90dad033b966">
+            <LayoutItem Id="Order_Ready_DashBoardView" ViewItem="Order_Ready_DashBoardView" />
+          </LayoutGroup>
+          <LayoutGroup Id="Auto1312a2ce-a17a-4d84-819c-af844b15f1f7">
+            <LayoutItem Id="Order_Trip_DashBoardView" ViewItem="Order_Trip_DashBoardView" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+      <Items Id="Items">
+        <DashboardViewItemRelation Id="Trip_DashBoardView">
+          <RelationListViews Id="RelationListViews">
+            <DashBoardRelationView Name="Trip_Order" DashboardViewItem="Order_Trip_DashBoardView" />
+          </RelationListViews>
+        </DashboardViewItemRelation>
+      </Items>
+    </DashboardView>
+    <ListView Id="Order_Pick_ListViewDHV" MasterDetailView="Order_Simple_DetailView" DetailViewID="Order_Simple_DetailView">
+      <MenuSettings Id="MenuSettings">
+        <MenuItem Name="TaskAssignedFromOrder" CallAction="TaskAssignedFromOrder" ParentMenu="Menu" />
+        <MenuItem Name="OrderPickingReservation" CallAction="OrderPickingReservation" />
+      </MenuSettings>
+    </ListView>
+    <DetailView Id="Order_Pick_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="PickingItems">
+              <LayoutItem Id="PickingItems" ViewItem="PickingItems" />
+            </LayoutGroup>
+          </TabbedGroup>
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Auto8348b982-3346-43dd-a32c-4b0842b27bc2">
+              <LayoutGroup Id="Autof2c39942-667c-48bc-9103-488fa20aebfa">
+                <TabbedGroup Id="Item2">
+                  <LayoutGroup Id="Item3">
+                    <LayoutGroup Id="Auto3321ac2c-f5f3-4ae2-876c-facf7a1c851d">
+                      <LayoutItem Id="DocumentCode" ViewItem="DocumentCode" />
+                      <LayoutItem Id="LastTrip" ViewItem="LastTrip" />
+                    </LayoutGroup>
+                  </LayoutGroup>
+                </TabbedGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="Order_Create_MasterDetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="Lines">
+              <TabbedGroup Id="Item1">
+                <LayoutGroup Id="Item2">
+                  <LayoutGroup Id="Auto547c5a6b-46ec-4990-af74-106aa9469ed4">
+                    <LayoutGroup Id="Auto8af488b0-915f-45f3-8f5f-c28d7a6f888b">
+                      <LayoutGroup Id="Auto3c41a987-ec62-44d4-9a1b-2eaa5971f708">
+                        <LayoutGroup Id="Autod8bcd0dc-e16c-4232-a6b4-8fc2f04c4deb">
+                          <LayoutItem Id="LastTrip" ViewItem="LastTrip" />
+                        </LayoutGroup>
+                      </LayoutGroup>
+                      <LayoutGroup Id="Autoc5bb8624-b09b-4516-9854-4164ed4c86b4">
+                        <LayoutItem Id="Location" ViewItem="Location" />
+                      </LayoutGroup>
+                    </LayoutGroup>
+                  </LayoutGroup>
+                </LayoutGroup>
+              </TabbedGroup>
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Order_Create_ListView" DetailRowView="Order_Simple_DetailView" />
+    <DetailView Id="Order_Create_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="Item3">
+              <LayoutItem Id="StockItemItems" ViewItem="StockItemItems" />
+            </LayoutGroup>
+            <LayoutGroup Id="OrderLineReservations">
+              <LayoutItem Id="StockItemItemReservation" ViewItem="StockItemItemReservation" />
+            </LayoutGroup>
+            <LayoutGroup Id="Labels">
+              <LayoutItem Id="Labels" ViewItem="Labels" />
+            </LayoutGroup>
+            <LayoutGroup Id="Trips">
+              <LayoutItem Id="Trips" ViewItem="Trips" />
+            </LayoutGroup>
+            <LayoutGroup Id="Tasks">
+              <LayoutItem Id="Tasks" ViewItem="Tasks" />
+            </LayoutGroup>
+          </TabbedGroup>
+          <LayoutGroup Id="SimpleEditors">
+            <TabbedGroup Id="Item1">
+              <LayoutGroup Id="Item2">
+                <LayoutGroup Id="Auto5a755c00-ba28-40de-8253-03c0b0570b42">
+                  <LayoutGroup Id="Auto8303dd03-0cf4-4b95-ac1e-0c652d06031f">
+                    <LayoutItem Id="LastTrip" ViewItem="LastTrip" />
+                  </LayoutGroup>
+                </LayoutGroup>
+                <LayoutGroup Id="Auto547c5a6b-46ec-4990-af74-106aa9469ed4">
+                  <LayoutItem Id="Location" ViewItem="Location" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </TabbedGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Order_Canceled_ListView" DetailRowView="Order_Simple_DetailView" DetailViewID="Order_Simple_DetailView" />
+    <ListView Id="EntryLocation_ListViewDHV">
+      <MenuSettings Id="MenuSettings">
+        <MenuItem Name="ramp" CallAction="GoodsInOutFromEntry" />
+      </MenuSettings>
+    </ListView>
+    <DetailView Id="RoutePlanTransport_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="RoutePlanTransport">
+              <LayoutGroup Id="Autoffc8d5f5-d031-48e0-8cc7-d2699227b5d1">
+                <LayoutGroup Id="Auto8c83bc0c-c6e6-4fc4-86a4-27e9753373fe">
+                  <LayoutGroup Id="Item1">
+                    <LayoutItem Id="Volume" ViewItem="Volume" />
+                    <LayoutItem Id="Width" ViewItem="Width" />
+                    <LayoutItem Id="Height" ViewItem="Height" />
+                    <LayoutItem Id="Length" ViewItem="Length" />
+                  </LayoutGroup>
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutGroup Id="Auto2186406e-3c6e-4da0-ba21-9cf166934827">
+                <LayoutGroup Id="Item2">
+                  <LayoutItem Id="PalletCapacity" ViewItem="PalletCapacity" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="EntryLocation_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Auto51e816b4-40dd-41bd-87fd-6a021f3234c5">
+              <LayoutGroup Id="Auto61d89184-7bf6-4dd2-902e-8adc2cf82d2d">
+                <LayoutGroup Id="Auto334c0d98-53ec-4883-8d17-c0679b265ddd">
+                  <LayoutItem Id="Location" ViewItem="Location" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="Item_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <TabbedGroup Id="Item5">
+              <LayoutGroup Id="SmartMobiles">
+                <LayoutItem Id="SmartMobiles" ViewItem="SmartMobiles" />
+              </LayoutGroup>
+              <LayoutGroup Id="Locations">
+                <LayoutItem Id="Locations" ViewItem="Locations" />
+              </LayoutGroup>
+              <LayoutGroup Id="Item6">
+                <LayoutGroup Id="Autoc862da0c-46fe-4411-8f75-47c77b9137ac">
+                  <LayoutGroup Id="Auto6fbab5ca-fd22-4c45-8046-379a1c289dbb">
+                    <LayoutItem Id="Volume" ViewItem="Volume" />
+                  </LayoutGroup>
+                </LayoutGroup>
+                <LayoutGroup Id="Autob89e1f9a-bd90-4371-8c9c-646ab2b1d027">
+                  <LayoutItem Id="UnitType" ViewItem="UnitType" />
+                  <LayoutItem Id="StockItemUnitType" ViewItem="StockItemUnitType" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </TabbedGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="Order_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Auto8348b982-3346-43dd-a32c-4b0842b27bc2">
+              <LayoutGroup Id="Autof2c39942-667c-48bc-9103-488fa20aebfa">
+                <TabbedGroup Id="Item2">
+                  <LayoutGroup Id="Item3">
+                    <LayoutGroup Id="Auto3321ac2c-f5f3-4ae2-876c-facf7a1c851d">
+                      <LayoutItem Id="DocumentCode" ViewItem="DocumentCode" />
+                      <LayoutItem Id="LastTrip" ViewItem="LastTrip" />
+                    </LayoutGroup>
+                  </LayoutGroup>
+                </TabbedGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="OrderLine_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <TabbedGroup Id="Item1">
+              <LayoutGroup Id="Item2">
+                <LayoutGroup Id="Auto78f334d2-d217-4867-9552-ab74207e46d5">
+                  <LayoutItem Id="BoxQuantity" ViewItem="BoxQuantity" />
+                  <LayoutItem Id="PackageQuantity" ViewItem="PackageQuantity" />
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutGroup Id="OrderLine">
+                <LayoutGroup Id="OrderLine_col1">
+                  <LayoutGroup Id="Auto7a8ad2ef-033c-480d-b67d-565e89c8190a">
+                    <LayoutGroup Id="Auto78910cf2-418a-45e7-b286-f003395c49f7">
+                      <LayoutGroup Id="Autoe3a6d72a-f5f9-4281-a8a8-9303756e78bf">
+                        <LayoutItem Id="Reservation" ViewItem="Reservation" />
+                      </LayoutGroup>
+                    </LayoutGroup>
+                  </LayoutGroup>
+                </LayoutGroup>
+              </LayoutGroup>
+            </TabbedGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="Owner_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <TabbedGroup Id="Item3">
+              <LayoutGroup Id="Item5">
+                <LayoutItem Id="Addresses" ViewItem="Addresses" />
+              </LayoutGroup>
+              <LayoutGroup Id="Item1">
+                <LayoutGroup Id="Auto30be0d2a-2a02-4581-b1d7-2c55216793b9">
+                  <LayoutGroup Id="Auto5332a47d-7caa-4c78-8d7b-aebf1f626b01">
+                    <LayoutGroup Id="Auto6d0e2466-36ca-4752-89c8-356aab0216f3">
+                      <LayoutItem Id="Industry" ViewItem="Industry" />
+                    </LayoutGroup>
+                  </LayoutGroup>
+                </LayoutGroup>
+              </LayoutGroup>
+            </TabbedGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="Task_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Task">
+              <LayoutGroup Id="Task_col1">
+                <TabbedGroup Id="Item2">
+                  <LayoutGroup Id="Item1">
+                    <LayoutGroup Id="Autoa84f57fd-ba8c-4be8-9804-3140fec670c5">
+                      <LayoutGroup Id="Item6">
+                        <LayoutItem Id="Assigned" ViewItem="Assigned" />
+                      </LayoutGroup>
+                    </LayoutGroup>
+                  </LayoutGroup>
+                </TabbedGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="TaskTemplate_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <TabbedGroup Id="Item3">
+              <LayoutGroup Id="TaskTemplate">
+                <LayoutGroup Id="TaskTemplate_col1">
+                  <LayoutGroup Id="Auto11d0a96d-d81c-410f-95ad-9bcf43705c8f">
+                    <LayoutGroup Id="Auto90a9dcc8-e9bc-4e49-8902-69a10ec67ba7">
+                      <LayoutGroup Id="Auto55b12eb8-b8da-4819-95c7-9aeb92bf84eb">
+                        <LayoutGroup Id="Autof9b734be-eda7-4b1d-bd52-3bbcb567d05c">
+                          <LayoutItem Id="StockItemTransactionType" ViewItem="StockItemTransactionType" />
+                        </LayoutGroup>
+                      </LayoutGroup>
+                    </LayoutGroup>
+                  </LayoutGroup>
+                </LayoutGroup>
+              </LayoutGroup>
+            </TabbedGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="WorkingArea_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="WorkingArea">
+              <LayoutGroup Id="WorkingArea_col2">
+                <LayoutGroup Id="Item3">
+                  <LayoutItem Id="CrossDockAddress" ViewItem="CrossDockAddress" />
+                  <LayoutItem Id="CrossDeliveryAddress" ViewItem="CrossDeliveryAddress" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+  <NavigationItems Id="NavigationItems">
+    <Items Id="Items">
+      <Item Id="Operation">
+        <Items Id="Items">
+          <Item Id="Stok Takip" ViewId="StockItemItem_ListViewDashBoardView" />
+          <Item Id="PackingStation" ViewId="Location_ListView" />
+        </Items>
+      </Item>
+      <Item Id="Transport">
+        <Items Id="Items">
+          <Item Id="@1d5293f3-568f-47d9-9a91-ea08b6c4334a" ViewId="DeliveryPlan_Daily_ListView" />
+          <Item Id="RoutePlan" ViewId="RoutePlan_ListView" />
+        </Items>
+      </Item>
+      <Item Id="Order" ViewId="OrderOneToOne_ListView" />
+    </Items>
+  </NavigationItems>
+</Application>

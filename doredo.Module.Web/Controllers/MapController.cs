@@ -231,8 +231,7 @@ namespace dola.Module.Web
         private void MapViewAction_Execute(object sender, SimpleActionExecuteEventArgs e)
         {          
             var objectSpace = Application.CreateObjectSpace();
-            
-           // ReloadMap(View);
+            ReloadMap(View);
             object firstObject = null;
             if (View.CurrentObject != null)
             {
@@ -279,10 +278,9 @@ namespace dola.Module.Web
         }
 
         private void MapRouteTruckAction_Execute(object sender, SimpleActionExecuteEventArgs e)
-        {
-           
+        { 
             var objectSpace = Application.CreateObjectSpace();
- //           ReloadMap(View);
+            ReloadMap(View);
             object firstObject = null;
             if (View.CurrentObject != null)
             {

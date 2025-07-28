@@ -157,8 +157,16 @@ namespace dola.Module
         {
             get { return _IntegrationCode; }
             set { _IntegrationCode = value; }
-        } 
-      
+        }
+
+        String _MapLink;
+        public String MapLink
+        {
+            get { return _MapLink; }
+            set { _MapLink = value; }
+        }
+
+
         public String Key
         {
             get { return this.ID.ToString(); }

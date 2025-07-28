@@ -2038,55 +2038,59 @@
       </Layout>
     </DetailView>
     <DetailView Id="RoutePlanTransport_DetailView">
+      <Items>
+        <PropertyEditor Id="WorkingTime" PropertyName="WorkingTime" IsNewNode="True" Removed="True" />
+        <PropertyEditor Id="WorkingTime.Address.AddressType" PropertyName="WorkingTime.Address.AddressType" IsNewNode="True" />
+        <PropertyEditor Id="WorkingTime.Address.City" PropertyName="WorkingTime.Address.City" IsNewNode="True" />
+        <PropertyEditor Id="WorkingTime.Address.District" PropertyName="WorkingTime.Address.District" IsNewNode="True" />
+        <PropertyEditor Id="WorkingTime.Address.Name" PropertyName="WorkingTime.Address.Name" IsNewNode="True" />
+      </Items>
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
           <LayoutGroup Id="SimpleEditors" RelativeSize="14.348302300109529">
-            <LayoutGroup Id="RoutePlanTransport" RelativeSize="77.099236641221367" Caption="RoutePlanTransport" Direction="Horizontal">
-              <LayoutGroup Id="Auto2186406e-3c6e-4da0-ba21-9cf166934827" ShowCaption="False" Caption="Auto2186406e-3c6e-4da0-ba21-9cf166934827(4)" Index="0" RelativeSize="33.308383233532936" IsNewNode="True">
-                <LayoutItem Id="SysCode" ViewItem="SysCode" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
-                <LayoutItem Id="Owner" ViewItem="Owner" Index="1" RelativeSize="27.272727272727273" IsNewNode="True" />
-                <LayoutItem Id="State" ViewItem="State" Index="2" RelativeSize="36.363636363636367" IsNewNode="True" />
+            <LayoutGroup Id="RoutePlanTransport" RelativeSize="100">
+              <LayoutGroup Id="RoutePlanTransport_col1" RelativeSize="33.333333333333336">
+                <LayoutItem Id="VehicleType" ViewItem="VehicleType" Index="0" RelativeSize="28.571428571428573" IsNewNode="True" />
+                <LayoutItem Id="Owner" Index="1" RelativeSize="21.428571428571427" />
+                <LayoutItem Id="Description" Index="2" RelativeSize="21.428571428571427" />
+                <LayoutItem Id="TotalStation" Index="2" RelativeSize="36.363636363636367" Removed="True" />
+                <LayoutItem Id="SysCode" ViewItem="SysCode" Index="3" RelativeSize="28.571428571428573" IsNewNode="True" />
+                <LayoutItem Id="WorkingTime" Removed="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Autoffc8d5f5-d031-48e0-8cc7-d2699227b5d1" ShowCaption="False" Caption="Autoffc8d5f5-d031-48e0-8cc7-d2699227b5d1(11)" Direction="Horizontal" Index="1" RelativeSize="66.691616766467064" IsNewNode="True">
-                <LayoutGroup Id="Auto0b0d8a2f-17a3-46bf-8af8-7b55ea1ba854" ShowCaption="False" Caption="Auto0b0d8a2f-17a3-46bf-8af8-7b55ea1ba854(12)" Index="0" RelativeSize="49.943883277216614" IsNewNode="True">
-                  <LayoutItem Id="WorkingTime1" ViewItem="WorkingTime" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
-                  <LayoutItem Id="WorkingTime" ViewItem="WorkingTime" Index="1" RelativeSize="27.272727272727273" IsNewNode="True" />
-                  <LayoutItem Id="Description" ViewItem="Description" Index="2" RelativeSize="36.363636363636367" IsNewNode="True" />
+              <LayoutGroup Id="RoutePlanTransport_col2" RelativeSize="66.666666666666671" Caption="RoutePlanTransport_col2" Direction="Horizontal">
+                <LayoutGroup Id="Autodf5da183-21aa-4e2a-8946-36057b54fda2" ShowCaption="False" Caption="" Index="0" RelativeSize="50" IsNewNode="True">
+                  <LayoutItem Id="WorkingTime" ViewItem="WorkingTime" Index="0" RelativeSize="28.571428571428573" IsNewNode="True" />
+                  <LayoutItem Id="TotalDuration" ViewItem="TotalDuration" Index="1" RelativeSize="21.428571428571427" IsNewNode="True" />
+                  <LayoutItem Id="TotalStation" ViewItem="TotalStation" Index="2" RelativeSize="21.428571428571427" IsNewNode="True" />
+                  <LayoutItem Id="TotalKm" ViewItem="TotalKm" Index="3" RelativeSize="28.571428571428573" IsNewNode="True" />
                 </LayoutGroup>
-                <LayoutGroup Id="Auto8c83bc0c-c6e6-4fc4-86a4-27e9753373fe" ShowCaption="False" Caption="Auto8c83bc0c-c6e6-4fc4-86a4-27e9753373fe(15)" Index="1" RelativeSize="50.056116722783386" IsNewNode="True">
-                  <LayoutItem Id="TotalStation" ViewItem="TotalStation" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
-                  <LayoutItem Id="TotalKm" ViewItem="TotalKm" Index="1" RelativeSize="27.272727272727273" IsNewNode="True" />
-                  <LayoutItem Id="TotalDuration" ViewItem="TotalDuration" Index="2" RelativeSize="36.363636363636367" IsNewNode="True" />
+                <LayoutGroup Id="Autod04e47bb-d6ca-44db-9601-8a15877307d5" ShowCaption="False" Caption="" Index="1" RelativeSize="50" IsNewNode="True">
+                  <LayoutItem Id="WorkingTime.Address.AddressType" ViewItem="WorkingTime.Address.AddressType" Index="0" RelativeSize="28.571428571428573" IsNewNode="True" />
+                  <LayoutItem Id="WorkingTime.Address.District" ViewItem="WorkingTime.Address.District" Index="1" RelativeSize="21.428571428571427" IsNewNode="True" />
+                  <LayoutItem Id="WorkingTime.Address.City" ViewItem="WorkingTime.Address.City" Index="2" RelativeSize="21.428571428571427" IsNewNode="True" />
+                  <LayoutItem Id="State" ViewItem="State" Index="3" RelativeSize="28.571428571428573" IsNewNode="True" />
                 </LayoutGroup>
-              </LayoutGroup>
-              <LayoutGroup Id="RoutePlanTransport_col1" Index="1" RelativeSize="16.616766467065869" Caption="RoutePlanTransport_col1" Removed="True">
-                <LayoutItem Id="Owner" RelativeSize="100" Index="0" Removed="True" />
-                <LayoutItem Id="Description" Removed="True" />
-                <LayoutItem Id="WorkingTime" RelativeSize="36.363636363636367" Removed="True" />
-              </LayoutGroup>
-              <LayoutGroup Id="RoutePlanTransport_col2" Index="2" RelativeSize="16.91616766467066" Caption="RoutePlanTransport_col2" Removed="True">
-                <LayoutItem Id="TotalDuration" RelativeSize="36.363636363636367" Index="0" Removed="True" />
-                <LayoutItem Id="TotalKm" RelativeSize="100" Index="0" Removed="True" />
-                <LayoutItem Id="TotalStation" RelativeSize="36.363636363636367" Removed="True" />
+                <LayoutItem Id="TotalKm" RelativeSize="21.428571428571427" Index="2" Removed="True" />
+                <LayoutItem Id="VehicleType" RelativeSize="28.571428571428573" Index="3" Removed="True" />
+                <LayoutItem Id="TotalDuration" RelativeSize="28.571428571428573" Removed="True" />
               </LayoutGroup>
             </LayoutGroup>
-            <LayoutGroup Id="BaseObjectC" RelativeSize="15.706806282722512" Index="1" Caption="Sys Code" Removed="True">
+            <LayoutGroup Id="BaseObjectC" RelativeSize="50.751879699248121" Caption="Sys Code" Removed="True">
               <LayoutItem Id="SysCode" RelativeSize="100" Removed="True" />
             </LayoutGroup>
-            <LayoutItem Id="Description" ViewItem="Description" Index="1" RelativeSize="22.900763358778626" IsNewNode="True" />
-            <LayoutGroup Id="ObjectBase" RelativeSize="61.490683229813662" Index="1" Removed="True">
-              <LayoutGroup Id="ObjectBase_col1" RelativeSize="49.950835791543753">
+            <LayoutGroup Id="BaseObjectState" RelativeSize="53.007518796992478" Caption="State" Removed="True">
+              <LayoutItem Id="State" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="ObjectBase" RelativeSize="37.218045112781958" Removed="True">
+              <LayoutGroup Id="ObjectBase_col1" RelativeSize="49.898989898989896">
                 <LayoutItem Id="CreatedBy" RelativeSize="36.363636363636367" />
                 <LayoutItem Id="CreateTime" RelativeSize="36.363636363636367" />
                 <LayoutItem Id="UpdateTime" RelativeSize="27.272727272727273" />
               </LayoutGroup>
-              <LayoutGroup Id="ObjectBase_col2" RelativeSize="50.049164208456247">
+              <LayoutGroup Id="ObjectBase_col2" RelativeSize="50.101010101010104">
                 <LayoutItem Id="ObjectSpace" RelativeSize="63.636363636363633" />
                 <LayoutItem Id="UpdateBy" RelativeSize="36.363636363636367" />
               </LayoutGroup>
-            </LayoutGroup>
-            <LayoutGroup Id="BaseObjectState" RelativeSize="10.859728506787331" Caption="State" Removed="True">
-              <LayoutItem Id="State" RelativeSize="100" Removed="True" />
             </LayoutGroup>
           </LayoutGroup>
           <LayoutGroup Id="WorkingTimes_Group" Direction="Vertical" RelativeSize="85.651697699890477">
@@ -2099,7 +2103,15 @@
       <Columns>
         <ColumnInfo Id="SysCode" Width="241" />
         <ColumnInfo Id="WorkingTime" Width="87" />
-        <ColumnInfo Id="Owner" Width="55" />
+        <ColumnInfo Id="WorkingTime.Address.Name" PropertyName="WorkingTime.Address.Name" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="WorkingTime.Address.District" PropertyName="WorkingTime.Address.District" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="WorkingTime.Address.City" PropertyName="WorkingTime.Address.City" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="Owner" Width="55" Index="5" />
+        <ColumnInfo Id="Description" Index="6" />
+        <ColumnInfo Id="TotalStation" Index="7" />
+        <ColumnInfo Id="TotalDuration" Index="8" />
+        <ColumnInfo Id="TotalKm" Index="9" />
+        <ColumnInfo Id="VehicleType" Index="10" />
       </Columns>
     </ListView>
     <ListView Id="RoutePlanTransport_WorkingTimes_ListView" InlineEditMode="Batch" IsFooterVisible="True" IsAdaptive="True">
