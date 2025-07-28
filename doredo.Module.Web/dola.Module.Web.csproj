@@ -212,10 +212,13 @@
   <ItemGroup>
     <None Include="app.config" />
     <Compile Include="Controllers\GoogleService.cs" />
-    <Compile Include="Controllers\MapController.cs" />
+    <Compile Include="Controllers\MapController.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controllers\MapController.Designer.cs">
       <DependentUpon>MapController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\MapStatic.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="map.aspx.cs">
       <DependentUpon>map.aspx</DependentUpon>

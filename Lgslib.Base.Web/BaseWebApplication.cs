@@ -7,7 +7,7 @@ using DevExpress.ExpressApp.EF;
 using System.Data.Common;
 using LgsLib.Base;
 
-namespace Lgslib.Base.Web
+namespace LgsLib.Base.Web
 {
     class BaseWebApplication: WebApplication
     {

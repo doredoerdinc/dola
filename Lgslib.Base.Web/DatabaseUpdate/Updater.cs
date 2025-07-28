@@ -7,7 +7,7 @@ using DevExpress.ExpressApp.Updating;
 using DevExpress.ExpressApp.EF;
 
 
-namespace Lgslib.Base.Web.DatabaseUpdate {
+namespace LgsLib.Base.Web.DatabaseUpdate {
     // For more typical usage scenarios, be sure to check out https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.Updating.ModuleUpdater
     public class Updater : ModuleUpdater {
         public Updater(IObjectSpace objectSpace, Version currentDBVersion) :

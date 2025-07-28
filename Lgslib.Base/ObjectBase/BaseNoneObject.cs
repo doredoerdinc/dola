@@ -77,17 +77,13 @@ namespace LgsLib.Base
         {
             get { return _Marker; }
             set { _Marker = value; }
-        }
-
-
+        } 
         List<MapPointLGS> _Points;
         public List<MapPointLGS> Points
         {
             get { return _Points; }
             set { _Points = value; }
-        }
-
-
+        } 
     }
 
     [DomainComponent]

@@ -25,7 +25,7 @@ using DevExpress.ExpressApp.Web.SystemModule;
 using DevExpress.ExpressApp.Web.Templates;
 using DevExpress.ExpressApp.Web.TestScripts;
 
-namespace Lgslib.Base.Web
+namespace LgsLib.Base.Web
 {
 
     public class JSRouteSettings

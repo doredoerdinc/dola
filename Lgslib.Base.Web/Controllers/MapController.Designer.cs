@@ -1,4 +1,4 @@
-﻿namespace Lgslib.Base.Web
+﻿namespace LgsLib.Base.Web
 {
     partial class MapController
     {

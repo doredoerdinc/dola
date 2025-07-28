@@ -29,201 +29,9 @@ using DevExpress.ExpressApp.Web.SystemModule;
 using DevExpress.ExpressApp.Web.Templates;
 using DevExpress.ExpressApp.Web.TestScripts;
 
+
 namespace dola.Module.Web
 { 
-    public static class MapStatic
-    {
-
-        public static string CallMapView(string path)
-        {
-            return @"
-let params = 'scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=600,height=300,left=100,top=100';
-let popupName = 'doredo';
-let popupRef = null;
-const bc = new BroadcastChannel('popup_channel');
-bc.onmessage = function(event) {
-    if (event.data === 'focus') {
-        if (popupRef && !popupRef.closed) popupRef.focus();
-    }
-};
-function openOnce(url) {
-    var absoluteUrl = new URL(url, window.location.origin).href;
-
-    if (!popupRef || popupRef.closed) {
-        popupRef = window.open(absoluteUrl, popupName, params);
-    } else {
-        try {
-            if (popupRef.location.href !== absoluteUrl) {
-                popupRef.location.href = absoluteUrl;
-            } else {
-                popupRef.location.reload();
-            }
-        } catch (e) {
-            popupRef.location.href = absoluteUrl;
-        }
-    }
-    popupRef.focus();
-    bc.postMessage('focus');
-    return popupRef;
-}  
-var url='" + path+"';"+"" +"" +
-"" +
-"openOnce(url);";
-        }
-
-
-        static List<MapPointLGS> _StaticPointList;
-        public static List<MapPointLGS> StaticPointList
-        {
-            get { return _StaticPointList; }
-            set { _StaticPointList = value; }
-        }
-
-        static List<MapPointOrderTransfer> _StaticMapPointOrderTransferList;
-        public static List<MapPointOrderTransfer> StaticMapPointOrderTransferList
-        {
-            get { return _StaticMapPointOrderTransferList; }
-            set { _StaticMapPointOrderTransferList = value; }
-        }
-
-        public static string RemoveIllegalCharacters(string text) // method alınacak
-        {
-            string cleanText=null;
-            if (!string.IsNullOrEmpty(text))
-            {
-                cleanText=Regex.Replace(text, @"[^a-zA-Z0-9ğüşöçıİĞÜŞÖÇ\s_]", "");
-            }
-            return cleanText;
-            // Harf, rakam, boşluk ve alt çizgi dışındaki her şeyi sil
-
-        }
-
-        static List<GoogleRouteDraw> _StaticRouteDrawList;
-        static public List<GoogleRouteDraw> StaticRouteDrawList
-        {
-            get { return _StaticRouteDrawList; }
-            set { _StaticRouteDrawList = value; }
-        }
-
-        public static List<PolyLatLng> DecodePolylinePoints(string encodedPoints)
-        {
-            if (encodedPoints == null || encodedPoints == "") return null;
-            List<PolyLatLng> poly = new List<PolyLatLng>();
-            char[] polylinechars = encodedPoints.ToCharArray();
-            int index = 0;
-
-            int currentLat = 0;
-            int currentLng = 0;
-            int next5bits;
-            int sum;
-            int shifter;
-
-            try
-            {
-                while (index < polylinechars.Length)
-                {
-                    // calculate next latitude
-                    sum = 0;
-                    shifter = 0;
-                    do
-                    {
-                        next5bits = (int)polylinechars[index++] - 63;
-                        sum |= (next5bits & 31) << shifter;
-                        shifter += 5;
-                    } while (next5bits >= 32 && index < polylinechars.Length);
-
-                    if (index >= polylinechars.Length)
-                        break;
-
-                    currentLat += (sum & 1) == 1 ? ~(sum >> 1) : (sum >> 1);
-
-                    //calculate next longitude
-                    sum = 0;
-                    shifter = 0;
-                    do
-                    {
-                        next5bits = (int)polylinechars[index++] - 63;
-                        sum |= (next5bits & 31) << shifter;
-                        shifter += 5;
-                    } while (next5bits >= 32 && index < polylinechars.Length);
-
-                    if (index >= polylinechars.Length && next5bits >= 32)
-                        break;
-
-                    currentLng += (sum & 1) == 1 ? ~(sum >> 1) : (sum >> 1);
-                    PolyLatLng p = new PolyLatLng();
-                    p.lat = Convert.ToDouble(currentLat) / 100000.0;
-                    p.lng = Convert.ToDouble(currentLng) / 100000.0;
-                    poly.Add(p);
-                }
-            }
-            catch (Exception ex)
-            {
-                // logo it
-            }
-            return poly;
-        }
-
-
-    }
-    public class GoogleRouteDraw
-    {
-
-        String _SysCode;
-        public String SysCode
-        {
-            get { return _SysCode; }
-            set { _SysCode = value; }
-        }
-
-
-
-        double? _DictanceMeters;
-        public double? DictanceMeters
-        {
-            get { return _DictanceMeters; }
-            set { _DictanceMeters = value; }
-        }
-
-        string _Duration;
-        public string Duration
-        {
-            get { return _Duration; }
-            set { _Duration = value; }
-        }
-
-
-        string _StaticDuration;
-        public string StaticDuration
-        {
-            get { return _StaticDuration; }
-            set { _StaticDuration = value; }
-        }
-
-        string _EncodedPolyline; 
-        public string EncodedPolyline
-        {
-            get { return _EncodedPolyline; }
-            set { _EncodedPolyline = value; }
-        }
-
-        String _Object;
-        public String Object
-        {
-            get { return _Object; }
-            set { _Object = value; }
-        }
-
-
-    }
-    public class JSRouteSettings
-    {
-        public string mode;
-        public double opacity;
-        public int weight;
-        public string color;
-        public List<MapPoint> locations;
-    }
     // For more typical usage scenarios, be sure to check out https://documentation.devexpress.com/eXpressAppFramework/clsDevExpressExpressAppViewControllertopic.aspx.
     public partial class MapController : ViewController
     {  
@@ -332,7 +140,7 @@ var url='" + path+"';"+"" +"" +
         {
             var points = new List<MapPointLGS>();
             var objectSpace = Application.CreateObjectSpace();
-            var mapModelObjectSpace = Application.CreateObjectSpace(typeof(Map));
+            
             List<Order> selectedOrders = new List<Order>();
              
             foreach (var item in View.SelectedObjects)
@@ -388,7 +196,7 @@ var url='" + path+"';"+"" +"" +
                     var findPosition = MapStatic.StaticMapPointOrderTransferList.Find(x => x.Key == from.groupOrder.FromAddress.SysCode);
                     if (findPosition == null)
                     {
-                        var mapTransfer = mapModelObjectSpace.CreateObject<MapPointOrderTransfer>();
+                        var mapTransfer = MapStatic.MapObjectSpace.CreateObject<MapPointOrderTransfer>();
                         mapTransfer.Key = from.groupOrder.FromAddress.SysCode;
                         mapTransfer.Latitude = from.groupOrder.FromAddress.LocationGeo.Latitude;
                         mapTransfer.Longitude = from.groupOrder.FromAddress.LocationGeo.Longitude;
@@ -404,7 +212,7 @@ var url='" + path+"';"+"" +"" +
                     var findPosition = MapStatic.StaticMapPointOrderTransferList.Find(x => x.Key == to.groupOrder.ToAddress.SysCode);
                     if (findPosition == null)
                     {
-                        var mapTransfer = mapModelObjectSpace.CreateObject<MapPointOrderTransfer>();
+                        var mapTransfer = MapStatic.MapObjectSpace.CreateObject<MapPointOrderTransfer>();
                         mapTransfer.Key = to.groupOrder.ToAddress.SysCode;
                         mapTransfer.Latitude = to.groupOrder.ToAddress.LocationGeo.Latitude;
                         mapTransfer.Longitude = to.groupOrder.ToAddress.LocationGeo.Longitude;
@@ -421,11 +229,10 @@ var url='" + path+"';"+"" +"" +
             }
         } 
         private void MapViewAction_Execute(object sender, SimpleActionExecuteEventArgs e)
-        {
-            var points = new List<MapPointLGS>();
+        {          
             var objectSpace = Application.CreateObjectSpace();
-            var mapModelObjectSpace = Application.CreateObjectSpace(typeof(Map));
-            ReloadMap(View);
+            
+           // ReloadMap(View);
             object firstObject = null;
             if (View.CurrentObject != null)
             {
@@ -443,7 +250,7 @@ var url='" + path+"';"+"" +"" +
                     var isPointAdd = MapStatic.StaticPointList.Find(x => x.Key == point.Key);
                     if (isPointAdd == null)
                     {
-                        var mapPoint1 = mapModelObjectSpace.CreateObject<MapPointLGS>();
+                        var mapPoint1 = MapStatic.MapObjectSpace.CreateObject<MapPointLGS>();
                         mapPoint1.Key = point.Key;
                         mapPoint1.Latitude = point.Latitude;
                         mapPoint1.Longitude = point.Longitude;
@@ -451,29 +258,6 @@ var url='" + path+"';"+"" +"" +
                         mapPoint1.Object = View.ObjectTypeInfo.FullName;
                         MapStatic.StaticPointList.Add(mapPoint1);
                     }
-
-                }
-
-            }
-            if (View.CurrentObject is IRoute)
-            {
-                foreach (var obj in View.SelectedObjects)
-                {
-                    var order = obj as Order;
-
-                    var mapPoint1 = mapModelObjectSpace.CreateObject<MapPointLGS>();
-                    mapPoint1.Key = order.FromAddress.SysCode;
-                    mapPoint1.Latitude = order.FromAddress.Latitude;
-                    mapPoint1.Longitude = order.FromAddress.Longitude;
-                    mapPoint1.Title = order.FromAddress.Name;
-                    MapStatic.StaticPointList.Add(mapPoint1);
-
-                    var mapPoint2 = mapModelObjectSpace.CreateObject<MapPointLGS>();
-                    mapPoint2.Key = order.SysCode;
-                    mapPoint2.Latitude = order.ToAddress.Latitude;
-                    mapPoint2.Longitude = order.ToAddress.Longitude;
-                    mapPoint2.Title = order.ToAddress.Name;
-                    MapStatic.StaticPointList.Add(mapPoint2);
                 }
             }
             ShowMapFrmScript();
@@ -489,14 +273,16 @@ var url='" + path+"';"+"" +"" +
                 MapviewActionPath = "../../map/MapView.aspx";
             }
             var callJavascript = MapStatic.CallMapView(MapviewActionPath);
+            var filePath2 = String.Format(AppDomain.CurrentDomain.BaseDirectory + @"\{0}.js", View.ObjectTypeInfo.Name);
+            System.IO.File.WriteAllText(filePath2, callJavascript);
             ((WebWindow)WebApplication.Instance.MainWindow).RegisterStartupScript("script", callJavascript);
         }
 
         private void MapRouteTruckAction_Execute(object sender, SimpleActionExecuteEventArgs e)
         {
-            var mapModelObjectSpace = Application.CreateObjectSpace(typeof(Map));
+           
             var objectSpace = Application.CreateObjectSpace();
-            ReloadMap(View);
+ //           ReloadMap(View);
             object firstObject = null;
             if (View.CurrentObject != null)
             {
@@ -551,7 +337,7 @@ var url='" + path+"';"+"" +"" +
                             MapPointLGS pointFrom = MapStatic.StaticPointList.Find(x => x.Key == workObjectFrom.Address.Key);
                             if (pointFrom == null)
                             {
-                                pointFrom = mapModelObjectSpace.CreateObject<MapPointLGS>();
+                                pointFrom = MapStatic.MapObjectSpace.CreateObject<MapPointLGS>();
                                 pointFrom.Key = workObjectFrom.Address.Key;
                                 pointFrom.Latitude = workObjectFrom.Address.Latitude;
                                 pointFrom.Longitude = workObjectFrom.Address.Longitude;
@@ -563,7 +349,7 @@ var url='" + path+"';"+"" +"" +
                             MapPointLGS pointto = MapStatic.StaticPointList.Find(x => x.Key == workObjectFrom.Address.Key);
                             if (pointto == null)
                             {
-                                pointto = mapModelObjectSpace.CreateObject<MapPointLGS>();
+                                pointto = MapStatic.MapObjectSpace.CreateObject<MapPointLGS>();
                                 pointto.Key = workObjectTo.Address.Key;
                                 pointto.Latitude = workObjectTo.Address.Latitude;
                                 pointto.Longitude = workObjectTo.Address.Longitude;
@@ -614,12 +400,21 @@ var url='" + path+"';"+"" +"" +
         protected override void OnActivated()
         { 
             base.OnActivated();
-            MapStatic.StaticPointList = new List<MapPointLGS>();
+
+            if (MapStatic.MapObjectSpace == null)
+            {
+                MapStatic.MapObjectSpace = Application.CreateObjectSpace(typeof(Map));
+            }
+            if (MapStatic.StaticPointList == null)
+            {
+                MapStatic.StaticPointList = new List<MapPointLGS>();
+            }
+            
             if (MapStatic.StaticMapPointOrderTransferList == null)
             {
                 MapStatic.StaticMapPointOrderTransferList = new List<MapPointOrderTransfer>();
             }
-            
+
         }
 
         protected override void OnAfterConstruction()
