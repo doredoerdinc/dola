@@ -45,13 +45,13 @@ namespace dola.Module.Web
             mapViewTripCargoAction.Execute += MapViewTripCargoAction_Execute;
             mapViewTripCargoAction.TargetObjectType = typeof(TripCargo);
             mapDistanceAddress.TargetObjectType= typeof(Address);
-            mapDistanceAddressQuantity.TargetObjectType = typeof(Address);
             mapRouteTruckAction.TargetObjectType = typeof(RoutePlanTransport);
+            mapRoutePlanCalculate.TargetObjectType = typeof(RoutePlanTransport);
 
            // mapViewAction.TargetObjectType = typeof(IMapPoint);
            // mapViewAction.TargetObjectType= typeof(IMapMultiplePoint);
 
-        
+
             //mapViewTripCargoAction.SetClientScript(CallMapView());
         } 
  

@@ -35,10 +35,10 @@ namespace dola.Module.Web
         {
             this.components = new System.ComponentModel.Container();
             this.mapDistanceAddress = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
-            this.mapDistanceAddressQuantity = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
-            this.mapViewAction = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
+             this.mapViewAction = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             this.mapRouteTruckAction = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             this.mapRoutePlanCalculate = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
+
             // 
             // mapDistanceAddress
             // 
@@ -47,13 +47,7 @@ namespace dola.Module.Web
             this.mapDistanceAddress.Id = "mapDistanceAddress";
             this.mapDistanceAddress.ToolTip = null;
             this.mapDistanceAddress.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.mapDistanceAddress_Execute);
-            // 
-            // mapDistanceAddressQuantity
-            // 
-            this.mapDistanceAddressQuantity.Caption = null;
-            this.mapDistanceAddressQuantity.ConfirmationMessage = null;
-            this.mapDistanceAddressQuantity.Id = "ff97bf55-2ee2-4346-a218-a6d2f3fdc78f";
-            this.mapDistanceAddressQuantity.ToolTip = null;
+           
             // 
             // mapViewAction
             // 
@@ -83,15 +77,13 @@ namespace dola.Module.Web
             // 
             // MapController
             // 
-            this.Actions.Add(this.mapDistanceAddress);
-            this.Actions.Add(this.mapDistanceAddressQuantity);
+            this.Actions.Add(this.mapDistanceAddress); 
             this.Actions.Add(this.mapViewAction);
             this.Actions.Add(this.mapRouteTruckAction);
             this.Actions.Add(this.mapRoutePlanCalculate);
 
         }
-        private DevExpress.ExpressApp.Actions.SimpleAction mapDistanceAddress;
-        private DevExpress.ExpressApp.Actions.SimpleAction mapDistanceAddressQuantity;
+        private DevExpress.ExpressApp.Actions.SimpleAction mapDistanceAddress; 
         private DevExpress.ExpressApp.Actions.SimpleAction mapViewAction;
         private DevExpress.ExpressApp.Actions.SimpleAction mapRouteTruckAction;
 
