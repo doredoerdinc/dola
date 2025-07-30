@@ -305,33 +305,13 @@
     <Compile Include="GlobalWindowsController.Designer.cs">
       <DependentUpon>GlobalWindowsController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202507260443373_a.cs" />
-    <Compile Include="Migrations\202507260443373_a.designer.cs">
-      <DependentUpon>202507260443373_a.cs</DependentUpon>
+    <Compile Include="Migrations\202507300826595_a.cs" />
+    <Compile Include="Migrations\202507300826595_a.designer.cs">
+      <DependentUpon>202507300826595_a.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202507260501281_saat.cs" />
-    <Compile Include="Migrations\202507260501281_saat.designer.cs">
-      <DependentUpon>202507260501281_saat.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202507260513151_nulfir.cs" />
-    <Compile Include="Migrations\202507260513151_nulfir.designer.cs">
-      <DependentUpon>202507260513151_nulfir.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202507260612460_test.cs" />
-    <Compile Include="Migrations\202507260612460_test.designer.cs">
-      <DependentUpon>202507260612460_test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202507260621297_a1.cs" />
-    <Compile Include="Migrations\202507260621297_a1.designer.cs">
-      <DependentUpon>202507260621297_a1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202507281855479_a2.cs" />
-    <Compile Include="Migrations\202507281855479_a2.designer.cs">
-      <DependentUpon>202507281855479_a2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202507281903266_bc.cs" />
-    <Compile Include="Migrations\202507281903266_bc.designer.cs">
-      <DependentUpon>202507281903266_bc.cs</DependentUpon>
+    <Compile Include="Migrations\202507300925496_a1.cs" />
+    <Compile Include="Migrations\202507300925496_a1.designer.cs">
+      <DependentUpon>202507300925496_a1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Module.cs">
@@ -366,26 +346,11 @@
     <EmbeddedResource Include="Controllers\MainDashBoardController.resx">
       <DependentUpon>MainDashBoardController.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202507260443373_a.resx">
-      <DependentUpon>202507260443373_a.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202507300826595_a.resx">
+      <DependentUpon>202507300826595_a.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202507260501281_saat.resx">
-      <DependentUpon>202507260501281_saat.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202507260513151_nulfir.resx">
-      <DependentUpon>202507260513151_nulfir.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202507260612460_test.resx">
-      <DependentUpon>202507260612460_test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202507260621297_a1.resx">
-      <DependentUpon>202507260621297_a1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202507281855479_a2.resx">
-      <DependentUpon>202507281855479_a2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202507281903266_bc.resx">
-      <DependentUpon>202507281903266_bc.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202507300925496_a1.resx">
+      <DependentUpon>202507300925496_a1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Model.DesignedDiffs.xafml" />
     <EmbeddedResource Include="Module.resx">

@@ -6,7 +6,8 @@
       <Action Id="LabelCreateFromOrderLine" ImageName="Truck16X16" />
       <Action Id="Link" Caption="Baglantı" />
       <Action Id="mapDistanceAddress" ImageName="Distributed_32x32" />
-      <Action Id="mapRoutePlanTruck" ImageName="DeltaColorizerMap_32x32" />
+      <Action Id="mapRoutePlanCalculate" ImageName="Distributed_32x32" PaintStyle="Image" />
+      <Action Id="mapRoutePlanTruck" ImageName="Distributed_32x32" />
       <Action Id="MapViewAction" ImageName="GeoPointMap_32x32" PaintStyle="Image" />
       <Action Id="mapViewTripCargoAction" ImageName="ColorizerMap_32x32" />
       <Action Id="OrderItemExtoMap" ImageName="AddNewDataSource_32x32" />

@@ -224,16 +224,16 @@ openOnce(url);";
             set { _DictanceMeters = value; }
         }
 
-        string _Duration;
-        public string Duration
+        double? _Duration;
+        public double? Duration
         {
             get { return _Duration; }
             set { _Duration = value; }
         }
 
 
-        string _StaticDuration;
-        public string StaticDuration
+        double? _StaticDuration;
+        public double? StaticDuration
         {
             get { return _StaticDuration; }
             set { _StaticDuration = value; }

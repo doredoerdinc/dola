@@ -2,16 +2,16 @@
   "origin": {
     "location": {
       "latLng": {
-        "latitude": 39.7511561,
-        "longitude": 30.3513857
+        "latitude": 39.9179913,
+        "longitude": 32.8555011
       }
     }
   },
   "destination": {
     "location": {
       "latLng": {
-        "latitude": 39.6500607,
-        "longitude": 27.9035473
+        "latitude": 40.2261547,
+        "longitude": 24.2320391
       }
     }
   }

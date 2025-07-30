@@ -164,23 +164,19 @@ namespace dola.Module
         {
             get { return _MapLink; }
             set { _MapLink = value; }
-        }
-
+        } 
 
         public String Key
         {
-            get { return this.ID.ToString(); }
-             
-        }
-
+            get { return this.ID.ToString(); }             
+        } 
         String _Marker;
         public String Marker
         {
             get { return _Marker; }
             set { _Marker = value; }
         }
-
-
+         
     }
      
     [Table("LocationGeoPoints")]

@@ -35,12 +35,12 @@ namespace dola.Module
                 set { _FromAddress = value; }
             }
 
-            Address _ToAddressCode;
-            [Column("FromAddress_Code")]
-            public virtual Address ToAddressCode
+            Address _ToAddress;
+            [Column("ToAddress_Code")]
+            public virtual Address ToAddress
             {
-                get { return _ToAddressCode; }
-                set { _ToAddressCode = value; }
+                get { return _ToAddress; }
+                set { _ToAddress = value; }
             }
 
             double? _DictanceMeters;
@@ -50,16 +50,16 @@ namespace dola.Module
                 set { _DictanceMeters = value; }
             }
 
-            string _Duration;
-            public string Duration
+            double? _Duration;
+            public double? Duration
             {
                 get { return _Duration; }
                 set { _Duration = value; }
             }
 
 
-            string _StaticDuration;
-            public string StaticDuration
+            double? _StaticDuration;
+            public double? StaticDuration
             {
                 get { return _StaticDuration; }
                 set { _StaticDuration = value; }

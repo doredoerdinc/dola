@@ -44,7 +44,7 @@ namespace dola.Module
     {
         public Address()
         {
-            AddressRouteMatrixies = new List<AddressRouteMatrix>();
+            AddressRouteMatrixies = new List<AddressRouteMatrix>(); 
             WorkingTimes = new List<WorkingTime>();
         }
         [InverseProperty("FromAddress")]
@@ -52,12 +52,36 @@ namespace dola.Module
         public virtual IList<WorkingTime> WorkingTimes { get; set; }
 
 
-        double? _DistanceMaptoAddressQuantity;
-        public double? DistanceMaptoAddressQuantity
+
+        int? _CalculateRouteRequest;
+        public int? CalculateRouteRequest
         {
-            get { return _DistanceMaptoAddressQuantity; }
-            set { _DistanceMaptoAddressQuantity = value; }
-        } 
+            get { return _CalculateRouteRequest; }
+            set { _CalculateRouteRequest = value; }
+        }
+
+        int? _CalculateRouteAddress;
+        public int? CalculateRouteAddress
+        {
+            get { return _CalculateRouteAddress; }
+            set { _CalculateRouteAddress = value; }
+        }
+
+        int? _UnCalculateRouteAddress;
+        public int? UnCalculateRouteAddress
+        {
+            get { return _UnCalculateRouteAddress; }
+            set { _UnCalculateRouteAddress = value; }
+        }
+
+        String _UncalculateAddress;
+        public String UncalculateAddress
+        {
+            get { return _UncalculateAddress; }
+            set { _UncalculateAddress = value; }
+        }
+
+
 
         WorkingArea _WorkingArea;
         public virtual WorkingArea WorkingArea
@@ -66,7 +90,7 @@ namespace dola.Module
             set { _WorkingArea = value; }
         } 
 
-        LocationGeo _LocationGeo;
+        LocationGeo _LocationGeo; 
         public virtual LocationGeo LocationGeo
         {
             get { return _LocationGeo; }
@@ -292,6 +316,13 @@ namespace dola.Module
             set { _RouteRow = value; }
         }
 
+        AddressRouteMatrix _AddressRouteMatrix;
+        public virtual AddressRouteMatrix AddressRouteMatrix
+        {
+            get { return _AddressRouteMatrix; }
+            set { _AddressRouteMatrix = value; }
+        }
+         
 
         public String Key
         {

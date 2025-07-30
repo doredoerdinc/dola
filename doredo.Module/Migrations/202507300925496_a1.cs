@@ -7,12 +7,12 @@
     {
         public override void Up()
         {
-            AddColumn("dbo.WorkingTime", "RouteRow", c => c.Int());
+            AddColumn("dbo.Address", "UncalculateAddress", c => c.String());
         }
         
         public override void Down()
         {
-            DropColumn("dbo.WorkingTime", "RouteRow");
+            DropColumn("dbo.Address", "UncalculateAddress");
         }
     }
 }

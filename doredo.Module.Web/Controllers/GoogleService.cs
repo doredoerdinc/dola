@@ -11,10 +11,12 @@ using Newtonsoft.Json.Linq;
 using System.Collections.Specialized;
 using System.Web;
 using DevExpress.ExpressApp;
- 
+using System.Net.Http;
+using System.Globalization;
+using DevExpress.Data.Filtering;
 
 namespace dola.Module.Web
-{ 
+{
     public class GOrigin
     {
         public GLocation location { get; set; }
@@ -41,171 +43,106 @@ namespace dola.Module.Web
         public double longitude { get; set; }
     }
 
-    public static class googleService
+    public  class googleService 
     {
-        public static void GetDistanceMatrix()
+        public static void ComputeRouteMatrix(List<LocationGeo> fromAddresses, List<LocationGeo> toAddresses, IObjectSpace objectSpace)
         {
-            using (var client = new WebClient())
+            using (HttpClient client = new HttpClient())
             {
-                var values = HttpUtility.ParseQueryString(string.Empty);
+                var apiKey = "AIzaSyBIMx0eWPwIW4LyicLuTUhpdWuuNq3rVz4"; // Config dosyasına taşı
+                var url = $"https://maps.googleapis.com/maps/api/distancematrix/json?key={apiKey}";
 
-         
+                var origins = string.Join("|", fromAddresses.Select(f =>
+                $"{f.Latitude.ToString(CultureInfo.InvariantCulture)},{f.Longitude.ToString(CultureInfo.InvariantCulture)}"));
 
-                values["origins"] = "test,{lat:12312313,lng:1203192380}";
-                values["destinations"] = "test,{lat:12312313,lng:1203192380}";
-                values["mode"] = "bicycling";
-                values["language"] = "en";
-                values["sensor"] = "false";
-                values["key"] = "AIzaSyBqH8I4CO8L_ezjxoMxKXDVNKSonisvyhI";
-                var uriBuilder = new UriBuilder("https://maps.googleapis.com/maps/api/distancematrix/json");
-                uriBuilder.Query = values.ToString();
-                var result = client.DownloadData(uriBuilder.ToString());
-                var responString = Encoding.UTF8.GetString(result);
-                //    JObject json = JObject.Parse(responString);
-                var reponseDistance = JsonConvert.DeserializeObject<DistanceResponse>(responString);
+                var destinations = string.Join("|", toAddresses.Select(t =>
+                $"{t.Latitude.ToString(CultureInfo.InvariantCulture)},{t.Longitude.ToString(CultureInfo.InvariantCulture)}"));
 
-                var a = 1;
-                //var serializer = new JsonSerializer();
-                //var distanceResponse = serializer.Deserialize<DistanceResponse>(json);
-                //if (string.Equals("ok", distanceResponse.Status, StringComparison.OrdinalIgnoreCase))
-                //{
-                //    Console.WriteLine("origin addresses: {0}", string.Join(", ", distanceResponse.Origin_Addresses));
-                //    Console.WriteLine("destination addresses: {0}", string.Join(", ", distanceResponse.Destination_Addresses));
-                //    foreach (var row in distanceResponse.Rows)
-                //    {
-                //        foreach (var element in row.Elements)
-                //        {
-                //            if (string.Equals("ok", element.Status, StringComparison.OrdinalIgnoreCase))
-                //            {
-                //                Console.WriteLine("Distance: {0} {1}", element.Distance.Text, element.Distance.Value);
-                //                Console.WriteLine("Duration: {0} {1}", element.Duration.Text, element.Duration.Value);
-                //            }
-                //        }
-                //    }
-                //}
-            }
-        }
-         public static void GoogleComputeRoutes(List<LocationGeo> orginAddress, List<LocationGeo> destinationsAddress, IObjectSpace newIObjectSpace)
-        {
-            using (WebClient wc = new WebClient())
-            { 
-                byte[] resByte;
-                string resString;
-                byte[] reqString;
+                url += $"&origins={origins}&destinations={destinations}&mode=driving";
 
-                wc.Headers["Content-Type"] = "application/json";
-                wc.Headers["Accept"] = "*/*";
-                wc.Headers["X-Goog-Api-Key"] = "AIzaSyAlQGCtvldPPETwFL7mO6nEX7adcCYoQgE";
-                wc.Headers["X-Goog-FieldMask"] = "*";
-                wc.Encoding = System.Text.Encoding.UTF8;
-                var url = "https://routes.googleapis.com/directions/v2:computeRoutes"; 
 
-                foreach (var org in orginAddress)
+                // HTTP çağrısı SENKRON yapılır
+                var response = client.GetAsync(url).Result;
+                var responseString = response.Content.ReadAsStringAsync().Result;
+
+                var matrix = JsonConvert.DeserializeObject<DistanceMatrixResponse>(responseString);
+                if (matrix.status !="OK")
                 {
-                    Dictionary<string, object> dictData = new Dictionary<string, object>();
-                    var fromLatLong = new GLatLng();
-                    fromLatLong.latitude = org.Latitude;
-                    fromLatLong.longitude = org.Longitude;
-                    var fromGlocation = new GLocation();
-                    fromGlocation.latLng = fromLatLong;
-                    var orgin = new GOrigin();
-                    orgin.location = fromGlocation;
-                    dictData.Add("origin", orgin);
+                    var eror= string.Format("Google Service Error {0}",matrix.status);
+                    throw new System.ArgumentException(eror); 
+                } 
 
-                    foreach (var des in destinationsAddress)
+                for (int i = 0; i < fromAddresses.Count; i++)
+                {
+                    string uncalculateAddress = null;
+                    var fromAddress = objectSpace.GetObjectByKey<Address>(fromAddresses[i].IntegrationCode); 
+                    for (int j = 0; j < toAddresses.Count; j++)
                     {
-                        if (des.IntegrationCode != org.IntegrationCode)
-                        { 
-                            var toLatLong = new GLatLng();
-                            toLatLong.latitude = des.Latitude;
-                            toLatLong.longitude = des.Longitude;
-                            var toGlocation = new GLocation();
-                            toGlocation.latLng = toLatLong; 
-
-                            var destination = new GOrigin();
-                            destination.location = toGlocation;
-
-                            var fromJson = JsonConvert.SerializeObject(orgin);
-                            var tojson = JsonConvert.SerializeObject(destination);
-
-                            dictData.Add("destination", destination);
-                            var jsonData = JsonConvert.SerializeObject(dictData, Formatting.Indented);
-                            reqString = Encoding.UTF8.GetBytes(jsonData);
-                            JObject jobject = JObject.Parse(jsonData);
-
-                            var filePath = String.Format(AppDomain.CurrentDomain.BaseDirectory + @"\{0}.json", "test1");
-                            System.IO.File.WriteAllText(filePath, jsonData);
-                            try
+                        var toAddress=objectSpace.GetObjectByKey<Address>(toAddresses[j].IntegrationCode);
+                        if (fromAddresses[i].IntegrationCode != toAddresses[j].IntegrationCode)
+                        {
+                            var element = matrix.rows[i].elements[j];
+                            var admatCriteria = GroupOperator.Combine(
+                               GroupOperatorType.And
+                               , new BinaryOperator("FromAddress.Syscode", fromAddresses[i].IntegrationCode, BinaryOperatorType.Equal)
+                               , new BinaryOperator("ToAddress.SysCode", toAddresses[j].IntegrationCode, BinaryOperatorType.Equal));
+                            if (matrix.rows[i].elements[j].distance != null)
                             {
-                                resByte = wc.UploadData(url, "POST", reqString);
-                                resString = Encoding.UTF8.GetString(resByte);
-                                var reponse=JsonConvert.DeserializeObject<GoogleRouteResponseRoot>(resString);
-                                JObject json = JObject.Parse(resString);
-
-                                AddressRouteMatrix admat = newIObjectSpace.CreateObject<AddressRouteMatrix>();
-
-                                admat.FromAddress = newIObjectSpace.GetObjectByKey<Address>(org.IntegrationCode);
-                                admat.ToAddressCode = newIObjectSpace.GetObjectByKey<Address>(des.IntegrationCode);
-                                GoogleRoute route = reponse.routes.FirstOrDefault();
-                                admat.EncodedPolyline = route.polyline.encodedPolyline;
-                                admat.Duration =route.duration;
-                                admat.StaticDuration = route.staticDuration;
-                                admat.DictanceMeters = route.distanceMeters;
-                                newIObjectSpace.CommitChanges();
-                                dictData.Remove("destination");
-
-                                var filePath2 = String.Format(AppDomain.CurrentDomain.BaseDirectory + @"\{0}.json", "response");
-                                System.IO.File.WriteAllText(filePath2, json.ToString());
-                            }
-                            catch (Exception e)
+                                AddressRouteMatrix admat = null;
+                                admat = objectSpace.FindObject<AddressRouteMatrix>(admatCriteria);
+                                if (admat == null)
+                                {
+                                    admat = objectSpace.CreateObject<AddressRouteMatrix>();
+                                }
+                                admat.FromAddress = fromAddress;
+                                admat.ToAddress = toAddress;
+                                admat.Duration = element.duration.value;
+                                admat.StaticDuration = element.duration.value;
+                                admat.DictanceMeters = element.distance.value;
+                                objectSpace.CommitChanges();
+                            }else
                             {
-                                var b = e;
+                                uncalculateAddress = uncalculateAddress + string.Format("#AdressName={0},AddressSysCode={1}", toAddress.Name, toAddress.SysCode);
                             }
                         }
-                    }
+                           
+                         
+                        }
+                    int unCalculateRoute = matrix.rows[i].elements.Count(x => x.distance == null);
+                    fromAddress.UncalculateAddress = uncalculateAddress;
+                    fromAddress.UnCalculateRouteAddress = unCalculateRoute;
+                    fromAddress.CalculateRouteAddress = fromAddress.AddressRouteMatrixies.Count();
+                    fromAddress.CalculateRouteRequest = toAddresses.Count;
+                    objectSpace.CommitChanges();
                 }
-
-             
-
             }
         }
     }
-    public class DistanceResult
+
+    public class DistanceMatrixResponse
+    { 
+        public string error_message { get; set; }
+        public string status { get; set; }
+        public List<string> destination_addresses { get; set; }
+        public List<string> origin_addresses { get; set; }
+        public List<Row> rows { get; set; }
+    }
+
+    public class Row
+    {
+        public List<Element> elements { get; set; }
+    }
+
+    public class Element
+    {
+        public TextValue distance { get; set; }
+        public TextValue duration { get; set; }
+        public string status { get; set; }
+    }
+
+    public class TextValue
     {
         public string text { get; set; }
         public int value { get; set; }
     }
-
-    public class Duration
-    {
-        public string text { get; set; }
-        public int value { get; set; }
-    }
-
-        public class DistanceResponse
-        {
-            public string Status { get; set; }
-            public string[] Origin_Addresses { get; set; }
-            public string[] Destination_Addresses { get; set; }
-            public Row[] Rows { get; set; }
-        }
-
-        public class Row
-        {
-            public Element[] Elements { get; set; }
-        }
-
-        public class Element
-        {
-            public string Status { get; set; }
-            public Item Duration { get; set; }
-            public Item Distance { get; set; }
-        }
-
-        public class Item
-        {
-            public int Value { get; set; }
-            public string Text { get; set; }
-        }
-
-    }
+}

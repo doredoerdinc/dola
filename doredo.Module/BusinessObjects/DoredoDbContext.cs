@@ -33,11 +33,13 @@ namespace dola.Module {
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-             
+            // base.OnModelCreating(modelBuilder);
+            //modelBuilder.Entity<Address>().HasRequired(a => a.LocationGeo).WithOptional(l => l.Address);
             // modelBuilder.Ignore<ClientMessage>();
 
         }
+
+
         public DbSet<Person> Driver { get; set; }
         //  public DbSet<OperationGroup> OperationGroup { get; set; }
         //public DbSet<Transport> Transport { get; set; }
