@@ -53,56 +53,56 @@ namespace dola.Module.Web
 
 
             //mapViewTripCargoAction.SetClientScript(CallMapView());
-        } 
- 
-        private void mapDistanceAddressQuatity_Execute(object sender, SimpleActionExecuteEventArgs e)
-        {
-            var newObjectSpace = Application.CreateObjectSpace();
-            List<Address> orginAddress = new List<Address>();
-            foreach (var item in View.SelectedObjects)
-            {
-                var keyValue = newObjectSpace.GetKeyValue(item);
-                var criteria = CriteriaOperator.Parse("SysCode =?", keyValue);
-                var locationGeo = newObjectSpace.GetObjectByKey<Address>(keyValue);
-                if (locationGeo != null)
-                {
-                    orginAddress.Add(locationGeo);
-                }
-
-            }
-           // getCountMapMatrix(orginAddress, newObjectSpace);
-            newObjectSpace.CommitChanges();
-            View.ObjectSpace.CommitChanges();
-        }
-
-
+        }  
             private void mapDistanceAddress_Execute(object sender, SimpleActionExecuteEventArgs e)
         {
             var newObjectSpace = Application.CreateObjectSpace();
             List<Address> orginAddressList = new List<Address>();
             List<LocationGeo> orginLocationList = new List<LocationGeo>();
             List<LocationGeo> destinationLocationList = new List<LocationGeo>();
-          
+            String filterCriteria = null;
+            if (View.CurrentObject != null)
+            {
+                var fromKeyValue = newObjectSpace.GetKeyValue(View.CurrentObject);
+                var fromAddress = newObjectSpace.GetObjectByKey<Address>(fromKeyValue);
+                var sysCodes = fromAddress.AddressRouteMatrixies
+                   .Cast<AddressRouteMatrix>()
+                   .Where(x => x.ToAddress != null && !string.IsNullOrWhiteSpace(x.ToAddress.SysCode))
+                   .Select(x => $"'{x.ToAddress.SysCode}'")
+                   .Distinct()
+                   .ToList();
+                //'Not [SysCode] In ('1231', '123')'
+                if (sysCodes.Count > 0)
+                {
+                    var joinedSysCodes = string.Join(",", sysCodes);
+                    string criteriaString = $"Not [SysCode] In ({joinedSysCodes})";
+                    filterCriteria = CriteriaOperator.Parse(criteriaString).ToString();
+                }
             
+            }
+     
+      
+
             foreach (var item in View.SelectedObjects)
             {
                 var keyValue = newObjectSpace.GetKeyValue(item);
                 var addressObject = newObjectSpace.GetObjectByKey<Address>(keyValue);
                 var locationGeo = newObjectSpace.GetObject<LocationGeo>(addressObject.LocationGeo);
+               
                 if (locationGeo != null)
                 {
                     locationGeo.IntegrationCode = keyValue.ToString();
                     orginLocationList.Add(locationGeo);
                 }
             }
-
-            this.ExecutePopupSimpleList<Address>((clientModel, nonObjectSpace) =>
+          
+            this.ExecutePopupSimpleDynamicList<Address>(filterCriteria, (ToAddressListView, nonobjectSpace) =>
             {
                
-
             }, (clientModel) =>
             {
-               
+
+                var a = clientModel;
                 foreach (var item in clientModel.SelectedObjects)
                 {
                     var keyValue = newObjectSpace.GetKeyValue(item);
@@ -123,6 +123,8 @@ namespace dola.Module.Web
                 View.ObjectSpace.Refresh();
             });  
         }
+
+      
 
         //private void getCountMapMatrix(List<Address> adressList, IObjectSpace newObjectSpace)
         //{

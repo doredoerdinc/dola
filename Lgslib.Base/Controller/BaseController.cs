@@ -147,18 +147,31 @@ namespace LgsLib.Base
                 }
             });
         }
-        public static void ExecutePopupSimpleDynamicList<TModel>(this ViewController controller, List<TModel> Items,Action<ListView, IObjectSpace> executePopupObjectAction = null)
+        public static void ExecutePopupSimpleDynamicList<TModel>(
+            this ViewController controller,
+            String criteria,
+            Action<ListView, IObjectSpace> executePopupObjectAction,
+            Action<ListView> executePopupObjectInParentAction)
+            where TModel : class
         {
             IObjectSpace newObjectSapce = controller.Application.CreateObjectSpace(typeof(TModel));
-            var listView = controller.Application.CreateListView(newObjectSapce, typeof(TModel), true);
-            CollectionSourceBase collectionSource = controller.Application.CreateCollectionSource(
-                newObjectSapce, typeof(TModel), listView.Model.Id);
+            var objectSpace = controller.Application.CreateObjectSpace(typeof(TModel));
 
-            foreach (var item in Items)
+            // ListView ID'si alınır (Modelden)
+            var listViewId = controller.Application.FindListViewId(typeof(TModel));
+
+            var collectionSource = controller.Application.CreateCollectionSource(
+                objectSpace, typeof(TModel), listViewId);
+
+            // Kriter uygulanır
+            if (criteria != null)
             {
-                collectionSource.Add(item);
+                collectionSource.Criteria["DynamicFilter"] = CriteriaOperator.Parse(criteria);
             }
-             
+
+            var listView = controller.Application.CreateListView(listViewId, collectionSource, true);
+
+
             ShowViewParamters(controller, listView, (sender, e) =>
             {
                 try
