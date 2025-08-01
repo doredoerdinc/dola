@@ -49,9 +49,7 @@ namespace dola.Module
         }
         [InverseProperty("FromAddress")]
         public virtual IList<AddressRouteMatrix> AddressRouteMatrixies { get; set; }
-        public virtual IList<WorkingTime> WorkingTimes { get; set; }
-
-
+        public virtual IList<WorkingTime> WorkingTimes { get; set; } 
 
         int? _CalculateRouteRequest;
         public int? CalculateRouteRequest
@@ -79,8 +77,7 @@ namespace dola.Module
         {
             get { return _UncalculateAddress; }
             set { _UncalculateAddress = value; }
-        }
-
+        } 
 
 
         WorkingArea _WorkingArea;
@@ -316,14 +313,20 @@ namespace dola.Module
             set { _RouteRow = value; }
         }
 
+        String _Description;
+        public String Description
+        {
+            get { return _Description; }
+            set { _Description = value; }
+        }   
+
+
         AddressRouteMatrix _AddressRouteMatrix;
         public virtual AddressRouteMatrix AddressRouteMatrix
         {
             get { return _AddressRouteMatrix; }
             set { _AddressRouteMatrix = value; }
-        }
-         
-
+        } 
         public String Key
         {
             get

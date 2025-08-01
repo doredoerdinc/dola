@@ -883,13 +883,6 @@
           <LayoutGroup Id="SimpleEditors">
             <TabbedGroup Id="Item5">
               <LayoutGroup Id="Item3" Caption="Basit" />
-              <LayoutGroup Id="Item6">
-                <LayoutGroup Id="Autoc862da0c-46fe-4411-8f75-47c77b9137ac">
-                  <LayoutGroup Id="Auto6fbab5ca-fd22-4c45-8046-379a1c289dbb">
-                    <LayoutGroup Id="Auto35048082-be24-4d04-8225-2ad155c2edd8" Caption="Auto35048082-be24-4d04-8225-2ad155c2edd8(23)" />
-                  </LayoutGroup>
-                </LayoutGroup>
-              </LayoutGroup>
               <LayoutGroup Id="Item1" Caption="Birim Çevirme" />
             </TabbedGroup>
             <LayoutGroup Id="Item" Caption="Malzeme" />

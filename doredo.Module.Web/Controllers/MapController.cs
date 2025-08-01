@@ -80,47 +80,50 @@ namespace dola.Module.Web
                 }
             
             }
-     
-      
 
-            foreach (var item in View.SelectedObjects)
-            {
-                var keyValue = newObjectSpace.GetKeyValue(item);
-                var addressObject = newObjectSpace.GetObjectByKey<Address>(keyValue);
-                var locationGeo = newObjectSpace.GetObject<LocationGeo>(addressObject.LocationGeo);
-               
-                if (locationGeo != null)
-                {
-                    locationGeo.IntegrationCode = keyValue.ToString();
-                    orginLocationList.Add(locationGeo);
-                }
-            }
+            List<Address> fromAddressRequestList = View.SelectedObjects.Cast<Address>().Where(a => a != null).ToList();
+
+            //foreach (var item in View.SelectedObjects)
+            //{
+            //    var keyValue = newObjectSpace.GetKeyValue(item);
+            //    var addressObject = newObjectSpace.GetObjectByKey<Address>(keyValue);
+            //    var locationGeo = newObjectSpace.GetObject<LocationGeo>(addressObject.LocationGeo);
+            //    if (locationGeo != null)
+            //    {
+            //        locationGeo.IntegrationCode = keyValue.ToString();
+            //        orginLocationList.Add(locationGeo);
+            //    }
+            //}
           
             this.ExecutePopupSimpleDynamicList<Address>(filterCriteria, (ToAddressListView, nonobjectSpace) =>
             {
-               
-            }, (clientModel) =>
+            },
+            (executedListView) =>
             {
+                List<Address> toAddressRequestList = executedListView.SelectedObjects.Cast<Address>().Where(a => a != null).ToList();
 
-                var a = clientModel;
-                foreach (var item in clientModel.SelectedObjects)
+                //foreach (var item in executedListView.SelectedObjects)
+                //{
+                //    var keyValue = newObjectSpace.GetKeyValue(item);
+                //    var addressObject = newObjectSpace.GetObjectByKey<Address>(keyValue);
+                //    var locationGeo = newObjectSpace.GetObject<LocationGeo>(addressObject.LocationGeo); 
+                //    if (locationGeo != null)
+                //    {
+                //        destinationLocationList.Add(locationGeo);
+                //    }
+
+                //}
+                if (orginLocationList.Count>0&& destinationLocationList.Count>0)
                 {
-                    var keyValue = newObjectSpace.GetKeyValue(item);
-                    var addressObject = newObjectSpace.GetObjectByKey<Address>(keyValue);
-                    var locationGeo = newObjectSpace.GetObject<LocationGeo>(addressObject.LocationGeo); 
-                    if (locationGeo != null)
-                    {
-                        destinationLocationList.Add(locationGeo);
-                    }
-                    
-                }
-                if(orginLocationList.Count>0&& destinationLocationList.Count>0)
-                {
-                    googleService.ComputeRouteMatrix(orginLocationList, destinationLocationList,newObjectSpace);
+                    googleService.CalculateRouteMatrix(fromAddressRequestList, toAddressRequestList, newObjectSpace);
                 }
                 //getCountMapMatrix(orginAddressList, newObjectSpace);
                 newObjectSpace.CommitChanges();
                 View.ObjectSpace.Refresh();
+                orginLocationList.Clear();
+                destinationLocationList.Clear();
+                orginAddressList.Clear();
+
             });  
         }
 
@@ -139,10 +142,9 @@ namespace dola.Module.Web
         private void MapViewTripCargoAction_Execute(object sender, SimpleActionExecuteEventArgs e)
         {
             var points = new List<MapPointLGS>();
-            var objectSpace = Application.CreateObjectSpace();
-            
-            List<Order> selectedOrders = new List<Order>();
-             
+            var objectSpace = Application.CreateObjectSpace(); 
+            List<Order> selectedOrders = new List<Order>(); 
+
             foreach (var item in View.SelectedObjects)
             {
                 var keyValue = objectSpace.GetKeyValue(item);
@@ -290,11 +292,20 @@ namespace dola.Module.Web
             {
                 firstObject = View.SelectedObjects.Cast<IMapPoint>().FirstOrDefault();
             }
+           
+           
 
             foreach (var routeItem in View.SelectedObjects)
             {
                 var routeObjectKey = objectSpace.GetKeyValue(routeItem);
                 var routeObject = objectSpace.GetObjectByKey<RoutePlanTransport>(routeObjectKey);
+
+                if(routeObject.WorkingTimes.Count()>1)
+                {
+                    List<Address> requestAddressListMat = routeObject.WorkingTimes.Select(w => w.Address).Where(a => a != null).ToList();
+
+                    googleService.CalculateRouteMatrixMissing(requestAddressListMat,objectSpace);
+                }
 
                 for (int workTm = 0; workTm < routeObject.WorkingTimes.Count() - 1; workTm++)
                 {
@@ -311,10 +322,13 @@ namespace dola.Module.Web
 
                     GoogleRouteDraw newRouteDraw = null;
                     var findMatRoute = objectSpace.FindObject<AddressRouteMatrix>(findMat);
-                    if (findMatRoute == null)
+                 
+                    if (findMatRoute == null||findMatRoute.EncodedPolyline==null)
                     {
-                        throw new System.ArgumentException(string.Format("Rota Matrisi bulunamadı FromId={0},{1}->ToId={2},{3}", workObjectFrom.ID.ToString(), workObjectFrom.Address.Name, workObjectTo.ID.ToString(), workObjectTo.Address.Name));
+                        workObjectFrom.Description = "RotaHesaplanamadı";
                     }
+                    else
+                    { 
                     var routeKey = routeObject.SysCode + findMatRoute.ID.ToString();
                     if (MapStatic.StaticRouteDrawList != null)
                     {
@@ -358,7 +372,8 @@ namespace dola.Module.Web
                             }
 
                         }
-                    }                   
+                        }
+                    }
                 }
 
             }
@@ -414,26 +429,51 @@ namespace dola.Module.Web
              base.OnDeactivated();
          
         }
-        public AddressRouteMatrix FindClosestAddress(Address FromAddress, List<AddressRouteMatrix> routeMatrix, List<Address> candidateAddresses)
+
+        public class RouteRowAddress
         {
-            var candidateIds = candidateAddresses.Select(a => a.SysCode).ToHashSet();
+            public Address Address { get; set; }
+            public int Row { get; set; }
+        }
 
-            // fromAddressId'den candidateAddresses'a olan mesafeleri filtrele
-            var filteredRoutes = routeMatrix
-                .Where(r => r.FromAddress.SysCode == FromAddress.SysCode && candidateIds.Contains(r.ToAddress.SysCode))
-                .ToList();
+        public List<RouteRowAddress> RouteCalculateRow(
+         Address startAddress,
+         List<Address> storeAddresses,
+         List<AddressRouteMatrix> routeMatrix)
+        {
+            var routeRowAddress = new List<RouteRowAddress>();
+            var remainingStores = new List<Address>(storeAddresses);
+            var currentAddress = startAddress;
+            int routeCounter = 1;
 
-            if (!filteredRoutes.Any())
-                return null;
+            while (remainingStores.Any())
+            {
+                var nextRoute = routeMatrix
+                    .Where(r => r.FromAddress.SysCode == currentAddress.SysCode
+                                && r.ToAddress != null
+                                && remainingStores.Any(a => a.SysCode == r.ToAddress.SysCode))
+                    .OrderBy(r => r.DictanceMeters)
+                    .FirstOrDefault();
 
-            // En kısa mesafeyi bul
-            var closestRoute = filteredRoutes.OrderBy(r => r.DictanceMeters).First();
+                if (nextRoute == null)
+                    break;
 
-            return closestRoute;
+                var nextAddress = nextRoute.ToAddress;
+                routeRowAddress.Add(new RouteRowAddress
+                {
+                    Address = nextAddress,
+                    Row = routeCounter++
+                });
+
+                remainingStores.RemoveAll(a => a.SysCode == nextAddress.SysCode);
+                currentAddress = nextAddress;
+            }
+
+            return routeRowAddress;
         }
 
 
-        private void routePlanCalculate_Execute(object sender, SimpleActionExecuteEventArgs e)
+        private void mapRoutePlanCalculate_Execute(object sender, SimpleActionExecuteEventArgs e)
         {
             var objectSpace = Application.CreateObjectSpace();
             ReloadMap(View);
@@ -452,24 +492,39 @@ namespace dola.Module.Web
                 var routeObjectKey = objectSpace.GetKeyValue(routeItem);
                 var routeObject = objectSpace.GetObjectByKey<RoutePlanTransport>(routeObjectKey);
                 List<Address> routeAddressList = new List<Address>();
-                List<AddressRouteMatrix> routeMatList = new List<AddressRouteMatrix>();
+                List<AddressRouteMatrix> routeMatList = null;
 
                 foreach (var item in routeObject.WorkingTimes)
                 {
-                    var address = objectSpace.GetObject<Address>(item.Address);
-
-                    routeAddressList.Add(address);
-
+                    var address = objectSpace.GetObject<Address>(item.Address); 
+                    routeAddressList.Add(address); 
                 } 
-                routeMatList.AddRange(routeObject.WorkingTime.Address.AddressRouteMatrixies);  
-                var closest = FindClosestAddress(routeObject.WorkingTime.Address, routeMatList, routeAddressList);
 
-                
+                routeMatList=(routeObject.WorkingTime.Address.AddressRouteMatrixies).ToList<AddressRouteMatrix>();
+                var matrixes = objectSpace.GetObjects(typeof(AddressRouteMatrix));
+                routeMatList = matrixes.Cast<AddressRouteMatrix>().ToList();
 
-                for (int workTm = 0; workTm < routeObject.WorkingTimes.Count() - 1; workTm++)
-                {  
+                var routeList = RouteCalculateRow(routeObject.WorkingTime.Address, routeAddressList, routeMatList);
+                foreach (var rt in routeList)
+                {
+                    int Row =  + 1;
+                    
+                    foreach (var witem in routeObject.WorkingTimes)
+                    {
+                        if(rt.Address.SysCode==witem.Address.SysCode)
+                        {
+                            witem.RouteRow = rt.Row;
+                        }
+                        else
+                        {
+                            witem.RouteRow = 10000;
+                        }
 
+                    }
                 }
+                objectSpace.CommitChanges();
+
+
 
             }
         }

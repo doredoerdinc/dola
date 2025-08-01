@@ -697,8 +697,7 @@ namespace dola.Module
                 var stateTaskVisible = newObjectSpace.GetObject<State>(template.StateTaskVisible);
                 var stateTaskStepVisible = newObjectSpace.GetObject<State>(template.StateTaskVisible);
                 setState(newObjectSpace, tsk.TaskIntegrationObject, tsk.TaskIntegrationCode, stateTaskStepVisible);
-                obj.State = stateTaskVisible;
-
+                obj.State = stateTaskVisible; 
 
                 foreach (var objLine in tsk.TaskSteps)
                 {
@@ -1607,8 +1606,7 @@ namespace dola.Module
                 var orderKey = orderItem.Document.Owner.SysCode + orderItem.Document.RequestPlanedDate.Value.ToString("yyyymmddhhmmss") + orderItem.Gonderen_Magaza_Kod + orderItem.Teslim_Magaza_Kod;
                 order = newObjectSpace.GetObjectByKey<Order>(orderKey);
                 if (order == null)
-                {
-
+                { 
                     order = newObjectSpace.CreateObject<Order>();
                     order.SysCode = orderKey;
                     order.FromAddress = newObjectSpace.GetObjectByKey<Address>(orderItem.Gonderen_Magaza_Kod);

@@ -251,7 +251,6 @@
     <Compile Include="BusinessObjects\Entry.cs" />
     <Compile Include="BusinessObjects\RoutePlanTransport.cs" />
     <Compile Include="BusinessObjects\RouteBck.cs" />
-    <Content Include="BusinessObjects\map.html" />
     <Content Include="BusinessObjects\SQL\ProcedureStockUpdate.txt" />
     <Compile Include="BusinessObjects\Stock.cs" />
     <Compile Include="BusinessObjects\DataAnalysis.cs" />
@@ -313,6 +312,10 @@
     <Compile Include="Migrations\202507300925496_a1.designer.cs">
       <DependentUpon>202507300925496_a1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202507311733453_a2.cs" />
+    <Compile Include="Migrations\202507311733453_a2.designer.cs">
+      <DependentUpon>202507311733453_a2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Module.cs">
       <SubType>Component</SubType>
@@ -352,6 +355,9 @@
     <EmbeddedResource Include="Migrations\202507300925496_a1.resx">
       <DependentUpon>202507300925496_a1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202507311733453_a2.resx">
+      <DependentUpon>202507311733453_a2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Model.DesignedDiffs.xafml" />
     <EmbeddedResource Include="Module.resx">
       <DependentUpon>Module.cs</DependentUpon>
@@ -359,7 +365,6 @@
     <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="BusinessObjects\ReadMe.txt" />
     <None Include="Controllers\ReadMe.txt" />
     <None Include="DatabaseUpdate\ReadMe.txt" />
     <None Include="Images\ReadMe.txt" />

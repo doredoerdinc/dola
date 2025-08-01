@@ -73,7 +73,7 @@ namespace dola.Module.Web
             this.mapRoutePlanCalculate.ConfirmationMessage = null;
             this.mapRoutePlanCalculate.Id = "mapRoutePlanCalculate";
             this.mapRoutePlanCalculate.ToolTip = null;
-            this.mapRoutePlanCalculate.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.routePlanCalculate_Execute);
+            this.mapRoutePlanCalculate.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.mapRoutePlanCalculate_Execute);
             // 
             // MapController
             // 

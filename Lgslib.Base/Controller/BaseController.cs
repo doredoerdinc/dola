@@ -117,11 +117,17 @@ namespace LgsLib.Base
             svp.CreateAllControllers = true;
             controller.Application.ShowViewStrategy.ShowView(svp, new ShowViewSource(null, null));
         }
-        public static void ExecutePopupSimple<TModel>(this ViewController controller, Action<TModel, IObjectSpace> modifyPopupObjectAction, Action<TModel> executePopupObjectInParentAction, Action<TModel, IObjectSpace> executePopupObjectAction = null)
+        public static void ExecutePopupSimple<TModel>(
+            this ViewController controller,
+            Action<TModel, IObjectSpace> modifyPopupObjectAction,
+            Action<TModel> executePopupObjectInParentAction,
+            Action<TModel, IObjectSpace> executePopupObjectAction = null)
         {
             var newObjectSapce = controller.Application.CreateObjectSpace(typeof(TModel));
             var newObject = newObjectSapce.CreateObject<TModel>();
             var newView = controller.Application.CreateDetailView(newObjectSapce, newObject);
+
+
             if (modifyPopupObjectAction != null)
             {
                 modifyPopupObjectAction(newObject, newObjectSapce);
@@ -150,27 +156,28 @@ namespace LgsLib.Base
         public static void ExecutePopupSimpleDynamicList<TModel>(
             this ViewController controller,
             String criteria,
-            Action<ListView, IObjectSpace> executePopupObjectAction,
-            Action<ListView> executePopupObjectInParentAction)
-            where TModel : class
-        {
+            Action<ListView, IObjectSpace> modifyPopupObjectAction,
+            Action<ListView> executePopupObjectInParentAction,
+            Action<ListView, IObjectSpace> executePopupObjectAction = null
+            )
+            {
             IObjectSpace newObjectSapce = controller.Application.CreateObjectSpace(typeof(TModel));
-            var objectSpace = controller.Application.CreateObjectSpace(typeof(TModel));
-
-            // ListView ID'si alınır (Modelden)
-            var listViewId = controller.Application.FindListViewId(typeof(TModel));
-
+            var objectSpace = controller.Application.CreateObjectSpace(typeof(TModel)); 
+            var listViewId = controller.Application.FindListViewId(typeof(TModel)); 
             var collectionSource = controller.Application.CreateCollectionSource(
                 objectSpace, typeof(TModel), listViewId);
-
-            // Kriter uygulanır
+             
             if (criteria != null)
             {
                 collectionSource.Criteria["DynamicFilter"] = CriteriaOperator.Parse(criteria);
             }
-
             var listView = controller.Application.CreateListView(listViewId, collectionSource, true);
 
+
+            if (modifyPopupObjectAction != null)
+            {
+                modifyPopupObjectAction(listView, newObjectSapce);
+            } 
 
             ShowViewParamters(controller, listView, (sender, e) =>
             {
@@ -178,11 +185,14 @@ namespace LgsLib.Base
                 {
 
                     if (executePopupObjectAction != null)
-                    {
-                        //   Validator.RuleSet.Validate(newObjectSapce, newObject, "Save,Accept");
+                    { 
                         executePopupObjectAction(listView, newObjectSapce);
 
-                    } 
+                    }
+                    else if (executePopupObjectInParentAction != null)
+                    {
+                        executePopupObjectInParentAction(listView);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -271,7 +281,7 @@ namespace LgsLib.Base
         {
             get { return _Message; }
             set { _Message = value; }
-        } 
+        }
 
     }
 }
