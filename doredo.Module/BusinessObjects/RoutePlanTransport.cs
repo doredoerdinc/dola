@@ -46,35 +46,29 @@ namespace dola.Module
             set { _Description = value; }
         }
 
-        int? _TotalStation;
-        public int? TotalStation
+        int? _RouteTotalStation;
+        public int? RouteTotalStation
         {
-            get { return _TotalStation; }
-            set { _TotalStation = value; }
-        }
-
-        int? _TotalDuration;
-        public int? TotalDuration
-        {
-            get { return _TotalDuration; }
-            set { _TotalDuration = value; }
-        }
-
-        int? _TotalKm;
-        public int? TotalKm
-        {
-            get { return _TotalKm; }
-            set { _TotalKm = value; }
+            get { return _RouteTotalStation; }
+            set { _RouteTotalStation = value; }
         } 
+        double? _RouteTotalKm;
+        public double? RouteTotalKm
+        {
+            get { return _RouteTotalKm; }
+            set { _RouteTotalKm = value; }
+        }
+
+        double? _RouteTotalDuration;
+        public double? RouteTotalDuration
+        {
+            get { return _RouteTotalDuration; }
+            set { _RouteTotalDuration = value; }
+        }
 
         public override void OnSaving()
         {
-            base.OnSaving();
-            if(WorkingTimes.Count>0)
-            {
-                TotalStation = WorkingTimes.Count();
-
-            }
+            base.OnSaving();   
         }
 
         VehicleType _VehicleType;

@@ -82,5 +82,5 @@ function openOnce(url) {
 }
 
 // Başlat
-var url = '../../map/MapView.aspx';
+var url = '../map/MapView.aspx';
 openOnce(url);

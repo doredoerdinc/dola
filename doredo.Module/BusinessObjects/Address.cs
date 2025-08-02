@@ -255,11 +255,8 @@ namespace dola.Module
                 {
                     return null;
                 }
-            }
-
-        }
-
-
+            } 
+        } 
     }
 
     [Table("WorkingTime")]
@@ -313,13 +310,34 @@ namespace dola.Module
             set { _RouteRow = value; }
         }
 
+        TimeSpan? _RoutePlanedArivedTime;
+        public TimeSpan? RoutePlanedArivedTime
+        {
+            get { return _RoutePlanedArivedTime; }
+            set { _RoutePlanedArivedTime = value; }
+        }
+
+        double? _RoutePlanedArrivedDay;
+        public double? RoutePlanedArrivedDay
+        {
+            get { return _RoutePlanedArrivedDay; }
+            set { _RoutePlanedArrivedDay = value; }
+        }
+
+        double? _RouteRestTime;
+        public double? RouteRestTime
+        {
+            get { return _RouteRestTime; }
+            set { _RouteRestTime = value; }
+        }
+
+
         String _Description;
         public String Description
         {
             get { return _Description; }
             set { _Description = value; }
         }   
-
 
         AddressRouteMatrix _AddressRouteMatrix;
         public virtual AddressRouteMatrix AddressRouteMatrix

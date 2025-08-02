@@ -119,7 +119,9 @@ namespace dola.Module {
         public DbSet<WorkingTime> WorkingTimes { get; set; }
         public DbSet<WorkingArea> WorkingArea { get; set; }
 
-        public DbSet<AddressRouteMatrix> AddressRouteMatrix { get; set; }
+        public DbSet<TruckCostModel> TruckCostModel { get; set; }
+
+    public DbSet<AddressRouteMatrix> AddressRouteMatrix { get; set; }
      //  public DbSet<UserDola> UserDola { get; set; }	
 }
 }

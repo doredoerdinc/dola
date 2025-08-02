@@ -54,7 +54,7 @@ namespace dola.Module.Web
 
             //mapViewTripCargoAction.SetClientScript(CallMapView());
         }  
-            private void mapDistanceAddress_Execute(object sender, SimpleActionExecuteEventArgs e)
+        private void mapDistanceAddress_Execute(object sender, SimpleActionExecuteEventArgs e)
         {
             var newObjectSpace = Application.CreateObjectSpace();
             List<Address> orginAddressList = new List<Address>();
@@ -291,22 +291,12 @@ namespace dola.Module.Web
             else
             {
                 firstObject = View.SelectedObjects.Cast<IMapPoint>().FirstOrDefault();
-            }
-           
-           
+            } 
 
             foreach (var routeItem in View.SelectedObjects)
             {
                 var routeObjectKey = objectSpace.GetKeyValue(routeItem);
                 var routeObject = objectSpace.GetObjectByKey<RoutePlanTransport>(routeObjectKey);
-
-                if(routeObject.WorkingTimes.Count()>1)
-                {
-                    List<Address> requestAddressListMat = routeObject.WorkingTimes.Select(w => w.Address).Where(a => a != null).ToList();
-
-                    googleService.CalculateRouteMatrixMissing(requestAddressListMat,objectSpace);
-                }
-
                 for (int workTm = 0; workTm < routeObject.WorkingTimes.Count() - 1; workTm++)
                 {
                     var workObjectFromKeyValue = objectSpace.GetKeyValue(routeObject.WorkingTimes[workTm]);
@@ -379,6 +369,94 @@ namespace dola.Module.Web
             }
             ShowMapFrmScript();
         }
+        private void mapRoutePlanCalculate_Execute(object sender, SimpleActionExecuteEventArgs e)
+        {
+            var objectSpace = Application.CreateObjectSpace();
+            ReloadMap(View);
+            object firstObject = View.CurrentObject ?? View.SelectedObjects.Cast<IMapPoint>().FirstOrDefault();
+
+            double averageSpeed = 70; // Ortalama hız (km/h)
+            double totalDistance = 0; // Toplam mesafe
+            TimeSpan currentTime = TimeSpan.Zero; // Başlangıç zamanı
+            int totalRestTimeInMinutes = 0; // Toplam dinlenme süresi (dakika cinsinden)
+            int totalDaysForArrive = 1; // Günü 1'den başlatıyoruz
+            double drivingMinutes = 0; // Sürücünün toplam sürüş süresi (dakika cinsinden)
+            double totalDrivingTimeMinutes = 0; // Toplam sürüş süresi (dakika cinsinden)
+
+            bool firstRestDone = false; // İlk dinlenme süresi yapılmadı
+
+            foreach (var routeItem in View.SelectedObjects)
+            {
+                var routeObjectKey = objectSpace.GetKeyValue(routeItem);
+                var routeObject = objectSpace.GetObjectByKey<RoutePlanTransport>(routeObjectKey);
+
+                if (routeObject.WorkingTimes.Count() > 1)
+                {
+                    List<Address> requestAddressListMat = routeObject.WorkingTimes
+                        .Select(w => w.Address)
+                        .Where(a => a != null)
+                        .ToList();
+
+                    googleService.CalculateRouteMatrixMissing(requestAddressListMat, objectSpace);
+                    List<AddressRouteMatrix> addressRouteMatrixList = objectSpace
+                        .GetObjects(typeof(AddressRouteMatrix), null)
+                        .Cast<AddressRouteMatrix>()
+                        .ToList();
+
+                    var routeList = RouteCalculateRow(routeObject.WorkingTime.Address, requestAddressListMat, addressRouteMatrixList);
+                    
+                    currentTime = routeObject.WorkingTime.FinishTime.Value; // İlk adresin başlangıcı, 00:00
+                    for (int i = 0; i < routeList.Count(); i++)
+                    {
+                        WorkingTime wot = routeObject.WorkingTimes.FirstOrDefault(x => x.Address.SysCode == routeList[i].Address.SysCode);
+                        if (wot != null)
+                        {
+                            double distance = wot.AddressRouteMatrix?.DictanceMeters ?? 0; // Mesafe (metre cinsinden)
+                            double distanceKm = distance / 1000; // metreyi kilometreye çevir
+                            double drivingTimeMinutes = (distanceKm / averageSpeed) * 60; // Dakika cinsinden
+                            TimeSpan drivingTime = TimeSpan.FromMinutes(drivingTimeMinutes);
+                            currentTime = currentTime.Add(drivingTime);
+                            currentTime = currentTime.Add(TimeSpan.FromMinutes(30));
+                            drivingMinutes += drivingTimeMinutes; // Toplam sürüş süresi (dakika cinsinden) 
+
+                            while (drivingMinutes >= 540)
+                            {
+                                // Dinlenme süresi 900 dakika (15 saat) ekle
+                                totalRestTimeInMinutes += 900; // Dinlenme süresi (dakika cinsinden)
+                                drivingMinutes -= 540; // 540 dakikalık sürüş dilimini tamamladık, kalan sürüş süresi
+                            }
+                            // Günün saat kısmını al
+                            TimeSpan timeOfDay = currentTime - TimeSpan.FromDays(totalDaysForArrive); // Saat kısmını al 
+                            // Zamanın Negatif Olup Olmadığını Kontrol Etme
+                            if (timeOfDay < TimeSpan.Zero)
+                            {
+                                timeOfDay = TimeSpan.Zero; // Zaman negatifse, sıfırla
+                            }
+                            // `RouteRestTime`'ı hesapla ve güncelle
+
+                            // Eğer 540 dakika (9 saat) sürüş yapıldıysa, gün sayısını artırıyoruz
+                            if (drivingMinutes >= 540)
+                            {
+                                totalDaysForArrive++; // Bir sonraki gün için gün sayısını artırıyoruz
+                                drivingMinutes = 0; // Yeni gün başlıyor, sürüş saati sıfırlanıyor
+                            }
+                            wot.RouteRow = routeList[i].Row;
+                            wot.RouteRestTime = totalRestTimeInMinutes; // Dinlenme süresi (dakika cinsinden) 
+                            wot.RoutePlanedArrivedDay = totalDaysForArrive; // Gün sayısını hesapla
+                            wot.RoutePlanedArivedTime = currentTime;//timeOfDay; // Planlanan varış zamanını saat, dakika, saniye olarak ata 
+                        } 
+                    }
+                }
+
+              
+                routeObject.RouteTotalDuration = currentTime.TotalMinutes; 
+                routeObject.RouteTotalKm = totalDistance / 1000; // Kilometreyi km olarak gösterelim 
+               // routeObject.RouteTotalRestTime = totalRestTimeInMinutes; // Dinlenme süresi (dakika cinsinden) 
+                routeObject.RouteTotalStation = routeObject.WorkingTimes.Count(); 
+                objectSpace.CommitChanges();
+            }
+        }
+
 
         private void ReloadMap(View view)
         {
@@ -416,8 +494,7 @@ namespace dola.Module.Web
 
         protected override void OnAfterConstruction()
         {
-            base.OnAfterConstruction();
-      
+            base.OnAfterConstruction(); 
         }
 
         protected override void OnViewControlsCreated()
@@ -426,8 +503,7 @@ namespace dola.Module.Web
         } 
         protected override void OnDeactivated()
         {
-             base.OnDeactivated();
-         
+             base.OnDeactivated(); 
         }
 
         public class RouteRowAddress
@@ -437,96 +513,53 @@ namespace dola.Module.Web
         }
 
         public List<RouteRowAddress> RouteCalculateRow(
-         Address startAddress,
-         List<Address> storeAddresses,
-         List<AddressRouteMatrix> routeMatrix)
+          Address startAddress,
+          List<Address> storeAddresses,
+          List<AddressRouteMatrix> routeMatrix)
         {
             var routeRowAddress = new List<RouteRowAddress>();
             var remainingStores = new List<Address>(storeAddresses);
             var currentAddress = startAddress;
             int routeCounter = 1;
 
+            var findStartAdress = storeAddresses.Where(x => x.SysCode == startAddress.SysCode).FirstOrDefault();
+
+            if (findStartAdress != null)
+            {
+                routeRowAddress.Add(new RouteRowAddress
+                {
+                    Address = findStartAdress,
+                    Row = 0
+                });
+            }
+
             while (remainingStores.Any())
             {
                 var nextRoute = routeMatrix
                     .Where(r => r.FromAddress.SysCode == currentAddress.SysCode
                                 && r.ToAddress != null
-                                && remainingStores.Any(a => a.SysCode == r.ToAddress.SysCode))
+                                && remainingStores.Any(a => a.SysCode == r.ToAddress.SysCode)
+                                && r.ToAddress.SysCode != startAddress.SysCode) // Başlangıç adresini alma
                     .OrderBy(r => r.DictanceMeters)
-                    .FirstOrDefault();
-
+                    .FirstOrDefault(); 
                 if (nextRoute == null)
-                    break;
-
-                var nextAddress = nextRoute.ToAddress;
-                routeRowAddress.Add(new RouteRowAddress
+                    break; 
+                var nextAddress = nextRoute.ToAddress; 
+                // Ek güvenlik: baştan gelen adresi listeye ekleme
+                if (nextAddress.SysCode != startAddress.SysCode)
                 {
-                    Address = nextAddress,
-                    Row = routeCounter++
-                });
-
+                    routeRowAddress.Add(new RouteRowAddress
+                    {
+                        Address = nextAddress,
+                        Row = routeCounter++
+                    });
+                } 
                 remainingStores.RemoveAll(a => a.SysCode == nextAddress.SysCode);
                 currentAddress = nextAddress;
-            }
-
+            } 
             return routeRowAddress;
         }
 
 
-        private void mapRoutePlanCalculate_Execute(object sender, SimpleActionExecuteEventArgs e)
-        {
-            var objectSpace = Application.CreateObjectSpace();
-            ReloadMap(View);
-            object firstObject = null;
-            if (View.CurrentObject != null)
-            {
-                firstObject = View.CurrentObject;
-            }
-            else
-            {
-                firstObject = View.SelectedObjects.Cast<IMapPoint>().FirstOrDefault();
-            }
-
-            foreach (var routeItem in View.SelectedObjects)
-            {
-                var routeObjectKey = objectSpace.GetKeyValue(routeItem);
-                var routeObject = objectSpace.GetObjectByKey<RoutePlanTransport>(routeObjectKey);
-                List<Address> routeAddressList = new List<Address>();
-                List<AddressRouteMatrix> routeMatList = null;
-
-                foreach (var item in routeObject.WorkingTimes)
-                {
-                    var address = objectSpace.GetObject<Address>(item.Address); 
-                    routeAddressList.Add(address); 
-                } 
-
-                routeMatList=(routeObject.WorkingTime.Address.AddressRouteMatrixies).ToList<AddressRouteMatrix>();
-                var matrixes = objectSpace.GetObjects(typeof(AddressRouteMatrix));
-                routeMatList = matrixes.Cast<AddressRouteMatrix>().ToList();
-
-                var routeList = RouteCalculateRow(routeObject.WorkingTime.Address, routeAddressList, routeMatList);
-                foreach (var rt in routeList)
-                {
-                    int Row =  + 1;
-                    
-                    foreach (var witem in routeObject.WorkingTimes)
-                    {
-                        if(rt.Address.SysCode==witem.Address.SysCode)
-                        {
-                            witem.RouteRow = rt.Row;
-                        }
-                        else
-                        {
-                            witem.RouteRow = 10000;
-                        }
-
-                    }
-                }
-                objectSpace.CommitChanges();
-
-
-
-            }
-        }
     }
 }

@@ -3,16 +3,16 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class a2 : DbMigration
+    public partial class a : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.WorkingTime", "Description", c => c.String());
+            AddColumn("dbo.WorkingTime", "RouteRestTime", c => c.Double());
         }
         
         public override void Down()
         {
-            DropColumn("dbo.WorkingTime", "Description");
+            DropColumn("dbo.WorkingTime", "RouteRestTime");
         }
     }
 }

@@ -7,13 +7,13 @@ namespace dola.Module.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class a1 : IMigrationMetadata
+    public sealed partial class a : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(a1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(a));
         
         string IMigrationMetadata.Id
         {
-            get { return "202507300925496_a1"; }
+            get { return "202508021058177_a"; }
         }
         
         string IMigrationMetadata.Source
